@@ -5,15 +5,12 @@ import pfp from "../assets/pfp.png";
 
 const Navbar = () => {
     return( 
-    <div className='bg-[#171a21] flex items-center justify-around py-2 text-white' >
+    <div className='bg-[#EAB2CE] flex items-center justify-around text-white py-1' >
         <div className='logo'>
-            <img src={logo} alt='asd' className='w-12 h-12 rounded-full' />
-        </div>
-        <div className='home'>
-            Home
+            <img src={logo} alt='.' className='w-12 h-12 rounded-full' />
         </div>
         <div className='flex items-center'>
-            <img src={pfp} className='w-12 h-12 rounded-full'/>
+            <img src={pfp} alt="." className='w-11 h-11 rounded-full'/>
             <div className='px-3'>
                 User
             </div>
@@ -27,7 +24,6 @@ const Navbar = () => {
         <div className='logoff'>
             LogOff
         </div>
-
     </div>
     );
 };

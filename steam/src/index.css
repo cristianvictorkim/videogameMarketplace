@@ -9,7 +9,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.gradient{ 
+background: rgb(234,178,206);
+background: linear-gradient(
+  0deg, rgba(234,178,206,1) 8%, 
+  rgba(153,75,84,1) 84%);
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
