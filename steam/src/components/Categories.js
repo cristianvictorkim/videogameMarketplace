@@ -1,12 +1,11 @@
 import React from 'react';
 
-
 const Categories = () => {
     return(
-        <div className="my-3 mx-[42rem] bg-[white] ">
+        <div className="my-4 mx-auto bg-white w-full max-w-2xl flex items-center justify-around rounded-full">
             <ul className='flex items-center justify-center space-x-4'>
                 <li className=''>
-                    <p>Categorias</p>
+                    <p>Categorías</p>
                 </li>
                 <li className=''>
                     <p>Precio</p>
@@ -21,12 +20,13 @@ const Categories = () => {
                     <p>Jugadores</p>
                 </li>
                 <li className=''>
-                    <p>Calificacion</p>
-                </li>
-                <li className=''>
-                    <p>Search</p>
+                    <p>Calificación</p>
                 </li>
             </ul>
+            <input type="search"
+                placeholder='search for game...'
+                className='pl-5 rounded-full' 
+            />
         </div>
     );
 };
