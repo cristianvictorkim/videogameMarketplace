@@ -12,9 +12,9 @@ function App() {
     {/* Your selection */}
     <YourSelection/>
     <GameCard
-      image="https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D"
-      title="cool game"
-      price={29.99} 
+      image = "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2024/07/reserva-nba-2k25-all-star-edition-game-consigue-exclusiva-edicion-solo-ps5-3781943.jpg?tf=3840x"
+      title="2k25"
+      price={60.00} 
       score="2.5" 
     />      
     {/* Featured selection */}                    

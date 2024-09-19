@@ -2,29 +2,33 @@ import React from 'react';
 
 const GameCard = ({ image, title, price, score }) => {
     return (
-        <div className="bg-[#EAB2CE] rounded-lg flex items-center  w-full max-w-2xl mx-auto ">
-            <img 
-                src={image} 
-                alt={title} 
-                className="h-40 object-cover rounded-lg mr-4" 
-            />
-            <div className="space-y-3">
-                <h2 className="text-lg font-bold">
-                    {title}
-                </h2>
-                <p className="text-gray-700 text-sm">
-                    Rating: {score}
-                </p>
-                <div className="flex justify-between items-center">
-                    <span className="">
-                        ${price}
-                    </span>
+        <div className='bg-[#EAB2CE] mx-auto mt-[2rem] rounded-lg w-full max-w-2xl'>    
+            <div className="h-[14rem] w-full flex">
+                <div className='w-[60%] h-full flex'>
+                    <img 
+                        src={image} 
+                        alt={title} 
+                        className="object-cover w-full rounded-lg" 
+                    />
                 </div>
-                <button className="bg-[#994B54] rounded">
-                    <p className='text-black my-1 mx-1'>
-                        View Details
+                <div className="w-[40%] h-full flex flex-col justify-center items-center space-y-6">
+                    <h2 className="text-lg font-bold text-[25px]">
+                        {title}
+                    </h2>
+                    <p className="text-gray-700 text-sm text-[17px] ">
+                        Rating: {score}
                     </p>
-                </button>
+                    <div className="flex justify-between items-center ">
+                        <span className="text-[16px]">
+                            ${price}
+                        </span>
+                    </div>
+                    <button className="bg-[#994B54]">
+                        <p className='text-black my-1 mx-1'>
+                            View Details
+                        </p>
+                    </button>
+                </div>
             </div>
         </div>
     );
