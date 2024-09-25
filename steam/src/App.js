@@ -9,7 +9,8 @@ function App() {
     <Navbar/>
     {/* Categories */}
     <Categories/>             
-    {/* Your selection */}
+    
+  {/* Esto esta hecho asi para poder testear el comportamiento de la game card */} 
     <YourSelection/>
     <GameCard
       image = "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2024/07/reserva-nba-2k25-all-star-edition-game-consigue-exclusiva-edicion-solo-ps5-3781943.jpg?tf=3840x"

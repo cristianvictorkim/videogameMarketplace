@@ -1,6 +1,7 @@
 import React from 'react';
 
 const GameCard = ({ image, title, price, score }) => {
+    // Game card la cual muestra la informacion del juego.
     return (
         <div className='bg-[#EAB2CE] mx-auto mt-[2rem] rounded-lg w-full max-w-2xl'>    
             <div className="h-[14rem] w-full flex">
