@@ -3,7 +3,7 @@ import React from 'react';
 const GameCard = ({ image, title, price, score }) => {
     // Game card la cual muestra la informacion del juego.
     return (
-        <div className='bg-[#EAB2CE] mx-auto mt-[2rem] rounded-lg w-full max-w-2xl'>    
+        <div className='bg-main-color mx-auto mt-[2rem] rounded-lg w-full max-w-2xl'>    
             <div className="h-[14rem] w-full flex">
                 <div className='w-[60%] h-full flex'>
                     <img 
@@ -24,7 +24,7 @@ const GameCard = ({ image, title, price, score }) => {
                             ${price}
                         </span>
                     </div>
-                    <button className="bg-[#994B54]">
+                    <button className="bg-btn-color">
                         <p className='text-black my-1 mx-1'>
                             View Details
                         </p>

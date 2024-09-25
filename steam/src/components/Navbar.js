@@ -6,7 +6,7 @@ import pfp from "../assets/pfp.png";
 const Navbar = () => {
     // Navegation bar la cual sera utilizada para la gran mayoria de pantallas.
     return( 
-    <div className='bg-[#EAB2CE] flex items-center justify-around text-white py-1' >
+    <div className='bg-main-color flex items-center justify-around text-white py-1' >
         <div className='logo'>
             <img src={logo} alt='.' className='w-12 h-12 rounded-full' />
         </div>
