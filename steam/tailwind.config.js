@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -7,8 +6,8 @@ module.exports = {
     extend: {
       colors: {
         'btn-color': '#994B54',
-        'main-color' : '#EAB2CE'
-      }
+        'main-color' : '#EAB2CE',
+      },
     },
   },
   plugins: [],
