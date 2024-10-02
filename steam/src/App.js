@@ -38,9 +38,12 @@ function App() {
         title="NHL 2024"
         price={60.00}
         score="4.1"
-      />               
-      </div>
+      />
+      <div className="pt-5">
       <BottomScreen/>
+      </div>               
+      </div>
+      
       <UserLogIn/>
     </div>
   );    

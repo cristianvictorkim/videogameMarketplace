@@ -9,7 +9,7 @@ const UserLogIn = () => {
             <input
               type="text"
               placeholder="Username"
-              className="w-full p-3 border rounded-lg"
+              className="w-full p-2 border rounded-lg"
             />
           </div>
           <div className="mb-6">
@@ -17,15 +17,20 @@ const UserLogIn = () => {
               type="password"
               placeholder="Password"
               autoComplete="new-password"
-              className="w-full p-3 border rounded-lg"
+              className="w-full p-2 border rounded-lg"
             />
           </div>
           <button
             type="submit"
-            className="w-full p-3 border rounded-lg"
+            className="w-full p-2 border rounded-lg"
           >
             Log in
           </button>
+          <div className='text-center py-4 space-y-1'> 
+            <p>Forgot Password?</p>
+            <p>Register</p>
+            <p>I am a developer</p>
+          </div>
         </form>
       </div>
     );
