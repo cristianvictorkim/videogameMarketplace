@@ -4,6 +4,7 @@ import GameCard from "./components/GameCard";
 import YourSelection from "./components/YourSelection";
 import FeaturedSelection from "./components/FeaturedSelection";
 import BottomScreen from "./components/BottomScreen";
+import UserLogIn from "./components/UserLogIn";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
       />               
       </div>
       <BottomScreen/>
+      <UserLogIn/>
     </div>
   );    
 };
