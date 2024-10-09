@@ -5,6 +5,9 @@ import YourSelection from "./components/YourSelection";
 import FeaturedSelection from "./components/FeaturedSelection";
 import BottomScreen from "./components/BottomScreen";
 import UserLogIn from "./components/UserLogIn";
+import Error404 from "./components/Error404";
+import UserRegistration from "./components/UserRegistration";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
   return (
@@ -45,6 +48,9 @@ function App() {
       </div>
       
       <UserLogIn/>
+      <Error404/>
+      <UserRegistration/>
+      <ForgotPassword/>
     </div>
   );    
 };

@@ -2,7 +2,7 @@ import React from 'react';
 
 const UserLogIn = () => {
     return (
-      <div className="gradient flex items-center justify-center min-h-screen">
+      <div className="gradient flex items-center justify-center min-h-screen pb-20">
         <form className="p-8 w-full max-w-sm bg-main-color border-2 border-black">
           <h2 className="text-2xl font-semibold mb-6 text-center">Log in</h2>
           <p className='pb-1'>Username</p>
