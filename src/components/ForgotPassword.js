@@ -24,7 +24,7 @@ const ForgotPassword = () => {
                 className="w-full p-2 border rounded-lg"
               />
             </div>
-            <p className='pb-1'>Answer</p>
+            <p className=''>Answer</p>
             <div className="mb-6">
               <input
                 type="password"

@@ -8,6 +8,7 @@ import UserLogIn from "./components/UserLogIn";
 import Error404 from "./components/Error404";
 import UserRegistration from "./components/UserRegistration";
 import ForgotPassword from "./components/ForgotPassword";
+import Cart from "./components/Cart";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
       <Error404/>
       <UserRegistration/>
       <ForgotPassword/>
+      <Cart/>
     </div>
   );    
 };
