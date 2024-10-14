@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
-import GameCard from './GameCard';
+import RemovableGameCard from './RemovableGameCard';
+
 const Cart = () => {
     return(
         <div className=' min-h-screen gradient'>
@@ -12,7 +13,7 @@ const Cart = () => {
                         placeholder='search for game...'
                         className='pl-5 rounded-full w-[100%]' 
                     />
-                    <GameCard 
+                    <RemovableGameCard 
                     image="https://i.ytimg.com/vi/cklw-Yu3moE/maxresdefault.jpg"
                     title = "Ori and the Blind Forest"
                     price={60.0}

@@ -9,6 +9,7 @@ import Error404 from "./components/Error404";
 import UserRegistration from "./components/UserRegistration";
 import ForgotPassword from "./components/ForgotPassword";
 import Cart from "./components/Cart";
+import Wishlist from "./components/Wishlist";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
       <UserRegistration/>
       <ForgotPassword/>
       <Cart/>
+      <Wishlist/> {/* Adaptar la game card */} 
     </div>
   );    
 };

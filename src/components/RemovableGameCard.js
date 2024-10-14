@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GameCard = ({ image, title, price, score }) => {
+const RemovableGameCard = ({ image, title, price, score }) => {
     // Game card la cual muestra la informacion del juego.
     return (
         <div className='bg-main-color mx-auto mt-[2rem] rounded-lg w-full max-w-2xl border-2 border-black'>    
@@ -22,15 +22,20 @@ const GameCard = ({ image, title, price, score }) => {
                     <span className="text-[16px]">
                             ${price}
                     </span>
-                    <button className="bg-btn-color">
-                        <p className='text-black my-1 mx-1'>
-                            View Details
+                    <div className="space-y-2   ">    
+                        <button className="bg-btn-color">
+                            <p className='text-black my-1 mx-1'>
+                                View Details
+                            </p>
+                        </button>
+                        <p className='text-center'>
+                            Remove
                         </p>
-                    </button>
+                    </div>    
                 </div>
             </div>
         </div>
     );
 };
 
-export default GameCard;
+export default RemovableGameCard;
