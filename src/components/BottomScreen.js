@@ -2,7 +2,7 @@ import React from 'react';
 
 const BottomScreen = () => {
     return(
-        <div className="bg-btn-color w-100%">
+        <div className="w-100%" style={{color:"white"}}>
             <div className="py-3 flex items-center justify-center">
                 <p>
                 © 2024 Games Corporation. Todos los derechos reservados. Todas las marcas registradas.

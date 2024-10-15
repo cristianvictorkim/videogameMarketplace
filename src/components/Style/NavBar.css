@@ -1,0 +1,21 @@
+.navbar {
+    position: absolute;
+    top: 1%;
+    z-index: 1000;
+    background-color: #eab2ce;
+    display: flex;
+    align-items: center;
+    justify-content: space-around; 
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-width:2px;
+    border-style:solid;
+    border-color:black;
+    overflow: hidden;
+}
+
+.navbar.sticky {
+position: fixed; /* Change to fixed position */
+top: 0; /* Stick to the top */
+}
+

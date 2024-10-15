@@ -1,14 +1,54 @@
 import React from 'react';
 import logo from "../assets/logo.png";
 import pfp from "../assets/pfp.png";
+import './Style/NavBar.css';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Navbar = () => {
-    // Navegation bar la cual sera utilizada para la gran mayoria de pantallas.
+    
+    const [sticky, setSticky] = useState(false);
+
+    // Add event listener for scroll to make navbar sticky
+    useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 100) {  // When scrolled beyond 100px
+        setSticky(true);
+      } else {
+        setSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    const imageStyle = {
+        mixBlendMode: "color-burn",
+        maxWidth: "150px",
+        height: "170px",
+        clipPath: "ellipse(50% 25% at center)"
+    }
+
+    const logoStyle = 
+    {
+        height: "40px",
+        overflow: "visible",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center"
+    }
+
     return( 
-    <div className='bg-main-color flex items-center justify-around text-white py-1' >
-        <div className='logo'>
-            <img src={logo} alt='.' className='w-12 h-12 rounded-full' />
+    <div className={`navbar ${sticky ? 'sticky' : ''}`} >
+        <div style={logoStyle}>
+            <Link to="/">
+                <img src={logo} style={imageStyle}/>
+            </Link>
         </div>
         <div className='flex items-center'>
             <img src={pfp} alt="." className='w-11 h-11 rounded-full'/>
@@ -16,10 +56,10 @@ const Navbar = () => {
                 User
             </div>
         </div>
-        <div className='wishlist'>
-            Wishlist
+        <div>
+            <Link to="/Wishlist">Wishlist</Link>
         </div>
-        <div className='cart'>
+        <div >
             Cart
         </div>
         <div className='logoff'>

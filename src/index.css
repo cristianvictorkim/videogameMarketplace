@@ -13,6 +13,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 .gradient, .container, .navbar, .categories, .yourSelection, .gameCard {
+  padding-top: 70px;
   width: 100%;
   overflow-x: hidden;
 }
@@ -22,9 +23,7 @@ html, body {
 }
 .gradient{ 
 background: rgb(234,178,206);
-background: linear-gradient(
-  180deg, rgba(234,178,206,1) 8%, 
-  rgba(153,75,84,1) 84%);
+background-image: linear-gradient(to bottom, #e2659f, #d55f8e, #c85a7e, #ba5570, #ac5163, #984958, #84414d, #713942, #542c34, #392026, #201417, #000000);
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
