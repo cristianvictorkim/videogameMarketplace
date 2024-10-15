@@ -60,10 +60,10 @@ const Navbar = () => {
             <Link to="/Wishlist">Wishlist</Link>
         </div>
         <div >
-            Cart
+            <Link to="/Cart">Cart</Link>
         </div>
-        <div className='logoff'>
-            LogOff
+        <div>
+            <Link to="/Login">Sing Off</Link>
         </div>
     </div>
     );
