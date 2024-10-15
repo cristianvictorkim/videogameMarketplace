@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const GameCard = ({ image, title, price, score }) => {
     // Game card la cual muestra la informacion del juego.
@@ -22,10 +23,8 @@ const GameCard = ({ image, title, price, score }) => {
                     <span className="text-[16px]">
                             ${price}
                     </span>
-                    <button className="bg-btn-color">
-                        <p className='text-black my-1 mx-1'>
-                            View Details
-                        </p>
+                    <button className="btn">
+                        <Link to="/GameDetails"> View Details </Link>
                     </button>
                 </div>
             </div>

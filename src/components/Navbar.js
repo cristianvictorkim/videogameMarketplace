@@ -63,7 +63,7 @@ const Navbar = () => {
             <Link to="/Cart">Cart</Link>
         </div>
         <div>
-            <Link to="/Login">Sing Off</Link>
+            <Link to="/Login">Sign Off</Link>
         </div>
     </div>
     );

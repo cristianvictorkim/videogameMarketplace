@@ -25,6 +25,12 @@ html, body {
 background: rgb(234,178,206);
 background-image: linear-gradient(to bottom, #e2659f, #d55f8e, #c85a7e, #ba5570, #ac5163, #984958, #84414d, #713942, #542c34, #392026, #201417, #000000);
 }
+.btn {
+  padding: 2px;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  background-color: #994B54;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

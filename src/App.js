@@ -7,6 +7,7 @@ import UserLogIn        from './Pages/UserLogIn';
 import Wishlist         from './Pages/Wishlist';
 import UserRegistration from './Pages/UserRegistration';
 import Cart             from './Pages/Cart';
+import GameDetails      from './Pages/GameDetails';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/Login"        element={<UserLogIn />} />
           <Route path="/Wishlist"     element={<Wishlist />} />
           <Route path="/Register"     element={<UserRegistration />} />
+          <Route path="/GameDetails"  element={<GameDetails />} />
         </Routes>
       </main>
   </div>

@@ -3,6 +3,7 @@ import GameCard from "../components/GameCard";
 import YourSelection from "../components/YourSelection";
 import FeaturedSelection from "../components/FeaturedSelection";
 import BottomScreen from "../components/BottomScreen";
+import GameDetails from "./GameDetails";
 import { useState } from 'react';
 
 const HomePage = () => {
@@ -56,7 +57,7 @@ const HomePage = () => {
                     score="4.1"
                 />
                 <div className="pt-5">
-                <BottomScreen/>
+                    <BottomScreen/>
                 </div>   
         </div>                 
     );
