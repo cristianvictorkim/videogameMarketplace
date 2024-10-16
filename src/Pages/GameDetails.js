@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const GameDetails = () => {
     return(
-        <div className='gradient min-h-screen'> 
-            <div className='flex items-center items-center justify-center space-x-8 h-[20rem] mt-10'>
+        <div className='gradient min-h-screen flex-col justify-center'> 
+            <div className='flex items-center justify-center space-x-8 h-[20rem] mt-10'>
                 <div className='h-full flex'>
                     <img 
                         src="https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/LRHHYM3MLBANDKJCZUQU5MQ72Q.jpg"
@@ -43,10 +43,24 @@ const GameDetails = () => {
                 </div>
                 
             </div>
-            <div className=''>
-                <h1 className=''>
+            <div className='pt-5'>
+                <h1 className='font-bold pb-1'>
                     Publisher
                 </h1>
+                <div className='bg-main-color flex border-black'>
+                    <img 
+                        src='https://upload.wikimedia.org/wikipedia/commons/1/1f/2K_2021_Logo.svg'
+                        className='w-[128px] h-[128px] p-4 rounded-full'
+                    />
+                    <div>    
+                        <h1 className='font-bold'>
+                            Publisher Name
+                        </h1>
+                        <p>
+                            Publisher Description
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     );
