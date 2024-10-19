@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Comment from '../components/Comment';
 import AddComment from '../components/AddComment';
+import BottomScreen from '../components/BottomScreen';
 
 const GameDetails = () => {
     return(
@@ -69,7 +70,7 @@ const GameDetails = () => {
             </div>
             <div className='w-[59rem]'>
                 <h1 className='font-bold pb-1'>
-                    Publisher
+                    Game Description
                 </h1>
                 <div className='bg-main-color flex border-black p-4 rounded-lg'>   
                     <p className=''>
@@ -107,7 +108,7 @@ const GameDetails = () => {
             <div className='w-[59rem]'>
                 <AddComment/>
             </div>
-            
+            <BottomScreen/>
         </div>
     );
 };

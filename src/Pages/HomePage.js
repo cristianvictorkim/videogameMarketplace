@@ -3,12 +3,15 @@ import GameCard from "../components/GameCard";
 import YourSelection from "../components/YourSelection";
 import FeaturedSelection from "../components/FeaturedSelection";
 import BottomScreen from "../components/BottomScreen";
-import GameDetails from "./GameDetails";
 import { useState } from 'react';
 
 const HomePage = () => {
     
     const [gameCards] = useState([]);
+
+    const searchGame = async (name) => {
+
+    }
     
     const jsonData = `
     [
