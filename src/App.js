@@ -10,7 +10,7 @@ import CompanyLogin     from './Pages/CompanyLogin';
 import MainLayout       from './Layouts/MainLayout';
 
 function App() {
-
+  
   return (
   <div className="">    
         <Routes>

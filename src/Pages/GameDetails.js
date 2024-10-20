@@ -3,7 +3,22 @@ import { Link, useParams } from 'react-router-dom';
 import Comment from '../components/Comment';
 import AddComment from '../components/AddComment';
 import Footer from '../components/Footer';
-import { getGameById } from '../Entities/Game'
+import { getActiveGame, getGameById } from '../Entities/Game'
+import { getUserId } from '../Entities/User';
+
+function addToCart(gameId)
+{
+    let user = getUserId();
+    let game = getActiveGame();
+
+    fetch("http://localhost:3001/add-to-cart?"  + new URLSearchParams({
+        gameId: game,
+        userId: user
+        }).toString()
+    );
+    console.log("hui");
+}
+
 
 const GameDetails = () => {
 
@@ -49,9 +64,12 @@ const GameDetails = () => {
                         <button className='btn'>
                             Add to Wishlist
                         </button>
-                        <button className='btn'>
-                            <Link to="/">Buy now</Link>
-                        </button>
+                        <Link to="/Cart">
+                            <button className='btn' onClick={addToCart}>
+                                Buy now
+                            </button>
+                        </Link>
+                        
                     </div>
                 </div>
             </div>

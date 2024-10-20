@@ -9,7 +9,7 @@ const Footer = () => {
                 Todos los precios incluyen IVA (donde sea aplicable). 
                 </p>
             </div>
-            <div className="">
+            {/* <div className="">
                 <ul className='flex items-center justify-center space-x-4 py-4' >
                     <li>
                         <p>About us</p>
@@ -30,7 +30,7 @@ const Footer = () => {
                         <p>Twitter</p>
                     </li>
                 </ul>
-            </div>
+            </div> */}
         </div>
     );
 };

@@ -2,7 +2,6 @@ import Categories from "../components/Categories";
 import GameCard from "../components/GameCard";
 import YourSelection from "../components/YourSelection";
 import FeaturedSelection from "../components/FeaturedSelection";
-import { getGameById, getGames } from "../Entities/Game";
 import React from "react";
 
 const HomePage = () => {    
@@ -10,9 +9,17 @@ const HomePage = () => {
     const [featured, setFeatured] = React.useState({});
     
     React.useEffect(() => { 
-        setSelection(getGames()); 
-        setFeatured(getGameById(2))
-    })
+        fetch("http://localhost:3001/get-games")
+            .then(res => res.json())
+            .then(data => setSelection(data));
+            
+        fetch("http://localhost:3001/get-game-by-id?" + new URLSearchParams({
+                gameId: 2,
+                }).toString()
+            )
+            .then(res => res.json())
+            .then(data => setFeatured(data));
+    }, [])
 
     return( 
         <div>

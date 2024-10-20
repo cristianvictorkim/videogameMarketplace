@@ -2,7 +2,25 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import RemovableGameCard from '../components/RemovableGameCard';
 
+
 const Cart = () => {
+        
+    const [selection, setSelection] = React.useState([]);
+    const [featured, setFeatured] = React.useState({});
+
+    React.useEffect(() => { 
+        fetch("http://localhost:3001/get-games")
+            .then(res => res.json())
+            .then(data => setSelection(data));
+            
+        fetch("http://localhost:3001/get-game-by-id?" + new URLSearchParams({  
+                gameId: 2,
+                }).toString()
+            )
+            .then(res => res.json())
+            .then(data => setFeatured(data));
+    }, [])
+
     return(
         <div className='min-h-screen'>
             <Navbar/>

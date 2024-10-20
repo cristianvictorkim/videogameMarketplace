@@ -1,25 +1,8 @@
-// Array to store multiple game information instances
-const games = [];
+let userId = 0;
 
-// Counter for auto-assigning gameId
-let gameIdCounter = 1;
-
-// Function to add a new game
-function addGame(url, title, rating, price) {
-    const game = {
-        url: url,
-        title: title,
-        rating: rating,
-        price: price,
-        gameId: gameIdCounter++  // Assign current counter value and increment
-    };
-    games.push(game);
+function getUserId()
+{
+    return userId;
 }
 
-// Function to get all games
-function getGames() {
-    return games;
-}
-
-// Exporting the functions and games array for use in other files
-module.exports = { addGame, getGames, games };
+export {getUserId};

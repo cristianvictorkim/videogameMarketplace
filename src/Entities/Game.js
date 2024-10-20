@@ -1,4 +1,7 @@
+let useLocalData = true;
+
 // Array to store multiple game information instances
+const activeGame = -1;
 const games = new Map();
 let gameIdCounter = 0;
 
@@ -29,6 +32,11 @@ function getGameById(gameId) {
     return game;
 }
 
+function getActiveGame()
+{
+    return activeGame;
+}
+
 // Adding games with stubbed data
 const bannerUrl_2k25 = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2878980/header.jpg?t=1729266229";
 const bannerUrl_FC25 = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2669320/header.jpg?t=1728642725";
@@ -46,4 +54,4 @@ addGame(bannerUrl_CIV6, gameplayUrl_CIV6, "Sid Meier’s Civilization® VI", "St
 addGame(bannerUrl_ACM, gameplayUrl_ACM, "Assassin's Creed Mirage", "Open World", 4.0, 39.99);
 
 // Exporting the functions and games array for use in other files
-module.exports = { addGame, getGames, getGameById, games };
+module.exports = { addGame, getGames, getGameById, games, getActiveGame, useLocalData};
