@@ -5,7 +5,7 @@ const ForgotPassword = () => {
     return (
     <div className="">
         <Navbar/>
-        <div className="gradient flex items-center justify-center min-h-screen pb-20">
+        <div className="flex items-center justify-center min-h-screen pb-20">
           <form className="p-8 w-full max-w-sm bg-main-color border-2 border-black">
             <h2 className="text-2xl font-semibold mb-6 text-center">Forgot password?</h2>
             <p className='pb-1'>Enter email address</p>

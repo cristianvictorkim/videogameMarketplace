@@ -3,8 +3,7 @@ import logo from "../assets/logo.png";
 import pfp from "../assets/pfp.png";
 import './Style/NavBar.css';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, Outlet } from 'react-router-dom';
 
 const Navbar = () => {
     
@@ -44,28 +43,28 @@ const Navbar = () => {
     }
 
     return( 
-    <div className={`navbar ${sticky ? 'sticky' : ''}`} >
-        <div style={logoStyle}>
-            <Link to="/">
-                <img src={logo} style={imageStyle}/>
-            </Link>
-        </div>
-        <div className='flex items-center'>
-            <img src={pfp} alt="." className='w-11 h-11 rounded-full'/>
-            <div className='px-3'>
-                User
+        <div className={`navbar ${sticky ? 'sticky' : ''}`} >
+            <div style={logoStyle}>
+                <Link to="/">
+                    <img src={logo} style={imageStyle}/>
+                </Link>
+            </div>
+            <div className='flex items-center'>
+                <img src={pfp} alt="." className='w-11 h-11 rounded-full'/>
+                <div className='px-3'>
+                    User
+                </div>
+            </div>
+            <div>
+                <Link to="/Wishlist">Wishlist</Link>
+            </div>
+            <div >
+                <Link to="/Cart">Cart</Link>
+            </div>
+            <div>
+                <Link to="/Login">Sign Off</Link>
             </div>
         </div>
-        <div>
-            <Link to="/Wishlist">Wishlist</Link>
-        </div>
-        <div >
-            <Link to="/Cart">Cart</Link>
-        </div>
-        <div>
-            <Link to="/Login">Sign Off</Link>
-        </div>
-    </div>
     );
 };
 

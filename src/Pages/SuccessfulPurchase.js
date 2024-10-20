@@ -1,11 +1,9 @@
 import React from 'react';
-import Navbar from './Navbar';
 import RemovableGameCard from './RemovableGameCard';
 
 const Wishlist = () => {
     return(
-        <div className=' min-h-screen gradient'>
-            <Navbar/>
+        <div className=' min-h-screen'>
             <div className='flex flex-col items-center justify-center'> 
                 <div className='space-y-4'>
                     <h1 className='text-center text-2xl font-bold pt-5 '>Wishlist</h1>    

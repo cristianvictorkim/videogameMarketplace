@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 
 const Error404 = () => {
     return(
-        <div className="min-h-screen flex flex-col gradient">
+        <div className="min-h-screen flex flex-col">
             <Navbar/>
             <div className="flex flex-col items-center justify-center max-w-md mx-auto my-40 py-16 px-16 bg-main-color">
                 <div className=''>    

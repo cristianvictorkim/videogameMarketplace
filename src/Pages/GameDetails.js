@@ -1,16 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Comment from '../components/Comment';
 import AddComment from '../components/AddComment';
-import BottomScreen from '../components/BottomScreen';
+import Footer from '../components/Footer';
+import { getGameById } from '../Entities/Game'
 
 const GameDetails = () => {
+
+    const params = useParams();
+    let gameId = params["gameId"];
+    let game = getGameById(Number(gameId));
+
     return(
-        <div className='gradient min-h-screen flex flex-col justify-center items-center space-y-6 pb-10'> 
+        <div className='min-h-screen flex flex-col justify-center items-center space-y-6 pb-10'> 
             <div className='flex space-x-8 h-[20rem] mt-10 max-w-[59rem]'>
                 <div className='h-full flex'>
                     <img 
-                        src="https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/LRHHYM3MLBANDKJCZUQU5MQ72Q.jpg"
+                        src={game.gameplayUrl}
                         alt="asd"
                         className="object-cover w-full rounded"
                     />
@@ -19,23 +25,23 @@ const GameDetails = () => {
                     <div>
                         <div className='flex space-x-3 mb-2 mt-1'>    
                             <h2 className='text-lg font-bold'>
-                                Title
+                                {game.title}
                             </h2>
                             <p className='text-lg'>
-                                Genre
+                                {game.genre}
                             </p>
                         </div>
                         <img 
-                            src="https://images.ctfassets.net/wn7ipiv9ue5v/2o2zzN8bdBFi6BwGFJR1lK/fab7d2a0fa20e7a8ec13c6400bd21422/N25-BASE-STANDARD_EDITION_ANNOUNCE-NA-STATIC-ESRB-AGN-1920x1080.jpg?w=&h=630&fm=&q="
+                            src={game.bannerUrl}
                             alt="asd"
                             className="max-w-xs max-h-xs"
                         />
                         <div className='mt-2'>
                             <p className='font-bold'>
-                                Price:
+                                {"Price : $" + game.price}
                             </p>
                             <p className='font-bold'>
-                                Score:
+                                {"Score : " + game.rating}
                             </p>
                         </div>
                     </div>
@@ -108,7 +114,7 @@ const GameDetails = () => {
             <div className='w-[59rem]'>
                 <AddComment/>
             </div>
-            <BottomScreen/>
+            <Footer/>
         </div>
     );
 };

@@ -4,7 +4,7 @@ import RemovableGameCard from '../components/RemovableGameCard';
 
 const Cart = () => {
     return(
-        <div className=' min-h-screen gradient'>
+        <div className='min-h-screen'>
             <Navbar/>
             <div className='flex flex-col items-center justify-center'> 
                 <div className='space-y-4'>

@@ -4,8 +4,7 @@ import Navbar from "../components/Navbar";
 const UserRegistration = () => {
     return (
     <div className="">
-        <Navbar />
-        <div className="gradient flex items-center justify-center min-h-screen p-10">  
+        <div className="flex items-center justify-center min-h-screen p-10">  
           <form className="p-5 w-full max-w-sm bg-main-color border-2 border-black">
             <h2 className="text-2xl font-semibold mb-6 text-center">
                 Registration

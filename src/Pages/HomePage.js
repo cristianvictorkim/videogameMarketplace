@@ -2,67 +2,45 @@ import Categories from "../components/Categories";
 import GameCard from "../components/GameCard";
 import YourSelection from "../components/YourSelection";
 import FeaturedSelection from "../components/FeaturedSelection";
-import BottomScreen from "../components/BottomScreen";
-import { useState } from 'react';
+import { getGameById, getGames } from "../Entities/Game";
+import React from "react";
 
-const HomePage = () => {
+const HomePage = () => {    
+    const [selection, setSelection] = React.useState([]);
+    const [featured, setFeatured] = React.useState({});
     
-    const [gameCards] = useState([]);
-
-    const searchGame = async (name) => {
-
-    }
-    
-    const jsonData = `
-    [
-    {
-        "url" : "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2024/07/reserva-nba-2k25-all-star-edition-game-consigue-exclusiva-edicion-solo-ps5-3781943.jpg?tf=3840x",
-        "title": "2k25",
-        "rating": 2.5,
-        "price": 60
-    },
-    {
-        "url" : "https://i0.wp.com/www.pcmrace.com/wp-content/uploads/2024/07/ea-sports-fc-25-key-art.jpg",
-        "title": "EAFC25",
-        "rating": 4.2,
-        "price": 70
-    },
-    {
-        "url": "https://media.contentapi.ea.com/content/dam/ea/nhl/nhl-24/common/nhl24-dlx-key-art-16x9.jpg.adapt.crop191x100.1200w.jpg",
-        "title": "NHL 2024",
-        "rating": 4.1,
-        "price": 45
-    }
-    ]`;
-
-    const games = JSON.parse(jsonData);
+    React.useEffect(() => { 
+        setSelection(getGames()); 
+        setFeatured(getGameById(2))
+    })
 
     return( 
-        <div className="gradient">
+        <div>
                 <Categories/>             
                 <YourSelection/>
                 {
-                    games.map((game, index) => (
+                    selection.map((game, index) => (
                         <GameCard
                             key={index}
-                            image={game.url}
+                            image={game.bannerUrl}
                             title={game.title}
                             price={game.price}
-                            score={game.rating} 
+                            score={game.rating}
+                            gameId={game.gameId} 
                         /> 
                     ))
                 }
                 <FeaturedSelection/>
-                <GameCard
-                    image="https://media.contentapi.ea.com/content/dam/ea/nhl/nhl-24/common/nhl24-dlx-key-art-16x9.jpg.adapt.crop191x100.1200w.jpg"
-                    title="NHL 2024"
-                    price={60.00}
-                    score="4.1"
-                />
-                <div className="pt-5">
-                    <BottomScreen/>
-                </div>   
-        </div>                 
+                {
+                    <GameCard
+                        image={featured.bannerUrl}
+                        title={featured.title}
+                        price={featured.price}
+                        score={featured.rating}
+                        gameId={featured.gameId} 
+                    /> 
+                }
+        </div>
     );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const UserLogIn = () => {
+const CompanyLogin = () => {
     return (
       <div className="flex items-center justify-center min-h-screen pb-20">
         <form className="p-8 w-full max-w-sm bg-main-color border-2 border-black">
@@ -32,11 +32,11 @@ const UserLogIn = () => {
           <div className='text-center py-4 space-y-1'> 
             <p><Link>Forgot Password?</Link></p>
             <p><Link>Register</Link></p>
-            <p><Link to="/CompanyLogin">I am a developer</Link></p>
+            <p><Link to="/Login">I am a Gamer</Link></p>
           </div>
         </form>
       </div>
     );
 };
 
-export default UserLogIn;
+export default CompanyLogin;
