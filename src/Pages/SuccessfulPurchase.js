@@ -6,7 +6,9 @@ const Wishlist = () => {
         <div className=' min-h-screen'>
             <div className='flex flex-col items-center justify-center'> 
                 <div className='space-y-4'>
-                    <h1 className='text-center text-2xl font-bold pt-5 '>Wishlist</h1>    
+                    <h1 className='text-center text-2xl font-bold pt-5 '>
+                        Wishlist
+                    </h1>    
                     <input type="search"
                         placeholder='search for game...'
                         className='pl-5 rounded-full w-[100%]' 
