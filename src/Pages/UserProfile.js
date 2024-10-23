@@ -2,6 +2,7 @@ import React from 'react';
 import {getGames} from '../Entities/User';
 import PurchaseHistory from '../components/PurchaseHistory';
 import {useState, useEffect} from 'react';
+import pfp from '../assets/pfp.png';
 
 const UserProfile = () => {
     
@@ -18,7 +19,7 @@ const UserProfile = () => {
 
     return(
         <div className='min-h-screen flex justify-center'>
-            <div className='w-[42rem] space-y-5'>    
+            <div className='w-[45rem] space-y-5'>    
                 <h1 className='titleBold'>
                     Username
                 </h1>
@@ -37,6 +38,7 @@ const UserProfile = () => {
                 <h1 className='titleBold'>
                         Edit profile
                 </h1>
+                <div className='flex space-x-3'>
                     <div className='w-[50%]'>
                         <p>
                             Name
@@ -45,6 +47,7 @@ const UserProfile = () => {
                             <input
                                 className='input'
                                 placeholder='Enter your name'
+                                type='text'
                             />
                         </div>
                         <p>
@@ -54,6 +57,7 @@ const UserProfile = () => {
                             <input
                                 className='input'
                                 placeholder='Enter your email'
+                                type='text'
                             />
                         </div>
                         <p>
@@ -63,6 +67,7 @@ const UserProfile = () => {
                             <input
                                 className='input'
                                 placeholder='Enter your phone number'
+                                type='text'
                             />
                         </div>
                         <p>
@@ -72,6 +77,7 @@ const UserProfile = () => {
                             <input
                                 className='input'
                                 placeholder='Enter your address'
+                                type='text'
                             />
                         </div >
                         <p>
@@ -81,6 +87,7 @@ const UserProfile = () => {
                             <input
                                 className='input'
                                 placeholder='DD/MM/YYYY'
+                                type='date'
                             />
                         </div>
                         <p>
@@ -90,21 +97,60 @@ const UserProfile = () => {
                             <input
                                 className='input'
                                 placeholder='Enter your current password to make changes'
+                                type='password'
                             />
                         </div>
-                    
+
                     </div>
                     <div className='w-[50%]'>
                         <p>
-                            Name
+                            New password
                         </p>
                         <div className='pb-3'>
                             <input
                                 className='input'
                                 placeholder='Enter your name'
+                                type='password'
                             />
                         </div>
+                        <p>
+                            Confirm new password
+                        </p>
+                        <div className='pb-3'>
+                            <input
+                                className='input'
+                                placeholder='Enter your name'
+                                type='password'
+                            />
+                        </div>
+                        <div className='avatarChange flex'>
+                            <div className='p-5 space-y-5'>
+                                <img 
+                                    className='tinyPic' 
+                                    src=''
+                                />
+                                <img 
+                                    className='tinyPic' 
+                                    src=''
+                                />
+                                <img 
+                                    className='tinyPic' 
+                                    src=''
+                                />
+                            </div>
+                            <div className='pt-5'>
+                                <img
+                                    className=''
+                                    src={pfp}
+                                />
+                            </div>
+                        </div>
                     </div>
+                    
+                </div>
+                <button className='btn'>
+                    Save Changes
+                </button>
             </div>
             
         </div>

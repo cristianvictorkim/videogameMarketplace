@@ -3,7 +3,7 @@ import React from 'react';
 const PurchaseHistory = ({ game }) => {
     
     return(
-        <div className=''>
+        <div className='flex justify-center'>
             <ul className='flex space-x-10 pb-5'>
                 <li>
                     {game.title}
