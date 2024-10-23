@@ -1,6 +1,7 @@
 import React from 'react';
 
 const PurchaseHistory = ({ game }) => {
+    
     return(
         <div className=''>
             <ul className='flex space-x-10 pb-5'>

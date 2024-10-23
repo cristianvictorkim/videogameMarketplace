@@ -46,3 +46,11 @@ code {
   font-weight: bold;
   font-size: 1.5rem;
 }
+
+.input {
+  width: 100%; /* w-full */
+  padding: 0.5rem; /* p-2 */
+  border: 1px solid #e5e7eb; /* border (color gris claro por defecto en Tailwind) */
+  border-radius: 0.5rem; /* rounded-lg (8px) */
+  box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}

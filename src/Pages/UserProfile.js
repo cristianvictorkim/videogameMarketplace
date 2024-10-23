@@ -34,11 +34,77 @@ const UserProfile = () => {
                         <p>No purchases found.</p>
                     )}
                 </div>
-                <div>
-                    <h1 className='titleBold'>
+                <h1 className='titleBold'>
                         Edit profile
-                    </h1>
-                </div>
+                </h1>
+                    <div className='w-[50%]'>
+                        <p>
+                            Name
+                        </p>
+                        <div className='pb-3'>
+                            <input
+                                className='input'
+                                placeholder='Enter your name'
+                            />
+                        </div>
+                        <p>
+                            Email
+                        </p>
+                        <div className='pb-3'>
+                            <input
+                                className='input'
+                                placeholder='Enter your email'
+                            />
+                        </div>
+                        <p>
+                            Phone Number
+                        </p>
+                        <div className='pb-3'>
+                            <input
+                                className='input'
+                                placeholder='Enter your phone number'
+                            />
+                        </div>
+                        <p>
+                            Address
+                        </p>
+                        <div className='pb-3'>
+                            <input
+                                className='input'
+                                placeholder='Enter your address'
+                            />
+                        </div >
+                        <p>
+                            Date of birth
+                        </p>
+                        <div className='pb-3'>
+                            <input
+                                className='input'
+                                placeholder='DD/MM/YYYY'
+                            />
+                        </div>
+                        <p>
+                            Current password
+                        </p>
+                        <div className='pb-3'>
+                            <input
+                                className='input'
+                                placeholder='Enter your current password to make changes'
+                            />
+                        </div>
+                    
+                    </div>
+                    <div className='w-[50%]'>
+                        <p>
+                            Name
+                        </p>
+                        <div className='pb-3'>
+                            <input
+                                className='input'
+                                placeholder='Enter your name'
+                            />
+                        </div>
+                    </div>
             </div>
             
         </div>
