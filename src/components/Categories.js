@@ -27,7 +27,6 @@ const Categories = () => {
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             const searchResults = searchGame(searchQuery);
-            console.log(searchResults);
             navigate('/SearchedGames', { state: { games: searchResults } });
         }
     };
