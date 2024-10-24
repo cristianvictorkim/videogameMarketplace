@@ -8,6 +8,8 @@ import Cart             from './Pages/Cart';
 import GameDetails      from './Pages/GameDetails';
 import CompanyLogin     from './Pages/CompanyLogin';
 import MainLayout       from './Layouts/MainLayout';
+import SearchedGames    from './Pages/SearchedGames';
+import UserProfile      from './Pages/UserProfile';
 
 function App() {
   
@@ -22,6 +24,8 @@ function App() {
             <Route path="/Wishlist"             element={<Wishlist />} />
             <Route path="/Register"             element={<UserRegistration />} />
             <Route path="/GameDetails/:gameId"  element={<GameDetails />} />
+            <Route path="/SearchedGames"        element={<SearchedGames />} />
+            <Route path="/UserProfile"          element={<UserProfile />} />
           </Route>
         </Routes>
   </div>

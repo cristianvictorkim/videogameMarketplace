@@ -37,7 +37,26 @@ background-image: linear-gradient(to bottom, #e2659f, #d55f8e, #c85a7e, #ba5570,
   border-radius: 50%;
   object-fit: cover; 
 }
+.tinyPic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover; 
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.titleBold {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.input {
+  width: 100%; /* w-full */
+  padding: 0.3rem; /* p-2 */
+  border: 1px solid #e5e7eb; /* border (color gris claro por defecto en Tailwind) */
+  border-radius: 0.5rem; /* rounded-lg (8px) */
+  box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }

@@ -52,7 +52,7 @@ const Navbar = () => {
             <div className='flex items-center'>
                 <img src={pfp} alt="." className='w-11 h-11 rounded-full'/>
                 <div className='px-3'>
-                    User
+                    <Link to="/UserProfile">User</Link>
                 </div>
             </div>
             <div>

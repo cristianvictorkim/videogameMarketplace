@@ -1,47 +1,69 @@
-import React from 'react';
-import {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { getGames } from "../Entities/Game";
+import { useNavigate } from 'react-router-dom';
 
 const Categories = () => {
-    // Apartado de categorias para poder filtrar y buscar juegos.
-    // Es necesario agregarle el comportamiento a los filtros
-    const [games, setGames] = useState([])
+    const [games, setGames] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
-        searchGame()
-    }, []); 
+        fetchGames();
+    }, []);
 
-    const searchGame = async (name) => {
-        // Buscar el nombre del juego
-        
-    }
-    
-    return(
+    const fetchGames = async () => {
+        const allGames = await getGames();
+        setGames(allGames);
+    };
+
+    const searchGame = (name) => {
+        const searchResults = games.filter((game) =>
+            game.title.toLowerCase().includes(name.toLowerCase())
+        );
+        return searchResults;
+    };
+
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            const searchResults = searchGame(searchQuery);
+            navigate('/SearchedGames', { state: { games: searchResults } });
+        }
+    };
+
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    return (
         <div className="my-4 mx-auto bg-white w-full max-w-2xl flex items-center justify-around rounded-full">
             <ul className='flex items-center justify-center space-x-4'>
-                <li className=''>
+                <li>
                     <p>Categorías</p>
                 </li>
-                <li className=''>
+                <li>
                     <p>Precio</p>
                 </li>
-                <li className=''>
+                <li>
                     <p>OS</p>
                 </li>
-                <li className=''>
+                <li>
                     <p>Idioma</p>
                 </li>
-                <li className=''>
+                <li>
                     <p>Jugadores</p>
                 </li>
-                <li className=''>
+                <li>
                     <p>Calificación</p>
                 </li>
             </ul>
-            <input type="search"
-                placeholder='search for game...'
-                onChange={() => {}}
-                className='pl-5 rounded-full'
-                onKeyDown={() => {}} 
+            <input
+                type="text"
+                placeholder="search for game..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                onKeyDown={handleKeyDown}
+                className="pl-5 rounded-full"
             />
         </div>
     );
