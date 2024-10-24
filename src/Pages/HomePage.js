@@ -14,7 +14,7 @@ const HomePage = () => {
             .then(data => setSelection(data));
             
         fetch("http://localhost:3001/get-game-by-id?" + new URLSearchParams({
-                gameId: 2,
+                gameId: 2
                 }).toString()
             )
             .then(res => res.json())

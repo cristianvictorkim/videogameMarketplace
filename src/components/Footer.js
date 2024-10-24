@@ -9,28 +9,6 @@ const Footer = () => {
                 Todos los precios incluyen IVA (donde sea aplicable). 
                 </p>
             </div>
-            {/* <div className="">
-                <ul className='flex items-center justify-center space-x-4 py-4' >
-                    <li>
-                        <p>About us</p>
-                    </li>
-                    <li>
-                        <p>Employment</p>
-                    </li>
-                    <li>
-                        <p>Distribution</p>
-                    </li>
-                    <li>
-                        <p>Online Support</p>
-                    </li>
-                    <li>
-                        <p>Gift Cards</p>
-                    </li>
-                    <li>
-                        <p>Twitter</p>
-                    </li>
-                </ul>
-            </div> */}
         </div>
     );
 };

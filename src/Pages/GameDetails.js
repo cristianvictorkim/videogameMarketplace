@@ -3,29 +3,43 @@ import { Link, useParams } from 'react-router-dom';
 import Comment from '../components/Comment';
 import AddComment from '../components/AddComment';
 import Footer from '../components/Footer';
-import { getActiveGame, getGameById } from '../Entities/Game'
+import { addGame, getGameById } from '../Entities/Game'
 import { getUserId } from '../Entities/User';
-
-function addToCart(gameId)
-{
-    let user = getUserId();
-    let game = getActiveGame();
-
-    fetch("http://localhost:3001/add-to-cart?"  + new URLSearchParams({
-        gameId: game,
-        userId: user
-        }).toString()
-    );
-    console.log("hui");
-}
-
 
 const GameDetails = () => {
 
     const params = useParams();
     let gameId = params["gameId"];
-    let game = getGameById(Number(gameId));
 
+    const [game, setGame] = React.useState({
+        bannerUrl: "",
+        gameplayUrl: "",
+        title: "Loading..",
+        genre: "Loading..",
+        rating: 5,
+        price: 0,
+        gameId: -1 
+    });
+
+    React.useEffect(() => {
+        fetch("http://localhost:3001/get-game-by-id?"  + new URLSearchParams({
+                gameId: gameId
+                }).toString()
+            ).then(res => res.json())
+            .then(data => setGame(data));
+    }, []);
+
+    function addToCart()
+    {
+        let user = getUserId();
+
+        fetch("http://localhost:3001/add-to-cart?"  + new URLSearchParams({
+            gameId: gameId,
+            userId: user,
+            }.toString())
+        );
+    }
+    
     return(
         <div className='min-h-screen flex flex-col justify-center items-center space-y-6 pb-10'> 
             <div className='flex space-x-8 h-[20rem] mt-10 max-w-[59rem]'>

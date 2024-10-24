@@ -1,25 +1,28 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import RemovableGameCard from '../components/RemovableGameCard';
+import { getUserId } from '../Entities/User';
+import { getGameCards } from '../Entities/Game';
 
 
 const Cart = () => {
         
-    const [selection, setSelection] = React.useState([]);
-    const [featured, setFeatured] = React.useState({});
+    const [cartGames, setCartGames] = React.useState([]);
+    const [gameCards, setGameCards] = React.useState([]);
+    
+    let userId = getUserId();
+    
+    React.useEffect(() => { 
+        fetch("http://localhost:3001/get-cart?" + new URLSearchParams({
+            userId: userId
+            }).toString())
+            .then(res => res.json())
+            .then(data => setCartGames(data));
+    }, [])
 
     React.useEffect(() => { 
-        fetch("http://localhost:3001/get-games")
-            .then(res => res.json())
-            .then(data => setSelection(data));
-            
-        fetch("http://localhost:3001/get-game-by-id?" + new URLSearchParams({  
-                gameId: 2,
-                }).toString()
-            )
-            .then(res => res.json())
-            .then(data => setFeatured(data));
-    }, [])
+        setGameCards(getGameCards(cartGames))
+    }, [cartGames])
 
     return(
         <div className='min-h-screen'>
@@ -31,13 +34,17 @@ const Cart = () => {
                         placeholder='search for game...'
                         className='pl-5 rounded-full w-[100%]' 
                     />
-                    <RemovableGameCard 
-                    image="https://i.ytimg.com/vi/cklw-Yu3moE/maxresdefault.jpg"
-                    title = "Ori and the Blind Forest"
-                    price={60.0}
-                    score="4.8"
-                    />
-                    
+                    {
+                        cartGames.map((game, index) => (
+                            <RemovableGameCard
+                                key={index}
+                                image={game.bannerUrl}
+                                title={game.title}
+                                price={game.price}
+                                score={game.rating}
+                            /> 
+                        ))
+                    }
                 </div>
                 <div className='my-5 bg-main-color p-4 flex flex-col items-center justify-center border-2 border-black'>
                     <p>
