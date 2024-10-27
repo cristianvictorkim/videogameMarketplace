@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { removeGameFromCart } from '../Entities/Cart';
 
-const RemovableGameCard = ({ image, title, price, score }) => {
-    // Game card la cual muestra la informacion del juego.
+const RemovableGameCard = ({ gameId, image, title, price, score, removeFromFunction }) => {
+    
     return (
         <div className='bg-main-color mx-auto mt-[2rem] rounded-lg w-full max-w-2xl border-2 border-black'>    
             <div className="h-[14rem] w-full flex">
@@ -23,13 +24,17 @@ const RemovableGameCard = ({ image, title, price, score }) => {
                     <span className="text-[16px]">
                             ${price}
                     </span>
-                    <div className="space-y-2   ">    
-                        <button className="btn">
-                            <Link to="/GameDetails"> View Details </Link>
+                    <div className="space-y-2   ">   
+                        <Link to={"/GameDetails/?gameId=" + gameId}>  
+                            <button className="btn">
+                                View Details 
+                            </button>
+                        </Link>
+                        <button className="btn" onClick={() => removeFromFunction()}>
+                            <p className='text-center'>
+                                Remove
+                            </p>
                         </button>
-                        <p className='text-center'>
-                            Remove
-                        </p>
                     </div>    
                 </div>
             </div>

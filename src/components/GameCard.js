@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 const GameCard = ({ image, title, price, score, gameId}) => {
+
     // Game card la cual muestra la informacion del juego.
     return (
         <div className='bg-main-color mx-auto mt-[2rem] rounded-lg w-full max-w-2xl border-2 border-black'>    
@@ -23,9 +24,11 @@ const GameCard = ({ image, title, price, score, gameId}) => {
                     <span className="text-[16px]">
                             ${price}
                     </span>
-                    <button className="btn">
-                        <Link to={"/GameDetails/" + gameId}> View Details </Link>
-                    </button>
+                    <Link to={"/GameDetails/?gameId=" + gameId}>
+                        <button className="btn">
+                            View Details   
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

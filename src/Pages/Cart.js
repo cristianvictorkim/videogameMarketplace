@@ -3,26 +3,26 @@ import Navbar from '../components/Navbar';
 import RemovableGameCard from '../components/RemovableGameCard';
 import { getUserId } from '../Entities/User';
 import { getGameCards } from '../Entities/Game';
+import { getCartForUser, removeGameFromCart } from '../Entities/Cart';
 
 
 const Cart = () => {
-        
-    const [cartGames, setCartGames] = React.useState([]);
+
     const [gameCards, setGameCards] = React.useState([]);
-    
+    const [cartTotal, setCartTotal] = React.useState(0);
+
     let userId = getUserId();
     
     React.useEffect(() => { 
-        fetch("http://localhost:3001/get-cart?" + new URLSearchParams({
-            userId: userId
-            }).toString())
-            .then(res => res.json())
-            .then(data => setCartGames(data));
+        async function loadGames()
+        {
+            const gameCardData = await getCartForUser(userId);
+            setGameCards(gameCardData.games);
+            setCartTotal(gameCardData.total);
+        }
+        
+        loadGames();
     }, [])
-
-    React.useEffect(() => { 
-        setGameCards(getGameCards(cartGames))
-    }, [cartGames])
 
     return(
         <div className='min-h-screen'>
@@ -35,20 +35,34 @@ const Cart = () => {
                         className='pl-5 rounded-full w-[100%]' 
                     />
                     {
-                        cartGames.map((game, index) => (
+                        gameCards.map((game, index) => (
                             <RemovableGameCard
                                 key={index}
+                                gameId={game.gameId}
                                 image={game.bannerUrl}
                                 title={game.title}
                                 price={game.price}
                                 score={game.rating}
+                                removeFromFunction={() => 
+                                    {
+                                        let index = gameCards.indexOf(game.gameId);
+                                        if(index > -1)
+                                        {
+                                            let cartCopy = gameCards;
+                                            cartCopy.splice(index, 1);
+                                            setGameCards(cartCopy);
+                                        }
+                                        removeGameFromCart(game.removeUrl);
+                                        window.location.reload(false);
+                                    }
+                                }
                             /> 
                         ))
                     }
                 </div>
                 <div className='my-5 bg-main-color p-4 flex flex-col items-center justify-center border-2 border-black'>
                     <p>
-                        Total estimated to pay $60.0
+                        Total estimated to pay ${cartTotal}
                     </p>
                     <button className='bg-btn-color my-1 w-[40%] border border-black'>
                         Pay
@@ -57,6 +71,6 @@ const Cart = () => {
             </div>
         </div>
     );
-};
+}
 
 export default Cart;
