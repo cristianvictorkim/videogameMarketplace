@@ -36,6 +36,7 @@ const Wishlist = () => {
                                 title={game.title}
                                 price={game.price}
                                 score={game.rating}
+                                publisherId={game.publisherId}
                                 removeFromFunction={() => 
                                     {
                                         let index = gameCards.indexOf(game.gameId);

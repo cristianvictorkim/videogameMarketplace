@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import React from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import Comment from '../components/Comment';
 import AddComment from '../components/AddComment';
 import Footer from '../components/Footer';
-import { addGame, getGameById } from '../Entities/Game'
+import { getGameById } from '../Entities/Game'
 import { getUserId } from '../Entities/User';
 import { addGameToCart } from '../Entities/Cart';
 import { addGameToWishlist } from '../Entities/Wishlist';
+import { getPublisherById } from '../Entities/Publisher';
 
 const GameDetails = () => {
 
     const [isLoading, setIsLoading] = React.useState(true);
     const [game, setGame] = React.useState({});
+    const [publisher, setPublisherData] = React.useState({});
     const [searchParams, setSearchParams] = useSearchParams();
 
     let gameId = searchParams.get("gameId");
+    let publisherId  = searchParams.get("publisherId");
 
     React.useEffect(() => {      
         getGameById(gameId)
             .then(data => {
                 setIsLoading(false);
                 setGame(data)
+            });
+        
+        getPublisherById(publisherId)
+            .then(data => {
+                console.log(data)
+                setPublisherData(data);
             });
     }, []);
     
@@ -87,15 +96,15 @@ const GameDetails = () => {
                     </h1>
                     <div className='bg-main-color flex border-black p-4 rounded-lg'>
                         <img 
-                            src='https://upload.wikimedia.org/wikipedia/commons/1/1f/2K_2021_Logo.svg'
+                            src={publisher.profilePicUrl}
                             className='profilePic p-4'
                         />
                         <div className='ml-4'>    
                             <h1 className='font-bold'>
-                                Publisher Name
+                                {publisher.title}
                             </h1>
                             <p>
-                                Publisher Description
+                                {publisher.description}
                             </p>
                         </div>
                     </div>
@@ -106,7 +115,7 @@ const GameDetails = () => {
                     </h1>
                     <div className='bg-main-color flex border-black p-4 rounded-lg'>   
                         <p className=''>
-                            Game Description
+                            {game.description}
                         </p>
                     </div>
                 </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import RemovableGameCard from '../components/RemovableGameCard';
 import { getUserId } from '../Entities/User';
-import { getGameCards } from '../Entities/Game';
 import { getCartForUser, removeGameFromCart } from '../Entities/Cart';
 
 
@@ -43,6 +42,7 @@ const Cart = () => {
                                 title={game.title}
                                 price={game.price}
                                 score={game.rating}
+                                publisherId={game.publisherId}
                                 removeFromFunction={() => 
                                     {
                                         let index = gameCards.indexOf(game.gameId);

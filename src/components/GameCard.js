@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-const GameCard = ({ image, title, price, score, gameId}) => {
+const GameCard = ({ image, title, price, score, gameId, publisherId}) => {
 
     // Game card la cual muestra la informacion del juego.
     return (
@@ -24,7 +24,10 @@ const GameCard = ({ image, title, price, score, gameId}) => {
                     <span className="text-[16px]">
                             ${price}
                     </span>
-                    <Link to={"/GameDetails/?gameId=" + gameId}>
+                    <Link to={"/GameDetails/?" + new URLSearchParams({
+                        gameId : gameId,
+                        publisherId : publisherId
+                        }).toString()}>
                         <button className="btn">
                             View Details   
                         </button>

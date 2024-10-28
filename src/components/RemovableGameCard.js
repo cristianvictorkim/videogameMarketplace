@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { removeGameFromCart } from '../Entities/Cart';
 
-const RemovableGameCard = ({ gameId, image, title, price, score, removeFromFunction }) => {
+const RemovableGameCard = ({ gameId, image, title, price, score, publisherId, removeFromFunction }) => {
     
     return (
         <div className='bg-main-color mx-auto mt-[2rem] rounded-lg w-full max-w-2xl border-2 border-black'>    
@@ -25,7 +24,10 @@ const RemovableGameCard = ({ gameId, image, title, price, score, removeFromFunct
                             ${price}
                     </span>
                     <div className="space-y-2   ">   
-                        <Link to={"/GameDetails/?gameId=" + gameId}>  
+                        <Link to={"/GameDetails/?" + new URLSearchParams({
+                            gameId : gameId,
+                            publisherId : publisherId
+                            }).toString()}>  
                             <button className="btn">
                                 View Details 
                             </button>

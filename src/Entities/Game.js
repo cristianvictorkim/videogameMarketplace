@@ -14,7 +14,9 @@ async function getGameById(gameId)
 {
     let game = {};
     
-    await fetch("http://localhost:3001/games/"  + gameId)
+    await fetch("http://localhost:3001/games/byId?" + new URLSearchParams({
+            gameId : gameId
+            }).toString())
         .then(res => res.json())
         .then(data => game = data);
 

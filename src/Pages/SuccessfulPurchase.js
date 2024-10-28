@@ -1,5 +1,5 @@
 import React from 'react';
-import RemovableGameCard from './RemovableGameCard';
+import GameCard from '../components/GameCard';
 
 const Wishlist = () => {
     return(
@@ -13,7 +13,7 @@ const Wishlist = () => {
                         placeholder='search for game...'
                         className='pl-5 rounded-full w-[100%]' 
                     />
-                    <RemovableGameCard 
+                    <GameCard 
                     image="https://i.ytimg.com/vi/cklw-Yu3moE/maxresdefault.jpg"
                     title = "Ori and the Blind Forest" 
                     price={60.0}

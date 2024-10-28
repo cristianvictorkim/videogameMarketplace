@@ -30,6 +30,7 @@ const HomePage = () => {
                         price={game.price}
                         score={game.rating}
                         gameId={game.gameId} 
+                        publisherId={game.publisherId}
                     /> 
                 ))
             }
