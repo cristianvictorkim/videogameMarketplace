@@ -1,56 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from "../assets/logo.png";
-import pfp from "../assets/pfp.png";
+import { getPfp } from "../Entities/User";
 import './Style/NavBar.css';
-import { useState, useEffect } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     
     const [sticky, setSticky] = useState(false);
+    const [profilePicture, setProfilePicture] = useState('');
 
-    // Add event listener for scroll to make navbar sticky
     useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 100) {  // When scrolled beyond 100px
-        setSticky(true);
-      } else {
-        setSticky(false);
-      }
-    };
+        const handleScroll = () => {
+            const offset = window.scrollY;
+            if (offset > 100) {
+                setSticky(true);
+            } else {
+                setSticky(false);
+            }
+        };
 
-    window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
 
-    const imageStyle = {
-        mixBlendMode: "color-burn",
-        maxWidth: "150px",
-        height: "170px",
-        clipPath: "ellipse(50% 25% at center)"
-    }
+    useEffect(() => {
+        const fetchProfilePicture = () => {
+            const pfpUrl = getPfp();
+            setProfilePicture(pfpUrl); 
+        };
 
-    const logoStyle = 
-    {
-        height: "40px",
-        overflow: "visible",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center"
-    }
+        fetchProfilePicture();
+    }, []);
 
     return( 
-        <div className={`navbar ${sticky ? 'sticky' : ''}`} >
-            <div style={logoStyle}>
+        <div className={`navbar ${sticky ? 'sticky' : ''}`}>
+            <div className="logoStyle">
                 <Link to="/">
-                    <img src={logo} style={imageStyle}/>
+                    <img src={logo} className="imageStyle" alt="Logo"/>
                 </Link>
             </div>
             <div className='flex items-center'>
-                <img src={pfp} alt="." className='w-11 h-11 rounded-full'/>
+                <img 
+                    src={profilePicture}
+                    alt="Profile" 
+                    className='w-11 h-11 rounded-full'
+                />
                 <div className='px-3'>
                     <Link to="/UserProfile">User</Link>
                 </div>
@@ -58,7 +54,7 @@ const Navbar = () => {
             <div>
                 <Link to="/Wishlist">Wishlist</Link>
             </div>
-            <div >
+            <div>
                 <Link to="/Cart">Cart</Link>
             </div>
             <div>
@@ -69,3 +65,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

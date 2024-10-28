@@ -41,7 +41,8 @@ background-image: linear-gradient(to bottom, #e2659f, #d55f8e, #c85a7e, #ba5570,
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  object-fit: cover; 
+  object-fit: cover;
+  cursor: pointer; 
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -59,4 +60,19 @@ code {
   border: 1px solid #e5e7eb; /* border (color gris claro por defecto en Tailwind) */
   border-radius: 0.5rem; /* rounded-lg (8px) */
   box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
+
+.imageStyle {
+  mix-blend-mode: color-burn;
+  max-width: 150px;
+  height: 170px;
+  clip-path: ellipse(50% 25% at center);
+}
+
+.logoStyle {
+  height: 40px;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

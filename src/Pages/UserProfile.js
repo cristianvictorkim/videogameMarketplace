@@ -2,7 +2,10 @@ import React from 'react';
 import {getGames} from '../Entities/User';
 import PurchaseHistory from '../components/PurchaseHistory';
 import {useState, useEffect} from 'react';
-import pfp from '../assets/pfp.png';
+import {getPfp, setPfp } from "../Entities/User";
+import luffy from '../assets/luffy.png';
+import chopper from '../assets/chopper.png';
+import nami from '../assets/nami.png';
 
 const UserProfile = () => {
     
@@ -12,9 +15,16 @@ const UserProfile = () => {
         fetchGames();
     }, []);
 
+    const [profilePicture, setProfilePicture] = useState(getPfp());
+
     const fetchGames = async () => {
         const allGames = await getGames();
         setGames(allGames);
+    };
+    
+    const handleProfilePictureChange = (newPfp) => {
+        setPfp(newPfp); 
+        setProfilePicture(newPfp); 
     };
 
     return(
@@ -124,29 +134,35 @@ const UserProfile = () => {
                             />
                         </div>
                         <div className='avatarChange flex'>
-                            <div className='p-5 space-y-5'>
-                                <img 
-                                    className='tinyPic' 
-                                    src=''
+                        <div className='p-5 space-y-5'>
+                                <img
+                                    className='tinyPic'
+                                    src={nami}
+                                    alt='Nami'
+                                    onClick={() => handleProfilePictureChange(nami)}
                                 />
-                                <img 
-                                    className='tinyPic' 
-                                    src=''
+                                <img
+                                    className='tinyPic'
+                                    src={chopper}
+                                    alt='Chopper'
+                                    onClick={() => handleProfilePictureChange(chopper)}
                                 />
-                                <img 
-                                    className='tinyPic' 
-                                    src=''
+                                <img
+                                    className='tinyPic'
+                                    src={luffy}
+                                    alt='Luffy'
+                                    onClick={() => handleProfilePictureChange(luffy)}
                                 />
                             </div>
-                            <div className='pt-5'>
+                            <div className='pt-5 w-[62%]'>
                                 <img
-                                    className=''
-                                    src={pfp}
+                                    className='object-cover w-full'
+                                    src={profilePicture}
+                                    alt=''
                                 />
                             </div>
                         </div>
                     </div>
-                    
                 </div>
                 <button className='btn'>
                     Save Changes
