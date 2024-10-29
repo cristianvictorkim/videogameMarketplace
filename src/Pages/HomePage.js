@@ -7,34 +7,29 @@ import { getGameById } from "../Entities/Game";
 
 const HomePage = () => {    
     const [selection, setSelection] = React.useState([]);
-    const [featured, setFeatured] = React.useState([]);
     
     React.useEffect(() => { 
         fetch("http://localhost:3001/games")
             .then(res => res.json())
             .then(data => setSelection(data));
-            
-        fetch("http://localhost:3001/games")
-            .then(res => res.json())
-            .then(data => setFeatured(data));
     }, [])
 
     return( 
         <div>
-            <Categories/>
-            <FeaturedSelection/>
+            <Categories/>             
+            <YourSelection/>
             {
-               featured.map((game, index) => (
-                <GameCard
-                    key={index}
-                    image={game.bannerUrl}
-                    title={game.title}
-                    price={game.price}
-                    score={game.rating}
-                    gameId={game.gameId} 
-                    publisherId={game.publisherId}
-                /> 
-            ))
+                selection.map((game, index) => (
+                    <GameCard
+                        key={index}
+                        image={game.bannerUrl}
+                        title={game.title}
+                        price={game.price}
+                        score={game.rating}
+                        gameId={game.gameId} 
+                        publisherId={game.publisherId}
+                    /> 
+                ))
             }
         </div>
     );
