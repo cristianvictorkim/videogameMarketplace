@@ -7,7 +7,12 @@ function getUserId()
 
 // Array to store multiple game information instances
 const games = new Map();
+import emptyFoto from "../assets/pfp.png";
+
+const games = new Map();
 const today = new Date();
+const userName = '';
+let pfp = emptyFoto;
 
 // Counter for auto-assigning gameId
 let gameIdCounter = 1;
@@ -18,8 +23,8 @@ function addGame(title, rating, price, genre, os) {
         title: title,
         rating: rating,
         price: price,
-        gameId: gameIdCounter,  // Assign current counter value and increment
-        purchaseDate: today.getDate(),
+        gameId: gameIdCounter,
+        purchaseDate: today.toLocaleDateString(),
         genre: genre,
         os: os
     };
@@ -27,11 +32,11 @@ function addGame(title, rating, price, genre, os) {
     gameIdCounter++;
 }
 
-// Function to get all games
 function getGames() {
     return Array.from(games.values());
 }
 
+addGame("Sid Meier’s Civilization® VI", 4.7, 59.99, "Strategy", "Windows10/11");
 
-// Exporting the functions and games array for use in other files
-module.exports = { addGame, getGames, getUserId };
+// Exporting the functions and variables for use in other files
+export { addGame, getGames, games, setPfp, getPfp, getUserName, setUserName };
