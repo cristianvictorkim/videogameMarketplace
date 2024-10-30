@@ -1,29 +1,42 @@
-import React from 'react';
-import RemovableGameCard from './RemovableGameCard';
+import React, { useEffect, useState } from 'react';
+import PurchasedGameCard from '../components/PurchasedGameCard';
+import { Link } from 'react-router-dom';
+import { getGames } from '../Entities/User'; 
 
-const Wishlist = () => {
-    return(
-        <div className=' min-h-screen'>
-            <div className='flex flex-col items-center justify-center'> 
-                <div className='space-y-4'>
-                    <h1 className='text-center text-2xl font-bold pt-5 '>
-                        Wishlist
-                    </h1>    
-                    <input type="search"
-                        placeholder='search for game...'
-                        className='pl-5 rounded-full w-[100%]' 
-                    />
-                    <RemovableGameCard 
-                    image="https://i.ytimg.com/vi/cklw-Yu3moE/maxresdefault.jpg"
-                    title = "Ori and the Blind Forest" 
-                    price={60.0}
-                    score="4.8"
-                    />
-                    
-                </div>
+const SuccessfulPurchase = () => {
+    const [purchasedGames, setPurchasedGames] = useState([]);
+
+    useEffect(() => {
+        const games = getGames();
+        setPurchasedGames(games);
+    }, []);
+
+    return (
+        <div className='min-h-screen flex flex-col items-center mt-10'>
+            <div className='bg-main-color inline-block text-center p-4'>
+                <h1 className='titleBold'>
+                    Congratulations! Your purchase was successful.
+                </h1>
+                {purchasedGames.length > 0 ? (
+                    purchasedGames.map((game) => (
+                        <PurchasedGameCard
+                            key={game.gameId}
+                            image={game.image}
+                            title={game.title}
+                            price={game.price}
+                            purchasedDate={game.purchaseDate}
+                            gameId={game.gameId}
+                        />
+                    ))
+                ) : (
+                    <p>No games found.</p>
+                )}
             </div>
+            <button className='btn mt-4'>
+                <Link to={"/UserProfile"}>View my purchases</Link>
+            </button>
         </div>
     );
 };
 
-export default Wishlist;
+export default SuccessfulPurchase;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from "../components/Navbar";
+import { Link } from 'react-router-dom';
 
 const UserRegistration = () => {
     return (
@@ -21,7 +21,7 @@ const UserRegistration = () => {
             <div className="mb-6">
               <input
                 type="text"
-                placeholder="Password"
+                placeholder="Email Address"
                 className="w-full p-2 border rounded-lg"
               />
             </div>
@@ -65,8 +65,8 @@ const UserRegistration = () => {
               Submit
             </button>
             <div className='text-center py-2 space-y-1'> 
-              <p>Log in</p>
-              <p>I am a developer</p>
+                <Link to={"/LogIn"}>Log in</Link>
+                <Link to={"/CompanyLogIn"}><p>I am a developer</p></Link>  
             </div>
           </form>
         </div>

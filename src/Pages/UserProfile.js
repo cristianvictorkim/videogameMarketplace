@@ -8,6 +8,7 @@ import chopper from '../assets/chopper.png';
 import nami from '../assets/nami.png';
 import { UserContext } from '../components/UserContext';
 
+
 const UserProfile = () => {
     
     const [games, setGames] = useState([]);
@@ -147,13 +148,13 @@ const UserProfile = () => {
                             />
                         </div>
                         <div className='avatarChange flex'>
-                            <div className='p-3 space-y-5'>
+                            <div className='p-3 space-y-5 min-w-[100px]'>
                                 <img
                                     className='tinyPic'
                                     src={nami}
                                     alt='Nami'
                                     onClick={() => handleProfilePictureChange(nami)}
-                                />
+                            />
                                 <img
                                     className='tinyPic'
                                     src={chopper}

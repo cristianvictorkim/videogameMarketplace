@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Comment from '../components/Comment';
 import AddComment from '../components/AddComment';
 import Footer from '../components/Footer';
-import { getGameById } from '../Entities/Game'
+import { getGameById } from '../Entities/Game';
 
 const GameDetails = () => {
 
@@ -50,7 +50,7 @@ const GameDetails = () => {
                             Add to Wishlist
                         </button>
                         <button className='btn'>
-                            <Link to="/">Buy now</Link>
+                            <Link to="/SuccessfulPurchase">Buy now</Link>
                         </button>
                     </div>
                 </div>

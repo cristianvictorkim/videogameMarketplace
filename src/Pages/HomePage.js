@@ -11,35 +11,35 @@ const HomePage = () => {
     
     React.useEffect(() => { 
         setSelection(getGames()); 
-        setFeatured(getGameById(2))
-    })
+        setFeatured(getGameById(2));
+    }, []);
 
     return( 
         <div>
-                <Categories/>             
-                <YourSelection/>
-                {
-                    selection.map((game, index) => (
-                        <GameCard
-                            key={index}
-                            image={game.bannerUrl}
-                            title={game.title}
-                            price={game.price}
-                            score={game.rating}
-                            gameId={game.gameId} 
-                        /> 
-                    ))
-                }
-                <FeaturedSelection/>
-                {
+            <Categories/>             
+            <YourSelection/>
+            {
+                selection.map((game, index) => (
                     <GameCard
-                        image={featured.bannerUrl}
-                        title={featured.title}
-                        price={featured.price}
-                        score={featured.rating}
-                        gameId={featured.gameId} 
+                        key={index}
+                        image={game.bannerUrl}
+                        title={game.title}
+                        price={game.price}
+                        score={game.rating}
+                        gameId={game.gameId} 
                     /> 
-                }
+                ))
+            }
+            <FeaturedSelection/>
+            {
+                <GameCard
+                    image={featured.bannerUrl}
+                    title={featured.title}
+                    price={featured.price}
+                    score={featured.rating}
+                    gameId={featured.gameId} 
+                /> 
+            }
         </div>
     );
 };

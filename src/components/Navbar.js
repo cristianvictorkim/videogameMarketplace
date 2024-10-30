@@ -3,6 +3,7 @@ import logo from "../assets/logo.png";
 import './Style/NavBar.css';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../components/UserContext';
+import emptyFoto from '../assets/pfp.png'
 
 const Navbar = () => {
     
@@ -33,11 +34,13 @@ const Navbar = () => {
                 </Link>
             </div>
             <div className='flex items-center'>
+                <Link to="/UserProfile">
                 <img 
                     src={profilePicture}
-                    alt="Profile" 
+                    alt={emptyFoto} 
                     className='w-11 h-11 rounded-full'
                 />
+                </Link>
                 <div className='px-3'>
                     <Link to="/UserProfile"><span>{username}</span></Link>
                 </div>

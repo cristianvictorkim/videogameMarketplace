@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const RemovableGameCard = ({ image, title, price, score }) => {
+const RemovableGameCard = ({ image, title, price, score, gameId}) => {
     // Game card la cual muestra la informacion del juego.
     return (
         <div className='bg-main-color mx-auto mt-[2rem] rounded-lg w-full max-w-2xl border-2 border-black'>    
@@ -25,7 +25,7 @@ const RemovableGameCard = ({ image, title, price, score }) => {
                     </span>
                     <div className="space-y-2   ">    
                         <button className="btn">
-                            <Link to="/GameDetails"> View Details </Link>
+                            <Link to={"/GameDetails/" + gameId}> View Details </Link>
                         </button>
                         <p className='text-center'>
                             Remove

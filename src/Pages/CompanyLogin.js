@@ -31,7 +31,7 @@ const CompanyLogin = () => {
           </button>
           <div className='text-center py-4 space-y-1'> 
             <p><Link>Forgot Password?</Link></p>
-            <p><Link>Register</Link></p>
+            <p><Link to='/CompanyRegistration'>Register</Link></p>
             <p><Link to="/Login">I am a Gamer</Link></p>
           </div>
         </form>
