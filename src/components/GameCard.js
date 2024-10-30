@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import placeholder from '../assets/placeholder-image.jpg'
 
 const GameCard = ({ image, title, price, score, gameId}) => {
     // Game card la cual muestra la informacion del juego.
@@ -9,7 +10,7 @@ const GameCard = ({ image, title, price, score, gameId}) => {
                 <div className='w-[65%] h-full flex'>
                     <img 
                         src={image} 
-                        alt={title} 
+                        alt={placeholder} 
                         className="object-cover w-full rounded-lg" 
                     />
                 </div>

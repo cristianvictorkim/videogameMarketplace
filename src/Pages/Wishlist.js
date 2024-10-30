@@ -16,8 +16,7 @@ const Wishlist = () => {
                     title = "Ori and the Blind Forest" 
                     price={60.0}
                     score="4.8"
-                    />
-                    
+                    />  
                 </div>
             </div>
         </div>

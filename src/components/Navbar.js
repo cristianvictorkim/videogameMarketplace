@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import logo from "../assets/logo.png";
-import { getPfp } from "../Entities/User";
 import './Style/NavBar.css';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../components/UserContext';
 
 const Navbar = () => {
     
     const [sticky, setSticky] = useState(false);
-    const [profilePicture, setProfilePicture] = useState('');
+    const { username, profilePicture } = useContext(UserContext);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -25,15 +25,6 @@ const Navbar = () => {
         };
     }, []);
 
-    useEffect(() => {
-        const fetchProfilePicture = () => {
-            const pfpUrl = getPfp();
-            setProfilePicture(pfpUrl); 
-        };
-
-        fetchProfilePicture();
-    }, []);
-
     return( 
         <div className={`navbar ${sticky ? 'sticky' : ''}`}>
             <div className="logoStyle">
@@ -48,7 +39,7 @@ const Navbar = () => {
                     className='w-11 h-11 rounded-full'
                 />
                 <div className='px-3'>
-                    <Link to="/UserProfile">User</Link>
+                    <Link to="/UserProfile"><span>{username}</span></Link>
                 </div>
             </div>
             <div>

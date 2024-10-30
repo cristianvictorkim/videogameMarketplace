@@ -1,21 +1,23 @@
 import React from 'react';
 import {getGames} from '../Entities/User';
 import PurchaseHistory from '../components/PurchaseHistory';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import {getPfp, setPfp } from "../Entities/User";
 import luffy from '../assets/luffy.png';
 import chopper from '../assets/chopper.png';
 import nami from '../assets/nami.png';
+import { UserContext } from '../components/UserContext';
 
 const UserProfile = () => {
     
     const [games, setGames] = useState([]);
-
+    const { username, setUsername, setUserProfilePicture } = useContext(UserContext);
+    const [tempUsername, setTempUsername] = useState("");
+    const [tempProfilePicture, setTempProfilePicture] = useState(getPfp());
+    
     useEffect(() => {
         fetchGames();
     }, []);
-
-    const [profilePicture, setProfilePicture] = useState(getPfp());
 
     const fetchGames = async () => {
         const allGames = await getGames();
@@ -23,15 +25,24 @@ const UserProfile = () => {
     };
     
     const handleProfilePictureChange = (newPfp) => {
-        setPfp(newPfp); 
-        setProfilePicture(newPfp); 
+        setTempProfilePicture(newPfp);
+    };
+
+    const handleSaveChanges = () => {
+        setUserProfilePicture(tempProfilePicture);
+        setPfp(tempProfilePicture);
+        if(tempUsername !== ''){
+            setUsername(tempUsername);
+         }else{
+            alert("Some fields are incomplete");
+         }
     };
 
     return(
         <div className='min-h-screen flex justify-center'>
             <div className='w-[45rem] space-y-5'>    
                 <h1 className='titleBold'>
-                    Username
+                    {username}
                 </h1>
                 <div>
                     <h2 className='titleBold pb-3'>
@@ -58,6 +69,8 @@ const UserProfile = () => {
                                 className='input'
                                 placeholder='Enter your name'
                                 type='text'
+                                value={tempUsername}
+                                onChange={(e) => setTempUsername(e.target.value)}
                             />
                         </div>
                         <p>
@@ -134,7 +147,7 @@ const UserProfile = () => {
                             />
                         </div>
                         <div className='avatarChange flex'>
-                        <div className='p-5 space-y-5'>
+                            <div className='p-3 space-y-5'>
                                 <img
                                     className='tinyPic'
                                     src={nami}
@@ -154,17 +167,17 @@ const UserProfile = () => {
                                     onClick={() => handleProfilePictureChange(luffy)}
                                 />
                             </div>
-                            <div className='pt-5 w-[62%]'>
+                            <div className='pt-3 flex-grow h-full'>
                                 <img
-                                    className='object-cover w-full'
-                                    src={profilePicture}
+                                    className='w-full h-full'
+                                    src={tempProfilePicture}
                                     alt=''
                                 />
                             </div>
                         </div>
                     </div>
                 </div>
-                <button className='btn'>
+                <button className='btn' onClick={handleSaveChanges}>
                     Save Changes
                 </button>
             </div>
