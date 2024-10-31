@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-const GameCard = ({ image, title, price, score, gameId, publisherId}) => {
+const GameCard = ({ gameId, image, title, price, score, publisherId}) => {
 
     // Game card la cual muestra la informacion del juego.
     return (

@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import logo from "../assets/logo.png";
-import { getPfp } from "../Entities/User";
 import './Style/NavBar.css';
+import React, { useState, useEffect, forceUpdate } from 'react';
 import { Link } from 'react-router-dom';
+import logo from "../assets/logo.png";
+import { getPfp, pfp } from "../Entities/User";
 
 const Navbar = () => {
     
     const [sticky, setSticky] = useState(false);
-    const [profilePicture, setProfilePicture] = useState('');
+    const [profilePictureUrl, setProfilePictureUrl] = useState('');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -25,14 +25,7 @@ const Navbar = () => {
         };
     }, []);
 
-    useEffect(() => {
-        const fetchProfilePicture = () => {
-            const pfpUrl = getPfp();
-            setProfilePicture(pfpUrl); 
-        };
-
-        fetchProfilePicture();
-    }, []);
+    useEffect(() => {setProfilePictureUrl(pfp)}, [pfp])
 
     return( 
         <div className={`navbar ${sticky ? 'sticky' : ''}`}>
@@ -43,7 +36,7 @@ const Navbar = () => {
             </div>
             <div className='flex items-center'>
                 <img 
-                    src={profilePicture}
+                    src={profilePictureUrl}
                     alt="Profile" 
                     className='w-11 h-11 rounded-full'
                 />

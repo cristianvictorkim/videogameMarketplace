@@ -9,7 +9,7 @@ const HomePage = () => {
     const [selection, setSelection] = React.useState([]);
     
     React.useEffect(() => { 
-        fetch("http://localhost:3001/games")
+        fetch("http://localhost:5000/games")
             .then(res => res.json())
             .then(data => setSelection(data));
     }, [])
@@ -22,11 +22,11 @@ const HomePage = () => {
                 selection.map((game, index) => (
                     <GameCard
                         key={index}
+                        gameId={game._id} 
                         image={game.bannerUrl}
                         title={game.title}
                         price={game.price}
                         score={game.rating}
-                        gameId={game.gameId} 
                         publisherId={game.publisherId}
                     /> 
                 ))

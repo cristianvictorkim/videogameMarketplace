@@ -6,7 +6,7 @@ const PurchaseHistory = ({ game }) => {
         <div className='flex justify-center'>
             <ul className='flex space-x-10 pb-5'>
                 <li>
-                    {game.title}
+                    {game.gameTitle}
                 </li>
                 <li>
                     {game.purchaseDate}
@@ -15,7 +15,7 @@ const PurchaseHistory = ({ game }) => {
                     {game.price}
                 </li>
                 <li>
-                    {game.os}
+                    {game.operatingSystem}
                 </li>
                 <li>
                     {game.genre}

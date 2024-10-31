@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import RemovableGameCard from '../components/RemovableGameCard';
 import { getUserId } from '../Entities/User';
 import { getCartForUser, removeGameFromCart } from '../Entities/Cart';
+import { wait } from '@testing-library/user-event/dist/utils';
 
 
 const Cart = () => {
@@ -12,9 +13,11 @@ const Cart = () => {
 
     let userId = getUserId();
     
+
     React.useEffect(() => { 
         async function loadGames()
         {
+            await wait(200);
             const gameCardData = await getCartForUser(userId);
             setGameCards(gameCardData.games);
             setCartTotal(gameCardData.total);

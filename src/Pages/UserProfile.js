@@ -1,5 +1,5 @@
 import React from 'react';
-import {getGames} from '../Entities/User';
+import { getUserProfile } from '../Entities/User';
 import PurchaseHistory from '../components/PurchaseHistory';
 import {useState, useEffect} from 'react';
 import {getPfp, setPfp } from "../Entities/User";
@@ -9,41 +9,48 @@ import nami from '../assets/nami.png';
 
 const UserProfile = () => {
     
-    const [games, setGames] = useState([]);
+    const [purchaseHistory, setPurchaseHistory] = useState([]);
+    const [profile, setProfile] = useState({});
+    const [profilePictureUrl, setProfilePictureUrl] = useState(getPfp());
 
     useEffect(() => {
-        fetchGames();
+        fetchProfile();
     }, []);
 
-    const [profilePicture, setProfilePicture] = useState(getPfp());
 
-    const fetchGames = async () => {
-        const allGames = await getGames();
-        setGames(allGames);
+    const fetchProfile = async () => {
+        const profile = await getUserProfile();
+        setProfile(profile);
+        setPurchaseHistory(profile.purchases);
     };
     
     const handleProfilePictureChange = (newPfp) => {
         setPfp(newPfp); 
-        setProfilePicture(newPfp); 
+        setProfilePictureUrl(newPfp); 
     };
 
     return(
         <div className='min-h-screen flex justify-center'>
             <div className='w-[45rem] space-y-5'>    
                 <h1 className='titleBold'>
-                    Username
+                    {profile.userName}
                 </h1>
                 <div>
                     <h2 className='titleBold pb-3'>
                         Purchases
                     </h2>
-                    {games.length > 0 ? (
-                        games.map((game) => (
-                            <PurchaseHistory game={game} />
-                        ))
-                    ) : (
-                        <p>No purchases found.</p>
-                    )}
+                    {
+                        purchaseHistory.length > 0 ? (
+                            purchaseHistory.map((game, index) => (
+                                <PurchaseHistory
+                                    key={index}
+                                    game={game}
+                                /> 
+                            ))
+                        ) : (
+                            <p>No purchases found.</p>
+                        )
+                    }
                 </div>
                 <h1 className='titleBold'>
                         Edit profile
@@ -157,7 +164,7 @@ const UserProfile = () => {
                             <div className='pt-5 w-[62%]'>
                                 <img
                                     className='object-cover w-full'
-                                    src={profilePicture}
+                                    src={profilePictureUrl}
                                     alt=''
                                 />
                             </div>
