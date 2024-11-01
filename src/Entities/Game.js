@@ -15,7 +15,7 @@ async function getSelection() {
     let output = [];
 
     await fetch("http://localhost:5000/games/selection?" + new URLSearchParams({
-        n : 20
+        n : 4
         }).toString())
     .then(res => res.json())
     .then(data => output = data);
