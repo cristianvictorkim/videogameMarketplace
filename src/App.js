@@ -15,6 +15,7 @@ import SuccessfulPurchase from './Pages/SuccessfulPurchase';
 import CompanyRegistration from './Pages/CompanyRegistration';
 import { UserProvider } from './components/UserContext';
 import CompanyProfile from './Pages/CompanyProfile';
+import EditGame from './Pages/EditGame';
 
 function App() {
     return (
@@ -37,6 +38,7 @@ function App() {
                         <Route path="/CompanyLogIn"         element={<CompanyLogin />} />
                         <Route path="/CompanyRegistration"  element={<CompanyRegistration />} />
                         <Route path="/CompanyProfile"       element={<CompanyProfile />} />
+                        <Route path="/EditGame"             element={<EditGame />} />
                     </Route>
                 </Routes>
             </div>

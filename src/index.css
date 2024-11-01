@@ -82,3 +82,14 @@ code {
   flex-direction: column;
   justify-content: center;
 }
+
+.miniature{
+  width: 160px;
+  height: 90px;
+  object-fit: cover;
+}
+.mainPhoto{
+  width: 254px;
+  height: 144px;
+  object-fit: cover;
+}
