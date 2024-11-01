@@ -20,7 +20,7 @@ function App() {
     return (
         <UserProvider>
             <div>
-                <Navbar />
+                <Navbar/>
                 <Routes>
                     <Route path="/" element={<MainLayout />}>
                         <Route index                        element={<HomePage />} />
@@ -29,7 +29,7 @@ function App() {
                         <Route path="/CompanyLogin"         element={<CompanyLogin />} />
                         <Route path="/Wishlist"             element={<Wishlist />} />
                         <Route path="/Register"             element={<UserRegistration />} />
-                        <Route path="/GameDetails/:gameId"  element={<GameDetails />} />
+                        <Route path="/GameDetails"          element={<GameDetails />} />
                         <Route path="/SearchedGames"        element={<SearchedGames />} />
                         <Route path="/UserProfile"          element={<UserProfile />} />
                         <Route path="/SuccessfulPurchase"   element={<SuccessfulPurchase />} />

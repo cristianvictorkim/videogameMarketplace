@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import DeveloperGameCard from '../components/DeveloperGameCard';
 import { getPfp, setPfp } from "../Entities/User";
 import React from 'react';
-import { getGames } from '../Entities/User';
+import { getGames } from '../Entities/Game';
 
 const CompanyProfile = () => {
     const [games, setGames] = useState([]);

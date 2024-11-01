@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PurchasedGameCard from '../components/PurchasedGameCard';
 import { Link } from 'react-router-dom';
-import { getGames } from '../Entities/User'; 
+import { getGames } from '../Entities/Game'; 
 
 const SuccessfulPurchase = () => {
     const [purchasedGames, setPurchasedGames] = useState([]);

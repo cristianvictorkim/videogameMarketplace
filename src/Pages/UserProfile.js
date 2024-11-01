@@ -24,10 +24,6 @@ const UserProfile = () => {
         fetchProfile();
     }, []);
 
-    const fetchGames = async () => {
-        const allGames = await getGames();
-        setGames(allGames);
-
     const fetchProfile = async () => {
         const profile = await getUserProfile();
         setProfile(profile);

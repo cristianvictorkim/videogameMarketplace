@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import logo from "../assets/logo.png";
 import './Style/NavBar.css';
-import React, { useState, useEffect, forceUpdate } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../components/UserContext';
 import emptyFoto from '../assets/pfp.png'
