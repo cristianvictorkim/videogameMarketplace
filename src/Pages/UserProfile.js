@@ -154,7 +154,7 @@ const UserProfile = () => {
                                     src={nami}
                                     alt='Nami'
                                     onClick={() => handleProfilePictureChange(nami)}
-                            />
+                                />
                                 <img
                                     className='tinyPic'
                                     src={chopper}
@@ -182,7 +182,6 @@ const UserProfile = () => {
                     Save Changes
                 </button>
             </div>
-            
         </div>
     );
 };

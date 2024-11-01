@@ -29,7 +29,7 @@ const DeveloperGameCard = () => {
                         </div>
                         <div className="absolute bottom-4 inset-x-0 flex justify-center space-x-2">
                             <p>Edit</p>
-                            <p>Remove</p>
+                            <p>Show</p>
                             <p>Delete</p>
                         </div>
                     </div>

@@ -14,6 +14,7 @@ import Navbar from './components/Navbar';
 import SuccessfulPurchase from './Pages/SuccessfulPurchase';
 import CompanyRegistration from './Pages/CompanyRegistration';
 import { UserProvider } from './components/UserContext';
+import CompanyProfile from './Pages/CompanyProfile';
 
 function App() {
     return (
@@ -34,7 +35,8 @@ function App() {
                         <Route path="/SuccessfulPurchase"   element={<SuccessfulPurchase />} />
                         <Route path="/UserRegistration"     element={<UserRegistration />} />
                         <Route path="/CompanyLogIn"         element={<CompanyLogin />} />
-                        <Route path="/CompanyRegistration"   element={<CompanyRegistration />} />
+                        <Route path="/CompanyRegistration"  element={<CompanyRegistration />} />
+                        <Route path="/CompanyProfile"       element={<CompanyProfile />} />
                     </Route>
                 </Routes>
             </div>

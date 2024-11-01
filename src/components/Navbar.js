@@ -42,7 +42,7 @@ const Navbar = () => {
                 />
                 </Link>
                 <div className='px-3'>
-                    <Link to="/UserProfile"><span>{username}</span></Link>
+                    <Link to="/CompanyProfile"><span>{username}</span></Link> 
                 </div>
             </div>
             <div>
