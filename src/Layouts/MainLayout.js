@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 function MainLayout()  
 {
     return (
-        <div className="gradient">
+        <div className="gradient" style={{minHeight:"100%"}}>
             <Navbar />
             <Outlet />
             <Footer/>

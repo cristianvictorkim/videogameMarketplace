@@ -71,7 +71,7 @@ const GameDetails = () => {
                                     {"Price : $" + game.price}
                                 </p>
                                 <p className='font-bold'>
-                                    {"Score : " + game.rating}
+                                    {"Score : " + game.score}
                                 </p>
                             </div>
                         </div>

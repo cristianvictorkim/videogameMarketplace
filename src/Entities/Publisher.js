@@ -4,7 +4,7 @@ async function getPublisherById(publisherId)
 {
     let publisher = {};
 
-    await fetch("http://localhost:3001/publisher/byId?" + new URLSearchParams({
+    await fetch("http://localhost:5000/publishers/byId?" + new URLSearchParams({
             publisherId : publisherId
             }).toString())
         .then(res => res.json())

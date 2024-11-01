@@ -39,23 +39,23 @@ const Cart = () => {
                     {
                         gameCards.map((game, index) => (
                             <RemovableGameCard
-                                key={index}
-                                gameId={game.gameId}
-                                image={game.bannerUrl}
-                                title={game.title}
-                                price={game.price}
-                                score={game.rating}
-                                publisherId={game.publisherId}
+                                key={ index}
+                                gameId={ game._id }
+                                image={ game.bannerUrl }
+                                title={ game.title }
+                                price={ game.price }
+                                score={ game.rating }
+                                publisherId={ game.publisherId }
                                 removeFromFunction={() => 
                                     {
-                                        let index = gameCards.indexOf(game.gameId);
-                                        if(index > -1)
+                                        let index = gameCards.indexOf(game._id);
+                                        if( index > -1 )
                                         {
                                             let cartCopy = gameCards;
                                             cartCopy.splice(index, 1);
                                             setGameCards(cartCopy);
                                         }
-                                        removeGameFromCart(game.removeUrl);
+                                        removeGameFromCart(getUserId(), game._id);
                                         window.location.reload(false);
                                     }
                                 }
@@ -65,7 +65,7 @@ const Cart = () => {
                 </div>
                 <div className='my-5 bg-main-color p-4 flex flex-col items-center justify-center border-2 border-black'>
                     <p>
-                        Total estimated to pay ${cartTotal}
+                        Total estimated to pay ${cartTotal.toFixed(2)}
                     </p>
                     <button className='bg-btn-color my-1 w-[40%] border border-black'>
                         Pay

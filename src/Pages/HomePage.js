@@ -1,17 +1,15 @@
 import Categories from "../components/Categories";
 import GameCard from "../components/GameCard";
 import YourSelection from "../components/YourSelection";
-import FeaturedSelection from "../components/FeaturedSelection";
 import React from "react";
-import { getGameById } from "../Entities/Game";
+import { getSelection } from "../Entities/Game";
 
 const HomePage = () => {    
     const [selection, setSelection] = React.useState([]);
     
     React.useEffect(() => { 
-        fetch("http://localhost:5000/games")
-            .then(res => res.json())
-            .then(data => setSelection(data));
+        getSelection()
+        .then(data => setSelection(data));
     }, [])
 
     return( 

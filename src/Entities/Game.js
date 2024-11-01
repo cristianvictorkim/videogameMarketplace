@@ -10,6 +10,19 @@ async function getGames() {
     return output;
 }
 
+async function getSelection() {
+    
+    let output = [];
+
+    await fetch("http://localhost:5000/games/selection?" + new URLSearchParams({
+        n : 20
+        }).toString())
+    .then(res => res.json())
+    .then(data => output = data);
+
+    return output;
+}
+
 async function getGameById(gameId)
 {
     let game = {};
@@ -24,4 +37,4 @@ async function getGameById(gameId)
 }
 
 // Exporting the functions and games array for use in other files
-export { getGameById, getGames };
+export { getGameById, getGames, getSelection };

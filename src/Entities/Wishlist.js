@@ -2,7 +2,7 @@ async function getWishlistFromUser(userId)
 {
     let output = [];
 
-    await fetch("http://localhost:3001/wishlist?" + new URLSearchParams({
+    await fetch("http://localhost:5000/wishlists/byUserId?" + new URLSearchParams({
             userId: userId
             }).toString())
         .then(res => res.json())
@@ -11,17 +11,33 @@ async function getWishlistFromUser(userId)
     return output;
 }
 
-function addGameToWishlist(userId, gameId)
+async function addGameToWishlist(userId, gameId)
 {
-    fetch("http://localhost:3001/wishlist/add?" + new URLSearchParams({
-        userId : userId,
-        gameId : gameId
-        }).toString())
+    await fetch('http://localhost:5000/wishlists/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            userId : userId,
+            gameId : gameId
+        })
+    })
+    .then(response => console.log(response));
 }
 
-function removeGameFromWishlist(removeUrl)
+function removeGameFromWishlist(userId, gameId)
 {
-    fetch("http://localhost:3001" + removeUrl);
+    fetch("http://localhost:5000/wishlists/remove?" + new URLSearchParams({
+        userId: userId,
+        gameId: gameId
+        }).toString() ,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        }
+    })
+    .then(response => console.log(response));
 }
 
 export { addGameToWishlist, removeGameFromWishlist, getWishlistFromUser }

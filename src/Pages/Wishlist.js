@@ -2,6 +2,7 @@ import React from 'react';
 import RemovableGameCard from '../components/RemovableGameCard';
 import { getWishlistFromUser, removeGameFromWishlist } from '../Entities/Wishlist';
 import { getUserId } from '../Entities/User';
+import { wait } from '@testing-library/user-event/dist/utils';
 
 const Wishlist = () => {
     const [gameCards, setGameCards] = React.useState([]);
@@ -11,8 +12,9 @@ const Wishlist = () => {
     React.useEffect(() => { 
         async function loadGames()
         {
+            await wait(200);
             const gameCardData = await getWishlistFromUser(userId);
-            setGameCards(gameCardData);
+            setGameCards(gameCardData.games);
         }
         
         loadGames();
@@ -30,23 +32,23 @@ const Wishlist = () => {
                     {
                         gameCards.map((game, index) => (
                             <RemovableGameCard
-                                key={index}
-                                gameId={game.gameId}
-                                image={game.bannerUrl}
-                                title={game.title}
-                                price={game.price}
-                                score={game.rating}
-                                publisherId={game.publisherId}
+                                key={ index}
+                                gameId={ game._id }
+                                image={ game.bannerUrl }
+                                title={ game.title }
+                                price={ game.price }
+                                score={ game.rating }
+                                publisherId={ game.publisherId }
                                 removeFromFunction={() => 
                                     {
-                                        let index = gameCards.indexOf(game.gameId);
-                                        if(index > -1)
+                                        let index = gameCards.indexOf(game._id);
+                                        if( index > -1 )
                                         {
                                             let wishlistCopy = gameCards;
                                             wishlistCopy.splice(index, 1);
                                             setGameCards(wishlistCopy);
                                         }
-                                        removeGameFromWishlist(game.removeUrl);
+                                        removeGameFromWishlist(getUserId(), game._id);
                                         window.location.reload(false);
                                     }
                                 }

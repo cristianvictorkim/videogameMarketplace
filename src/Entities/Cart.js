@@ -23,12 +23,21 @@ async function addGameToCart(userId, gameId)
             gameId : gameId
         })
     })
-    .then(response => console.log(response))
+    .then(response => console.log(response));
 }
 
-function removeGameFromCart(removeUrl)
+function removeGameFromCart(userId, gameId)
 {
-    fetch("http://localhost:5000" + removeUrl);
+    fetch("http://localhost:5000/carts/remove?" + new URLSearchParams({
+        userId: userId,
+        gameId: gameId
+        }).toString() ,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        }
+    })
+    .then(response => console.log(response));
 }
 
 export { getCartForUser, addGameToCart, removeGameFromCart };
