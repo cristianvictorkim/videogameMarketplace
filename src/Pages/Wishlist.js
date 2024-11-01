@@ -6,55 +6,61 @@ import { wait } from '@testing-library/user-event/dist/utils';
 
 const Wishlist = () => {
     const [gameCards, setGameCards] = React.useState([]);
+    const [searchTerm, setSearchTerm] = React.useState(""); 
 
     let userId = getUserId();
     
     React.useEffect(() => { 
-        async function loadGames()
-        {
+        async function loadGames() {
             await wait(200);
             const gameCardData = await getWishlistFromUser(userId);
             setGameCards(gameCardData.games);
         }
         
         loadGames();
-    }, [])
+    }, []);
 
-    return(
-        <div className=' min-h-screen'>
+    const filteredGameCards = gameCards.filter((game) =>
+        game.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    return (
+        <div className='min-h-screen'>
             <div className='flex flex-col items-center justify-center'> 
                 <div className='space-y-4'>
-                    <h1 className='text-center text-2xl font-bold pt-5 '>Wishlist</h1>    
-                    <input type="search"
+                    <h1 className='text-center text-2xl font-bold pt-5'>Wishlist</h1>    
+                    <input 
+                        type="search"
                         placeholder='search for game...'
-                        className='pl-5 rounded-full w-[100%]' 
+                        className='pl-5 rounded-full w-[100%]'
+                        value={searchTerm} 
+                        onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    {
-                        gameCards.map((game, index) => (
+                    { filteredGameCards.length > 0 ?(
+                        filteredGameCards.map((game, index) => (
                             <RemovableGameCard
-                                key={ index}
-                                gameId={ game._id }
-                                image={ game.bannerUrl }
-                                title={ game.title }
-                                price={ game.price }
-                                score={ game.rating }
-                                publisherId={ game.publisherId }
-                                removeFromFunction={() => 
-                                    {
-                                        let index = gameCards.indexOf(game._id);
-                                        if( index > -1 )
-                                        {
-                                            let wishlistCopy = gameCards;
-                                            wishlistCopy.splice(index, 1);
-                                            setGameCards(wishlistCopy);
-                                        }
-                                        removeGameFromWishlist(getUserId(), game._id);
-                                        window.location.reload(false);
+                                key={index}
+                                gameId={game._id}
+                                image={game.bannerUrl}
+                                title={game.title}
+                                price={game.price}
+                                score={game.rating}
+                                publisherId={game.publisherId}
+                                removeFromFunction={() => {
+                                    const index = gameCards.findIndex((g) => g._id === game._id);
+                                    if (index > -1) {
+                                        const wishlistCopy = [...gameCards];
+                                        wishlistCopy.splice(index, 1);
+                                        setGameCards(wishlistCopy);
                                     }
-                                }
+                                    removeGameFromWishlist(getUserId(), game._id);
+                                    window.location.reload(false);
+                                }}
                             /> 
                         ))
-                    }                  
+                    ) : (
+                        <p className='text-center text-lg'>No games found</p>
+                    )}              
                 </div>
             </div>
         </div>

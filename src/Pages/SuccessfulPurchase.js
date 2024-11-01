@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import PurchasedGameCard from '../components/PurchasedGameCard';
 import { Link } from 'react-router-dom';
-import { getGames } from '../Entities/Game'; 
+import { getUserId } from '../Entities/User';
+import { getCartForUser, removeGameFromCart } from '../Entities/Cart';
+import { wait } from '@testing-library/user-event/dist/utils';
+
 
 const SuccessfulPurchase = () => {
+    
     const [purchasedGames, setPurchasedGames] = useState([]);
-
-    useEffect(() => {
-        const games = getGames();
-        setPurchasedGames(games);
-    }, []);
+    let userId = getUserId();
+    
+    React.useEffect(() => { 
+        async function loadGames()
+        {
+            await wait(200);
+            const gameCardData = await getCartForUser(userId);
+            setPurchasedGames(gameCardData.games);
+        }
+        
+        loadGames();
+    }, [])
 
     return (
         <div className='min-h-screen flex flex-col items-center mt-10'>
@@ -21,7 +32,7 @@ const SuccessfulPurchase = () => {
                     purchasedGames.map((game) => (
                         <PurchasedGameCard
                             key={game.gameId}
-                            image={game.image}
+                            image={game.bannerUrl}
                             title={game.title}
                             price={game.price}
                             purchasedDate={game.purchaseDate}

@@ -4,15 +4,16 @@ import RemovableGameCard from '../components/RemovableGameCard';
 import { getUserId } from '../Entities/User';
 import { getCartForUser, removeGameFromCart } from '../Entities/Cart';
 import { wait } from '@testing-library/user-event/dist/utils';
+import { Link } from 'react-router-dom';
 
 
 const Cart = () => {
 
     const [gameCards, setGameCards] = React.useState([]);
     const [cartTotal, setCartTotal] = React.useState(0);
+    const [searchTerm, setSearchTerm] = React.useState(""); 
 
     let userId = getUserId();
-    
 
     React.useEffect(() => { 
         async function loadGames()
@@ -26,6 +27,10 @@ const Cart = () => {
         loadGames();
     }, [])
 
+    const filteredGameCards = gameCards.filter((game) =>
+        game.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return(
         <div className='min-h-screen'>
             <Navbar/>
@@ -34,10 +39,12 @@ const Cart = () => {
                     <h1 className='text-center text-2xl font-bold pt-5 '>Cart</h1>    
                     <input type="search"
                         placeholder='search for game...'
-                        className='pl-5 rounded-full w-[100%]' 
+                        className='pl-5 rounded-full w-[100%]'
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)} 
                     />
-                    {
-                        gameCards.map((game, index) => (
+                    {filteredGameCards.length > 0 ?(
+                        filteredGameCards.map((game, index) => (
                             <RemovableGameCard
                                 key={ index}
                                 gameId={ game._id }
@@ -61,16 +68,20 @@ const Cart = () => {
                                 }
                             /> 
                         ))
-                    }
+                    ) : (
+                        <div className='text-center'> No games found </div>
+                    )}
                 </div>
+                {filteredGameCards.length > 0 && (
                 <div className='my-5 bg-main-color p-4 flex flex-col items-center justify-center border-2 border-black'>
                     <p>
                         Total estimated to pay ${cartTotal.toFixed(2)}
                     </p>
                     <button className='bg-btn-color my-1 w-[40%] border border-black'>
-                        Pay
+                    <Link to='/SuccessfulPurchase'> Pay</Link>  
                     </button>
                 </div>
+                )}
             </div>
         </div>
     );
