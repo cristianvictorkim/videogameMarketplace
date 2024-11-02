@@ -1,9 +1,7 @@
 // Array to store multiple game information instances
+import { redirect } from "react-router-dom";
 import emptyFoto from "../assets/pfp.png";
-import { getGames } from "./Game";
 
-const today = new Date();
-const userName = '';
 let pfp = emptyFoto;
 let userId = "6722c48b5751b6669ba2cb69";
 
@@ -32,13 +30,27 @@ function getPfp() {
     return pfp; // Retorna la foto de perfil actual
 }
 
-function getUserName() {
-    return userName; // Retorna el nombre de usuario actual
+async function getUserByUsername(username)
+{
+    let user = {};
+
+    await fetch("http://localhost:5000/users/byUsername?" + new URLSearchParams({
+            username : username
+            }).toString())
+        .then(res => res.json())
+        .then(data => user = data);
+
+    return user;
 }
 
-function setUserName(newUserName) {
-    userName = newUserName; 
+function authUser(rederictRoute)
+{
+    if (userId === "-1")
+    {
+        throw redirect(rederictRoute)
+    }
+    return null;
 }
 
 // Exporting the functions and variables for use in other files
-export { pfp, getUserId, getUserProfile, setPfp, getPfp, getUserName, setUserName };
+export { pfp, getUserId, getUserProfile, setPfp, getPfp, getUserByUsername, authUser };

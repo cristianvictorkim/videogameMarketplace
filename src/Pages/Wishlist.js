@@ -36,29 +36,30 @@ const Wishlist = () => {
                         value={searchTerm} 
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    { filteredGameCards.length > 0 ?(
-                        filteredGameCards.map((game, index) => (
-                            <RemovableGameCard
-                                key={index}
-                                gameId={game._id}
-                                image={game.bannerUrl}
-                                title={game.title}
-                                price={game.price}
-                                score={game.rating}
-                                publisherId={game.publisherId}
-                                removeFromFunction={() => {
-                                    const index = gameCards.findIndex((g) => g._id === game._id);
-                                    if (index > -1) {
-                                        const wishlistCopy = [...gameCards];
-                                        wishlistCopy.splice(index, 1);
-                                        setGameCards(wishlistCopy);
-                                    }
-                                    removeGameFromWishlist(getUserId(), game._id);
-                                    window.location.reload(false);
-                                }}
-                            /> 
-                        ))
-                    ) : (
+                    { 
+                        filteredGameCards.length > 0 ?(
+                            filteredGameCards.map((game, index) => (
+                                <RemovableGameCard
+                                    key={index}
+                                    gameId={game._id}
+                                    image={game.bannerUrl}
+                                    title={game.title}
+                                    price={game.price}
+                                    score={game.rating}
+                                    publisherId={game.publisherId}
+                                    removeFromFunction={() => {
+                                        const index = gameCards.findIndex((gameElement) => gameElement._id === game._id);
+                                        if (index > -1) {
+                                            const wishlistCopy = [...gameCards];
+                                            wishlistCopy.splice(index, 1);
+                                            setGameCards(wishlistCopy);
+                                        }
+                                        removeGameFromWishlist(getUserId(), game._id);
+                                        window.location.reload(false);
+                                    }}
+                                /> 
+                            ))
+                        ) : (
                         <p className='text-center text-lg'>No games found</p>
                     )}              
                 </div>

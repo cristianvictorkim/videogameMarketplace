@@ -43,34 +43,36 @@ const Cart = () => {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)} 
                     />
-                    {filteredGameCards.length > 0 ?(
-                        filteredGameCards.map((game, index) => (
-                            <RemovableGameCard
-                                key={ index}
-                                gameId={ game._id }
-                                image={ game.bannerUrl }
-                                title={ game.title }
-                                price={ game.price }
-                                score={ game.rating }
-                                publisherId={ game.publisherId }
-                                removeFromFunction={() => 
-                                    {
-                                        let index = gameCards.indexOf(game._id);
-                                        if( index > -1 )
+                    {
+                        filteredGameCards.length > 0 ? (
+                            filteredGameCards.map((game, index) => (
+                                <RemovableGameCard
+                                    key={ index}
+                                    gameId={ game._id }
+                                    image={ game.bannerUrl }
+                                    title={ game.title }
+                                    price={ game.price }
+                                    score={ game.rating }
+                                    publisherId={ game.publisherId }
+                                    removeFromFunction={() => 
                                         {
-                                            let cartCopy = gameCards;
-                                            cartCopy.splice(index, 1);
-                                            setGameCards(cartCopy);
+                                            let index = gameCards.indexOf(game._id);
+                                            if( index > -1 )
+                                            {
+                                                let cartCopy = gameCards;
+                                                cartCopy.splice(index, 1);
+                                                setGameCards(cartCopy);
+                                            }
+                                            removeGameFromCart(getUserId(), game._id);
+                                            window.location.reload(false);
                                         }
-                                        removeGameFromCart(getUserId(), game._id);
-                                        window.location.reload(false);
                                     }
-                                }
-                            /> 
-                        ))
-                    ) : (
-                        <div className='text-center'> No games found </div>
-                    )}
+                                /> 
+                            ))
+                        ) : (
+                            <div className='text-center'> No games found </div>
+                        )
+                    }
                 </div>
                 {filteredGameCards.length > 0 && (
                 <div className='my-5 bg-main-color p-4 flex flex-col items-center justify-center border-2 border-black'>
