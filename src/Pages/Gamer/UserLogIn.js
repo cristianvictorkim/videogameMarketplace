@@ -38,7 +38,7 @@ const UserLogIn = () => {
                         onChange={handleChange}
                         type="text"
                         placeholder="Username"
-                        value={loginFormData.email}
+                        value={loginFormData.username}
                         className="w-full p-2 border rounded-lg"
                     />
                 </div>

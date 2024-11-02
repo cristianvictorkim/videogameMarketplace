@@ -16,20 +16,25 @@ const HomePage = () => {
 
     return( 
         <div>
-            <Categories/>             
+            <Categories games={selection} setGames={setSelection} />             
             <YourSelection/>
             {
-                selection.map((game, index) => (
+                selection.length > 0 ?
+                (
+                    selection.map((game, index) => (
                     <GameCard
                         key={index}
                         gameId={game._id} 
                         image={game.bannerUrl}
                         title={game.title}
                         price={game.price}
-                        score={game.rating}
+                        score={game.score}
                         publisherId={game.publisherId}
                     /> 
                 ))
+                ) : (
+                    <h3> No games found </h3>
+                )
             }
         </div>
     );

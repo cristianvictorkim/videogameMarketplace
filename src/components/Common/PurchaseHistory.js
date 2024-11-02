@@ -21,7 +21,7 @@ const PurchaseHistory = ({ game }) => {
                     {game.genre}
                 </li>
                 <li>
-                    {game.rating}
+                    {game.score}
                 </li>
             </ul>
         </div>

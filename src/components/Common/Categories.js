@@ -1,71 +1,128 @@
 import React, { useState, useEffect } from 'react';
-import { getGames } from "../../Entities/Game";
+import { getGames, getGamesFiltered } from "../../Entities/Game";
 import { useNavigate } from 'react-router-dom';
 
-const Categories = () => {
-    const [games, setGames] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
-    const navigate = useNavigate();
+const Categories = ({ games, setGames }) => {
 
-    useEffect(() => {
-        fetchGames();
-    }, []);
+    const [filters, setFilters] = useState({
+        category: "", 
+        price: "",
+        os: "",
+        language: "",
+        playerCount: "",
+        rating: "",
+        title: ""
+    })
 
-    const fetchGames = async () => {
-        const allGames = await getGames();
-        setGames(allGames);
-    };
+    async function handleSubmit(e)
+    {
+        e.preventDefault();
+        let filteredGames = await getGamesFiltered(filters)
+        setGames(filteredGames);
+    }
 
-    const searchGame = (name) => {
-        const searchResults = games.filter((game) =>
-            game.title.toLowerCase().includes(name.toLowerCase())
-        );
-        return searchResults;
-    };
+    function handleChange(e) {
+        const { name, value } = e.target
+        setFilters((previousValue) => ({
+            ...previousValue,
+            [name]: value 
+        }))
+    }
 
+    const listStyle = 
+    {
+        paddingTop: "10px",
+        display:"flex", 
+        flexWrap: "wrap", 
+        flexDirection: "row", 
+        alignContent: "space-between", 
+        justifyContent: "center", 
+        alignItems: "flex-start"
+    }
 
-    const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            const searchResults = searchGame(searchQuery);
-            navigate('/SearchedGames', { state: { games: searchResults } });
-        }
-    };
-
-    const handleSearchChange = (event) => {
-        setSearchQuery(event.target.value);
-    };
+    const elementStyle =
+    {
+        padding: "5px"
+    }
 
     return (
-        <div className="my-4 mx-auto bg-white w-full max-w-2xl flex items-center justify-around rounded-full">
-            <ul className='flex items-center justify-center space-x-4'>
-                <li>
-                    <p>Categorías</p>
+        <form onSubmit={handleSubmit} className="flex items-center justify-around rounded-full">
+            <ul style={listStyle}>
+                <li style={elementStyle}>
+                    <input
+                        type="text"
+                        name="category"
+                        placeholder="category"
+                        value={filters.category}
+                        onChange={handleChange}
+                        className="pl-5 rounded-full"
+                    />
                 </li>
-                <li>
-                    <p>Precio</p>
+                <li style={elementStyle}>
+                    <input
+                        type="text"
+                        name="price"
+                        placeholder="price"
+                        value={filters.price}
+                        onChange={handleChange}
+                        className="pl-5 rounded-full"
+                    />
                 </li>
-                <li>
-                    <p>OS</p>
+                <li style={elementStyle}>
+                    <input
+                        type="text"
+                        name="os"
+                        placeholder="operating system"
+                        value={filters.os}
+                        onChange={handleChange}
+                        className="pl-5 rounded-full"
+                    />
                 </li>
-                <li>
-                    <p>Idioma</p>
+                <li style={elementStyle}>
+                    <input
+                        type="text"
+                        name="language"
+                        placeholder="language"
+                        value={filters.language}
+                        onChange={handleChange}
+                        className="pl-5 rounded-full"
+                    />
                 </li>
-                <li>
-                    <p>Jugadores</p>
+                <li style={elementStyle}>
+                    <input
+                        type="text"
+                        name="playerCount"
+                        placeholder="player count"
+                        value={filters.playerCount}
+                        onChange={handleChange}
+                        className="pl-5 rounded-full"
+                    />
                 </li>
-                <li>
-                    <p>Calificación</p>
+                <li style={elementStyle}>
+                    <input
+                        type="text"
+                        name="rating"
+                        placeholder="rating"
+                        value={filters.rating}
+                        onChange={handleChange}
+                        className="pl-5 rounded-full"
+                    />
                 </li>
+                <li style={elementStyle}>
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="title"
+                        value={filters.title}
+                        onChange={handleChange}
+                        className="pl-5 rounded-full"
+                    />
+                </li>
+                <button type="submit" className="btn" style={elementStyle}>
+                    Search
+                </button>
             </ul>
-            <input
-                type="text"
-                placeholder="search for game..."
-                value={searchQuery}
-                onChange={handleSearchChange}
-                onKeyDown={handleKeyDown}
-                className="pl-5 rounded-full"
-            />
-        </div>
+        </form>
     );
 };
 

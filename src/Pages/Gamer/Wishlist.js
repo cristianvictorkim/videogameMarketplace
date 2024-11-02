@@ -45,7 +45,7 @@ const Wishlist = () => {
                                     image={game.bannerUrl}
                                     title={game.title}
                                     price={game.price}
-                                    score={game.rating}
+                                    score={game.score}
                                     publisherId={game.publisherId}
                                     removeFromFunction={() => {
                                         const index = gameCards.findIndex((gameElement) => gameElement._id === game._id);
