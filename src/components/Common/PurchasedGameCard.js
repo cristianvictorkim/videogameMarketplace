@@ -1,7 +1,7 @@
 import React from 'react';
-import placeholder from '../assets/placeholder-image.jpg'
+import placeholder from '../../assets/placeholder-image.jpg'
 
-const PurchasedGameCard = ({ image, title, price, purchasedDate, gameId}) => {
+const PurchasedGameCard = ({ image, title, price, purchasedDate }) => {
     // Game card de un juego comprado
     return (
         <div className='bg-main-color mx-auto mt-[2rem] rounded-lg w-full max-w-2xl border-black'>    

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getUserId } from '../Entities/User';
+import { getUserId } from '../../Entities/User';
 
 const RemovableGameCard = ({ gameId, image, title, price, score, publisherId, removeFromFunction }) => {
     

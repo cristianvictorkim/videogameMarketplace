@@ -1,9 +1,9 @@
-import Categories from "../components/Categories";
-import GameCard from "../components/GameCard";
-import YourSelection from "../components/YourSelection";
+import Categories from "../../components/Common/Categories";
+import GameCard from "../../components/Common/GameCard";
+import YourSelection from "../../components/Common/YourSelection";
 import React from "react";
-import { getSelection } from "../Entities/Game";
-import { authUser, getUserId } from "../Entities/User";
+import { getSelection } from "../../Entities/Game";
+import { authUser, getUserId } from "../../Entities/User";
 import { Navigate } from "react-router-dom";
 
 const HomePage = () => {    
@@ -13,7 +13,7 @@ const HomePage = () => {
         getSelection()
         .then(data => setSelection(data));
     }, [])
-    
+
     return( 
         <div>
             <Categories/>             

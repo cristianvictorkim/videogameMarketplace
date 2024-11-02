@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getGames } from "../Entities/Game";
+import { getGames } from "../../Entities/Game";
 import { useNavigate } from 'react-router-dom';
 
 const Categories = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import placeholder from '../assets/placeholder-image.jpg';
-import { Link } from 'react-router-dom';
+import placeholder from '../../assets/placeholder-image.jpg';
+
 
 const DeveloperGameCard = () => {
 
@@ -28,8 +28,8 @@ const DeveloperGameCard = () => {
                             <p>Genre</p>
                         </div>
                         <div className="absolute bottom-4 inset-x-0 flex justify-center space-x-2">
-                            <Link to='/Host/EditGame'><p>Edit</p></Link>
-                            <p>Remove</p>
+                            <p>Edit</p>
+                            <p>Show</p>
                             <p>Delete</p>
                         </div>
                     </div>

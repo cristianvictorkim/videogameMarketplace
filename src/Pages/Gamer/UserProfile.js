@@ -1,24 +1,22 @@
 import React from 'react';
-import { getUserProfile } from '../Entities/User';
-import PurchaseHistory from '../components/PurchaseHistory';
+import { getUserProfile } from '../../Entities/User';
+import PurchaseHistory from '../../components/Common/PurchaseHistory';
 import {useState, useEffect, useContext} from 'react';
-import {getPfp, setPfp } from "../Entities/User";
-import luffy from '../assets/luffy.png';
-import chopper from '../assets/chopper.png';
-import nami from '../assets/nami.png';
-import { UserContext } from '../components/UserContext';
+import {getPfp, setPfp } from "../../Entities/User";
+import luffy from '../../assets/luffy.png';
+import chopper from '../../assets/chopper.png';
+import nami from '../../assets/nami.png';
+import { UserContext } from '../../components/Common/UserContext';
 
 
 const UserProfile = () => {
     
-    const [games, setGames] = useState([]);
     const { username, setUsername, setUserProfilePicture } = useContext(UserContext);
     const [tempUsername, setTempUsername] = useState("");
     const [tempProfilePicture, setTempProfilePicture] = useState(getPfp());
     
     const [purchaseHistory, setPurchaseHistory] = useState([]);
     const [profile, setProfile] = useState({});
-    const [profilePictureUrl, setProfilePictureUrl] = useState(getPfp());
 
     useEffect(() => {
         fetchProfile();

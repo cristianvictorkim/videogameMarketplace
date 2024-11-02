@@ -1,0 +1,84 @@
+import React from 'react';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../../components/Common/UserContext';
+
+const UserRegistration = () => {
+    const { profile, setProfile, sCLIENT, sDEVELOPER } = useContext(UserContext);
+
+    return (
+        <div className="">
+            <div className="flex items-center justify-center min-h-screen p-10">  
+                <form className="p-5 w-full max-w-sm bg-main-color border-2 border-black">
+                <h2 className="text-2xl font-semibold mb-6 text-center">
+                    Registration
+                </h2>
+                <p className='pb-1'>Name</p>
+                <div className="mb-4">
+                    <input
+                    type="text"
+                    placeholder="Name"
+                    className="w-full p-2 border rounded-lg"
+                    />
+                </div>
+                <p className='pb-1'>Email Adress</p>
+                <div className="mb-6">
+                    <input
+                    type="text"
+                    placeholder="Email Address"
+                    className="w-full p-2 border rounded-lg"
+                    />
+                </div>
+                <p className='pb-1'>Password</p>
+                <div className="mb-6">
+                    <input
+                    type="password"
+                    placeholder="Password"
+                    autoComplete="new-password"
+                    className="w-full p-2 border rounded-lg"
+                    />
+                </div>
+                <p className='pb-1'>Date of birth</p>
+                <div className="mb-6">
+                    <input
+                    type="date"
+                    placeholder="07/04/2004"
+                    className="w-full p-2 border rounded-lg"
+                    />
+                </div>
+                <p className='pb-1'>Secret Question</p>
+                <div className="mb-6">
+                    <input
+                    type="password"
+                    placeholder="Enter secret question"
+                    className="w-full p-2 border rounded-lg"
+                    />
+                </div>
+                <p className='pb-1'>Answer</p>
+                <div className="mb-6">
+                    <input
+                    type="password"
+                    placeholder="..."
+                    className="w-full p-2 border rounded-lg"
+                    />
+                </div>
+                <button
+                    type="submit"
+                    className="w-full p-2 border rounded-lg border-black bg-btn-color"
+                >
+                    Submit
+                </button>
+                <div className='text-center py-2 space-y-1'> 
+                    <Link to={"/LogIn"}>Log in</Link>
+                    <Link to={"/CompanyLogIn"}><p>
+                        <button onClick={() => { setProfile({ username: profile.username, profilePicture: profile.profilePicture, type : sDEVELOPER }) }}>
+                        I am a developer
+                        </button></p></Link>  
+                </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default UserRegistration;

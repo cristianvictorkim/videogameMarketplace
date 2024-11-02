@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import placeholder from '../assets/placeholder-image.jpg';
+import placeholder from '../../assets/placeholder-image.jpg';
 
 const EditGame = () => {
     return (

@@ -1,9 +1,9 @@
-import { UserContext } from '../components/UserContext';
+import { UserContext } from '../../components/Common/UserContext';
 import { useState, useEffect, useContext } from 'react';
-import DeveloperGameCard from '../components/DeveloperGameCard';
-import { getPfp, setPfp } from "../Entities/User";
+import DeveloperGameCard from '../../components/DeveloperComponents/DeveloperGameCard';
+import { getPfp, setPfp } from "../../Entities/User";
 import React from 'react';
-import { getGames } from '../Entities/Game';
+import { getGames } from '../../Entities/Game';
 
 const CompanyProfile = () => {
     const [games, setGames] = useState([]);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import placeholder from '../assets/placeholder-image.jpg'
+import placeholder from '../../assets/placeholder-image.jpg'
 
 const GameCard = ({ gameId, image, title, price, score, publisherId}) => {
 
@@ -26,8 +26,8 @@ const GameCard = ({ gameId, image, title, price, score, publisherId}) => {
                             ${price}
                     </span>
                     <Link to={"/Host/GameDetails/?" + new URLSearchParams({
-                        gameId : gameId,
-                        publisherId : publisherId
+                            gameId : gameId,
+                            publisherId : publisherId
                         }).toString()}>
                         <button className="btn">
                             View Details   

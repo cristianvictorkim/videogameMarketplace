@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { setUserId } from '../../Entities/User';
+import { UserContext } from '../../components/Common/UserContext';
+import { useContext } from 'react';
 
 
-const CompanyLogIn = () => {
+const UserLogIn = () => {
     const [loginFormData, setLoginFormData] = useState({ username: "", password: "" })
-  
+    const { profile, setProfile, sCLIENT, sDEVELOPER } = useContext(UserContext);
+
     function handleSubmit(e)
     {
-        e.preventDefault()
-        console.log(loginFormData);
+        e.preventDefault();
+        setUserId();
     }
 
     function handleChange(e) {
@@ -51,18 +55,21 @@ const CompanyLogIn = () => {
                 <button
                     type="submit"
                     className="w-full p-2 border rounded-lg border-black bg-btn-color"
-                >
+                    >
                     Log in
                 </button>
                 <div className='text-center py-4 space-y-1'> 
                     <p><Link>Forgot Password?</Link></p>
-                    <p><Link to='/CompanyRegistration'>Register</Link></p>
-                    <p><Link to="/Login">I am a Gamer</Link></p>
+                    <p><Link to="/UserRegistration">Register</Link></p>
+                    <p><Link to="/CompanyLogin">
+                        <button onClick={() => {setProfile({ username: profile.username, profilePicture: profile.profilePicture, type : sDEVELOPER })}}>
+                            I am a developer
+                        </button>
+                    </Link></p>
                 </div>
             </form>
         </div>
     );
 };
 
-export default CompanyLogIn;
-
+export default UserLogIn;

@@ -3,23 +3,23 @@ import { Route, Routes } from 'react-router-dom';
 
 import MainLayout from './Layouts/MainLayout';
 
-import AuthRequired from './Pages/AuthRequired';
-import Cart from './Pages/Cart';
-import CompanyLogin from './Pages/CompanyLogin';
-import CompanyProfile from './Pages/CompanyProfile';
-import CompanyRegistration from './Pages/CompanyRegistration';
-import EditGame from './Pages/EditGame';
-import GameDetails from './Pages/GameDetails';
-import HomePage from './Pages/HomePage';
-import SearchedGames from './Pages/SearchedGames';
-import SuccessfulPurchase from './Pages/SuccessfulPurchase';
-import UserLogIn from './Pages/UserLogIn';
-import UserProfile from './Pages/UserProfile';
-import UserRegistration from './Pages/UserRegistration';
-import Wishlist from './Pages/Wishlist';
+import AuthRequired from './Pages/Common/AuthRequired';
+import Cart from './Pages/Gamer/Cart';
+import CompanyLogin from './Pages/Developer/CompanyLogin';
+import CompanyProfile from './Pages/Developer/CompanyProfile';
+import CompanyRegistration from './Pages/Developer/CompanyRegistration';
+import EditGame from './Pages/Developer/EditGame';
+import GameDetails from './Pages/Gamer/GameDetails';
+import HomePage from './Pages/Gamer/HomePage';
+import SearchedGames from './Pages/Common/SearchedGames';
+import SuccessfulPurchase from './Pages/Gamer/SuccessfulPurchase';
+import UserLogIn from './Pages/Gamer/UserLogIn';
+import UserProfile from './Pages/Gamer/UserProfile';
+import UserRegistration from './Pages/Gamer/UserRegistration';
+import Wishlist from './Pages/Gamer/Wishlist';
 
-import Navbar from './components/Navbar';
-import { UserProvider } from './components/UserContext';
+import Navbar from './components/Common/Navbar';
+import { UserProvider } from './components/Common/UserContext';
 
 function App() {
     return (

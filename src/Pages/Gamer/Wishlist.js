@@ -1,7 +1,7 @@
 import React from 'react';
-import RemovableGameCard from '../components/RemovableGameCard';
-import { getWishlistFromUser, removeGameFromWishlist } from '../Entities/Wishlist';
-import { getUserId } from '../Entities/User';
+import RemovableGameCard from '../../components/Common/RemovableGameCard';
+import { getWishlistFromUser, removeGameFromWishlist } from '../../Entities/Wishlist';
+import { getUserId } from '../../Entities/User';
 import { wait } from '@testing-library/user-event/dist/utils';
 
 const Wishlist = () => {

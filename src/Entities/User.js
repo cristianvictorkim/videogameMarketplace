@@ -5,7 +5,7 @@ import emptyFoto from "../assets/pfp.png";
 let pfp = emptyFoto;
 let userId = undefined;
 let debugRequireAuth = false;
-debugRequireAuth = true; // <----- comment this to bypass auth
+//debugRequireAuth = true; // <----- comment this to bypass auth
 
 if (!debugRequireAuth)
 {
