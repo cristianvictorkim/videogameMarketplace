@@ -15,7 +15,7 @@ const HomePage = () => {
     }, [])
 
     return( 
-        <div>
+        <div className="min-h-screen">
             <Categories games={selection} setGames={setSelection} />             
             <YourSelection/>
             {
