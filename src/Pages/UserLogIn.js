@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, redirect } from 'react-router-dom';
+import { setUserId, userLogged } from '../Entities/User';
 
 
 const UserLogIn = () => {
@@ -7,8 +8,8 @@ const UserLogIn = () => {
   
     function handleSubmit(e)
     {
-        e.preventDefault()
-        console.log(loginFormData);
+        e.preventDefault();
+        setUserId();
     }
 
     function handleChange(e) {
@@ -51,7 +52,7 @@ const UserLogIn = () => {
                 <button
                     type="submit"
                     className="w-full p-2 border rounded-lg border-black bg-btn-color"
-                >
+                    >
                     Log in
                 </button>
                 <div className='text-center py-4 space-y-1'> 

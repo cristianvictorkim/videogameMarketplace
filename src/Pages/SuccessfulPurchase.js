@@ -44,7 +44,7 @@ const SuccessfulPurchase = () => {
                 )}
             </div>
             <button className='btn mt-4'>
-                <Link to={"/UserProfile"}>View my purchases</Link>
+                <Link to={"/Host/UserProfile"}>View my purchases</Link>
             </button>
         </div>
     );

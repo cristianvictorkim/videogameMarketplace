@@ -3,6 +3,8 @@ import GameCard from "../components/GameCard";
 import YourSelection from "../components/YourSelection";
 import React from "react";
 import { getSelection } from "../Entities/Game";
+import { authUser, getUserId } from "../Entities/User";
+import { Navigate } from "react-router-dom";
 
 const HomePage = () => {    
     const [selection, setSelection] = React.useState([]);
@@ -11,7 +13,7 @@ const HomePage = () => {
         getSelection()
         .then(data => setSelection(data));
     }, [])
-
+    
     return( 
         <div>
             <Categories/>             

@@ -80,7 +80,7 @@ const Cart = () => {
                         Total estimated to pay ${cartTotal.toFixed(2)}
                     </p>
                     <button className='bg-btn-color my-1 w-[40%] border border-black'>
-                    <Link to='/SuccessfulPurchase'> Pay</Link>  
+                    <Link to='/Host/SuccessfulPurchase'> Pay</Link>  
                     </button>
                 </div>
                 )}

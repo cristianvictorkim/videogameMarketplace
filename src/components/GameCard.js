@@ -25,7 +25,7 @@ const GameCard = ({ gameId, image, title, price, score, publisherId}) => {
                     <span className="text-[16px]">
                             ${price}
                     </span>
-                    <Link to={"/GameDetails/?" + new URLSearchParams({
+                    <Link to={"/Host/GameDetails/?" + new URLSearchParams({
                         gameId : gameId,
                         publisherId : publisherId
                         }).toString()}>

@@ -3,13 +3,16 @@ import { redirect } from "react-router-dom";
 import emptyFoto from "../assets/pfp.png";
 
 let pfp = emptyFoto;
-let userId = "6722c48b5751b6669ba2cb69";
+let userId = undefined;
+let debugRequireAuth = false;
+debugRequireAuth = true; // <----- comment this to bypass auth
 
-function getUserId()
+if (!debugRequireAuth)
 {
-    return userId;
+    userId = "6722c48b5751b6669ba2cb69"
 }
 
+// Server requests ------------------------------------------------------------------------------------------
 async function getUserProfile() {
     let user = {};
 
@@ -20,14 +23,6 @@ async function getUserProfile() {
         .then(data => user = data);
 
     return user;
-}
-
-function setPfp(newPfp) {
-    pfp = newPfp; // Actualiza la variable global pfp
-}
-
-function getPfp() {
-    return pfp; // Retorna la foto de perfil actual
 }
 
 async function getUserByUsername(username)
@@ -43,14 +38,39 @@ async function getUserByUsername(username)
     return user;
 }
 
-function authUser(rederictRoute)
+async function logOff()
 {
-    if (userId === "-1")
+    if(debugRequireAuth)
     {
-        throw redirect(rederictRoute)
+        userId = undefined;
     }
-    return null;
+}
+
+// Local Accessors ------------------------------------------------------------------------------------------
+
+function setPfp(newPfp) {
+    pfp = newPfp; // Actualiza la variable global pfp
+}
+
+function getPfp() {
+    return pfp; // Retorna la foto de perfil actual
+}
+
+function setUserId()
+{
+    userId = "6722c48b5751b6669ba2cb69"
+    console.log(userId)
+}
+
+function userLogged()
+{
+    return userId !== undefined;
+}
+
+function getUserId()
+{
+    return userId;
 }
 
 // Exporting the functions and variables for use in other files
-export { pfp, getUserId, getUserProfile, setPfp, getPfp, getUserByUsername, authUser };
+export { pfp, setUserId, getUserId, getUserProfile, setPfp, getPfp, getUserByUsername, userLogged, logOff };

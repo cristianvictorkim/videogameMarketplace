@@ -76,12 +76,12 @@ const GameDetails = () => {
                             </div>
                         </div>
                         <div className='flex space-x-2 pb-3'>    
-                            <Link to="/Wishlist">
+                            <Link to="/Host/Wishlist">
                                 <button className='btn' onClick={() => addGameToWishlist(getUserId(), gameId)}>
                                     Add to Wishlist
                                 </button>
                             </Link>
-                            <Link to="/Cart">
+                            <Link to="/Host/Cart">
                                 <button className='btn' onClick={() => addGameToCart(getUserId(), gameId)}>
                                     Add to Cart
                                 </button>

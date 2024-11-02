@@ -1,0 +1,22 @@
+import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
+import { userLogged } from '../Entities/User';
+
+const AuthRequired = () => {
+    
+    if (userLogged())
+    {
+        return <Outlet/>
+    }
+    else
+    {
+        alert("You must log in first")
+        return (
+            <div className='min-h-screen'>
+                <Navigate to="/Login" />
+            </div>
+        )
+    }
+};
+
+export default AuthRequired;

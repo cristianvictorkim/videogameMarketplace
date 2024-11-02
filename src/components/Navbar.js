@@ -1,40 +1,25 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import logo from "../assets/logo.png";
 import './Style/NavBar.css';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../components/UserContext';
 import emptyFoto from '../assets/pfp.png'
+import { logOff } from '../Entities/User'
 
 const Navbar = () => {
     
     const [sticky, setSticky] = useState(false);
     const { username, profilePicture } = useContext(UserContext);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const offset = window.scrollY;
-            if (offset > 100) {
-                setSticky(true);
-            } else {
-                setSticky(false);
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-
     return( 
         <div className={`navbar ${sticky ? 'sticky' : ''}`}>
             <div className="logoStyle">
-                <Link to="/">
+                <Link to="/Host">
                     <img src={logo} className="imageStyle" alt="Logo"/>
                 </Link>
             </div>
             <div className='flex items-center'>
-                <Link to="/UserProfile">
+                <Link to="/Host/UserProfile">
                 <img 
                     src={profilePicture}
                     alt={emptyFoto} 
@@ -42,17 +27,21 @@ const Navbar = () => {
                 />
                 </Link>
                 <div className='px-3'>
-                    <Link to="/CompanyProfile"><span>{username}</span></Link> 
+                    <Link to="/Host/CompanyProfile"><span>{username}</span></Link> 
                 </div>
             </div>
             <div>
-                <Link to="/Wishlist">Wishlist</Link>
+                <Link to="/Host/Wishlist">Wishlist</Link>
             </div>
             <div>
-                <Link to="/Cart">Cart</Link>
+                <Link to="/Host/Cart">Cart</Link>
             </div>
             <div>
-                <Link to="/Login">Sign Off</Link>
+                <Link to="/Login">
+                    <button onClick={() => {logOff()}}>
+                        Sign Off
+                    </button>
+                </Link>
             </div>
         </div>
     );
