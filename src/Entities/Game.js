@@ -49,7 +49,7 @@ async function getGamesFiltered(filter)
     {
         let insert = true;
 
-        if(atrib1.toString() !== "")
+        if(atrib1.toString() !== "" && atrib2 != undefined)
         {
             insert = comparator(atrib1, atrib2);
         }
@@ -67,15 +67,15 @@ async function getGamesFiltered(filter)
 
     await gameData.forEach((game) => {
         
-        let insert = true;
-
-        insert = filterAttrib(filterCategory,    game.genre,        (atrib1, atrib2) => { console.log(typeof atrib1, typeof atrib2); return atrib2.toLowerCase().includes(atrib1.toLowerCase()) } );
-        insert = filterAttrib(filterPrice,       game.price,        (atrib1, atrib2) => { console.log(typeof parseInt(atrib1), typeof parseInt(atrib2)); return parseInt(atrib1) >= parseInt(atrib2) } );
-        insert = filterAttrib(filterOS,          game.OS,           (atrib1, atrib2) => { console.log(typeof atrib1, typeof atrib2); return atrib2.toLowerCase().includes(atrib1.toLowerCase()) } );
-        insert = filterAttrib(filterLanguage,    game.language,     (atrib1, atrib2) => { console.log(typeof atrib1, typeof atrib2); return atrib2.toLowerCase().includes(atrib1.toLowerCase())  } );
-        insert = filterAttrib(filterPlayerCount, game.playerCount,  (atrib1, atrib2) => { console.log(typeof parseInt(atrib1), typeof parseInt(atrib2)); return parseInt(atrib1) <= parseInt(atrib2) } );
-        insert = filterAttrib(filterRating,      game.score,        (atrib1, atrib2) => { console.log(typeof parseInt(atrib1), typeof parseInt(atrib2)); return parseInt(atrib1) <= parseInt(atrib2) } );
-        insert = filterAttrib(filterTitle,       game.title,        (atrib1, atrib2) => { console.log(typeof atrib1, typeof atrib2); return atrib2.toLowerCase().includes(atrib1.toLowerCase()) } );
+        
+        let insert = 
+            (filterAttrib(filterCategory,      game.genre,        (atrib1, atrib2) => { return atrib2.toLowerCase().includes(atrib1.toLowerCase()) } )
+            && filterAttrib(filterPrice,       game.price,        (atrib1, atrib2) => { return (Number(atrib1) > Number(atrib2)) } )
+            && filterAttrib(filterOS,          game.OS,           (atrib1, atrib2) => { return atrib2.toLowerCase().includes(atrib1.toLowerCase()) } )
+            && filterAttrib(filterLanguage,    game.language,     (atrib1, atrib2) => { return atrib2.toLowerCase().includes(atrib1.toLowerCase())  } )
+            && filterAttrib(filterPlayerCount, game.playerCount,  (atrib1, atrib2) => { return (Number(atrib1) < Number(atrib2)) } )
+            && filterAttrib(filterRating,      game.score,        (atrib1, atrib2) => { return (Number(atrib1) < Number(atrib2)) } )
+            && filterAttrib(filterTitle,       game.title,        (atrib1, atrib2) => { return atrib2.toLowerCase().includes(atrib1.toLowerCase()) } ))
 
         if (insert) output.push(game);
 
