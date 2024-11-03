@@ -3,7 +3,6 @@ import { Link, useParams, useSearchParams } from 'react-router-dom';
 
 import Comment from 'components/GameDetails/Comment';
 import AddComment from 'components/GameDetails/AddComment';
-import Footer from 'components/Common/Footer';
 
 import { getGameById, getComments } from 'Entities/Game';
 import { getUserId, getUserProfile } from 'Entities/User';
@@ -15,6 +14,7 @@ const GameDetails = () => {
     const [isLoading, setIsLoading] = React.useState(true);
     const [game, setGame] = React.useState({});
     const [publisher, setPublisherData] = React.useState({});
+    const [comments, setComments] = React.useState([]);  // Cambiar a un array
     const params = useParams();
 
     let gameId = params.gameId;
@@ -139,20 +139,22 @@ const GameDetails = () => {
                 </div>  
                 <div className='w-[59rem]'>
                     <h1 className='font-bold pb-1'> Comments </h1>
-                    {comments.length > 0 ? (
-                        comments.map((comment, index) => (
-                            <Comment 
-                                key={index} // Asegúrate de dar una key única a cada comentario
-                                username={comment.userName}
-                                comment={comment.comment}
-                                rating={comment.score}
-                            />
-                        ))
-                    ) : (
-                        <div>
-                            <p className='text-center'>No hay comentarios todavía.</p>
-                        </div>
-                    )}
+                    {
+                        comments.length > 0 ? (
+                            comments.map((comment, index) => (
+                                <Comment 
+                                    key={index} // Asegúrate de dar una key única a cada comentario
+                                    username={comment.userName}
+                                    comment={comment.comment}
+                                    rating={comment.score}
+                                />
+                            ))
+                        ) : (
+                            <div>
+                                <p className='text-center'>No hay comentarios todavía.</p>
+                            </div>
+                        )
+                    }
                 </div>
 
                 <div className='w-[59rem]'>
@@ -161,7 +163,6 @@ const GameDetails = () => {
                         setComments={setComments} // Pasar setComments
                     />
                 </div>
-                <Footer />
             </div>
         );
     }

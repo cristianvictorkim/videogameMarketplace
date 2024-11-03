@@ -75,16 +75,18 @@ const Cart = () => {
                         )
                     }
                 </div>
-                {filteredGameCards.length > 0 && (
-                <div className='my-5 bg-main-color p-4 flex flex-col items-center justify-center border-2 border-black'>
-                    <p>
-                        Total estimated to pay ${cartTotal.toFixed(2)}
-                    </p>
-                    <button className='bg-btn-color my-1 w-[40%] border border-black'>
-                    <Link to='/SuccessfulPurchase'> Pay</Link>  
-                    </button>
-                </div>
-                )}
+                {
+                    filteredGameCards.length > 0 && (
+                    <div className='my-5 bg-main-color p-4 flex flex-col items-center justify-center border-2 border-black'>
+                        <p>
+                            Total estimated to pay ${cartTotal.toFixed(2)}
+                        </p>
+                        <button className='bg-btn-color my-1 w-[40%] border border-black'>
+                        <Link to='/SuccessfulPurchase'> Pay</Link>  
+                        </button>
+                    </div>
+                    )
+                }
             </div>
         </div>
     );
