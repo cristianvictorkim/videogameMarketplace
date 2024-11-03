@@ -1,22 +1,23 @@
-import React from 'react';
-import { getUserProfile } from '../../Entities/User';
+import React, {useState, useEffect, useContext} from 'react';
+
 import PurchaseHistory from '../../components/Common/PurchaseHistory';
-import {useState, useEffect, useContext} from 'react';
-import {getPfp, setPfp } from "../../Entities/User";
-import luffy from '../../assets/luffy.png';
-import chopper from '../../assets/chopper.png';
-import nami from '../../assets/nami.png';
 import { UserContext } from '../../components/Common/UserContext';
 
+import { getUserProfile } from '../../Entities/User';
+import {getPfp, setPfp } from "../../Entities/User";
+import luffy from 'assets/User/luffy.png';
+import chopper from 'assets/User/chopper.png';
+import nami from 'assets/User/nami.png';
 
 const UserProfile = () => {
     
-    const { username, setUsername, setUserProfilePicture } = useContext(UserContext);
+    const { profile, setProfile } = useContext(UserContext);
+
     const [tempUsername, setTempUsername] = useState("");
     const [tempProfilePicture, setTempProfilePicture] = useState(getPfp());
     
     const [purchaseHistory, setPurchaseHistory] = useState([]);
-    const [profile, setProfile] = useState({});
+    const [clientProfile, setClientProfile] = useState({});
 
     useEffect(() => {
         fetchProfile();
@@ -24,7 +25,7 @@ const UserProfile = () => {
 
     const fetchProfile = async () => {
         const profile = await getUserProfile();
-        setProfile(profile);
+        setClientProfile(profile);
         setPurchaseHistory(profile.purchases);
     };
     
@@ -33,10 +34,10 @@ const UserProfile = () => {
     };
 
     const handleSaveChanges = () => {
-        setUserProfilePicture(tempProfilePicture);
+
         setPfp(tempProfilePicture);
         if(tempUsername !== ''){
-            setUsername(tempUsername);
+            setProfile({ username: tempUsername, profilePicture: tempProfilePicture, type : profile.type });
          }else{
             alert("Some fields are incomplete");
          }
@@ -46,7 +47,7 @@ const UserProfile = () => {
         <div className='min-h-screen flex justify-center'>
             <div className='w-[45rem] space-y-5'>    
                 <h1 className='titleBold'>
-                    {profile.userName}
+                    {clientProfile.userName}
                 </h1>
                 <div>
                     <h2 className='titleBold pb-3'>

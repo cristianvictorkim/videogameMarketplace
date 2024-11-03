@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import logo from "../../assets/logo.png";
+import logo from "assets/Misc/logo.png";
 import { Link } from 'react-router-dom';
-import emptyFoto from '../../assets/pfp.png'
-import { logOff } from '../../Entities/User'
+import emptyFoto from 'assets/User/pfp.png'
+import { logOff } from 'Entities/User'
 import { UserContext } from './UserContext';
 
 const Navbar = () => {
     
-    const { profile, getProfile, sCLIENT, sDEVELOPER } = useContext(UserContext);
+    const { profile, setProfile, sCLIENT, sDEVELOPER } = useContext(UserContext);
 
     switch(profile.type)
     {      
@@ -31,7 +31,7 @@ const Navbar = () => {
                         />
                         </Link>
                         <div className='px-3'>
-                            <Link to="/Host/CompanyProfile"><span>{profile.username}</span></Link> 
+                            <Link to="/Host/UserProfile"><span>{profile.username}</span></Link> 
                         </div>
                     </div>
                     <div>
@@ -61,7 +61,7 @@ const Navbar = () => {
                         <Link to="/Host">Home</Link>
                     </div>
                     <div className='flex items-center'>
-                        <Link to="/Host/UserProfile">
+                        <Link to="/Host/CompanyProfile">
                         <img 
                             src={profile.profilePicture}
                             alt={emptyFoto} 

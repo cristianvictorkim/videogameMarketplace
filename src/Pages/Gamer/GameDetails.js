@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+
 import Comment from '../../components/GameDetails/Comment';
 import AddComment from '../../components/GameDetails/AddComment';
 import Footer from '../../components/Common/Footer';
+
 import { getGameById } from '../../Entities/Game'
 import { getUserId } from '../../Entities/User';
 import { addGameToCart } from '../../Entities/Cart';

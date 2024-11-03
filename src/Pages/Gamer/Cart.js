@@ -1,10 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import Navbar from '../../components/Common/Navbar';
 import RemovableGameCard from '../../components/Common/RemovableGameCard';
+
 import { getUserId } from '../../Entities/User';
 import { getCartForUser, removeGameFromCart } from '../../Entities/Cart';
+
 import { wait } from '@testing-library/user-event/dist/utils';
-import { Link } from 'react-router-dom';
 
 
 const Cart = () => {

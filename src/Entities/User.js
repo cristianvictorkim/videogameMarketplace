@@ -1,6 +1,5 @@
 // Array to store multiple game information instances
-import { redirect } from "react-router-dom";
-import emptyFoto from "../assets/pfp.png";
+import emptyFoto from "assets/User/pfp.png";
 
 let pfp = emptyFoto;
 let userId = undefined;

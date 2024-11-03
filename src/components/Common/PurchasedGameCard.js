@@ -1,5 +1,5 @@
 import React from 'react';
-import placeholder from '../../assets/placeholder-image.jpg'
+import placeholder from 'assets/Misc/placeholder-image.jpg'
 
 const PurchasedGameCard = ({ image, title, price, purchasedDate }) => {
     // Game card de un juego comprado

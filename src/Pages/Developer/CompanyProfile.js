@@ -1,13 +1,14 @@
+import React, { useState, useEffect, useContext } from 'react';
+
 import { UserContext } from '../../components/Common/UserContext';
-import { useState, useEffect, useContext } from 'react';
 import DeveloperGameCard from '../../components/DeveloperComponents/DeveloperGameCard';
+
 import { getPfp, setPfp } from "../../Entities/User";
-import React from 'react';
 import { getGames } from '../../Entities/Game';
 
 const CompanyProfile = () => {
     const [games, setGames] = useState([]);
-    const { username, setUsername, setUserProfilePicture } = useContext(UserContext);
+    const { profile, setProfile } = useContext(UserContext);
     const [tempUsername, setTempUsername] = useState("");
     const [tempProfilePicture, setTempProfilePicture] = useState(getPfp());
 
@@ -32,10 +33,9 @@ const CompanyProfile = () => {
     };
 
     const handleSaveChanges = () => {
-        setUserProfilePicture(tempProfilePicture);
         setPfp(tempProfilePicture);
         if (tempUsername !== '') {
-            setUsername(tempUsername);
+            setProfile({ username: tempUsername, profilePicture: tempProfilePicture, type : profile.type });
         } else {
             alert("Some fields are incomplete");
         }
@@ -43,7 +43,7 @@ const CompanyProfile = () => {
 
     return (
         <div className="min-h-screen">
-            <h1 className="titleBold text-center p-3">{username}</h1>
+            <h1 className="titleBold text-center p-3">{profile.username}</h1>
             <div className="space-y-5">
                 <DeveloperGameCard />
                 <DeveloperGameCard />

@@ -1,6 +1,6 @@
 import React from 'react';
-import GameCard from '../../components/Common/GameCard';
 import { useLocation } from 'react-router-dom';
+import GameCard from '../../components/Common/GameCard';
 
 const SearchedGames = () => {
     const location = useLocation();

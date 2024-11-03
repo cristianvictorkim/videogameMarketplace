@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import placeholder from '../../assets/placeholder-image.jpg'
+import placeholder from 'assets/Misc/placeholder-image.jpg'
 
 const GameCard = ({ gameId, image, title, price, score, publisherId}) => {
 
