@@ -5,57 +5,52 @@ import Comment from 'components/GameDetails/Comment';
 import AddComment from 'components/GameDetails/AddComment';
 import Footer from 'components/Common/Footer';
 
-import { getGameById } from 'Entities/Game'
-import { getUserId } from 'Entities/User';
+import { getGameById, getComments } from 'Entities/Game';
+import { getUserId, getUserProfile } from 'Entities/User';
 import { addGameToCart } from 'Entities/Cart';
 import { addGameToWishlist } from 'Entities/Wishlist';
 import { getPublisherById } from 'Entities/Publisher';
 
 const GameDetails = () => {
-
     const [isLoading, setIsLoading] = React.useState(true);
     const [game, setGame] = React.useState({});
     const [publisher, setPublisherData] = React.useState({});
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
+    const [comments, setComments] = React.useState([]);  // Cambiar a un array
 
     let gameId = searchParams.get("gameId");
-    let publisherId  = searchParams.get("publisherId");
+    let publisherId = searchParams.get("publisherId");
 
-    React.useEffect(() => {      
+    React.useEffect(() => {
         getGameById(gameId)
             .then(data => {
                 setIsLoading(false);
-                setGame(data)
+                setGame(data);
+                setComments(getComments() || []); // Asegúrate de obtener comentarios
             });
-        
+
         getPublisherById(publisherId)
             .then(data => {
-                console.log(data)
                 setPublisherData(data);
             });
-    }, []);
-    
-    if(isLoading)
-    {
-        return(
-            <div>Loading....</div>
-        )
-    }
-    else
-    {
-        return(
-            <div className='min-h-screen flex flex-col justify-center items-center space-y-6 pb-10'> 
+    }, [gameId, publisherId]);
+
+    if (isLoading) {
+        return <div>Loading....</div>;
+    } else {
+        return (
+            <div className='min-h-screen flex flex-col justify-center items-center space-y-6 pb-10'>
                 <div className='flex space-x-8 h-[20rem] mt-10 max-w-[59rem]'>
                     <div className='h-full flex'>
-                        <img 
+                        <img
                             src={game.gameplayUrl}
-                            alt="asd"
+                            alt="Gameplay"
                             className="object-cover w-full rounded"
                         />
                     </div>
                     <div className='bg-main-color px-4 h-full rounded flex flex-col justify-between'>
                         <div>
-                            <div className='flex space-x-3 mb-2 mt-1'>    
+                            <div className='flex space-x-3 mb-2 mt-1'>
                                 <h2 className='text-lg font-bold'>
                                     {game.title}
                                 </h2>
@@ -63,9 +58,9 @@ const GameDetails = () => {
                                     {game.genre}
                                 </p>
                             </div>
-                            <img 
+                            <img
                                 src={game.bannerUrl}
-                                alt="asd"
+                                alt="Banner"
                                 className="max-w-xs max-h-xs"
                             />
                             <div className='mt-2'>
@@ -77,7 +72,7 @@ const GameDetails = () => {
                                 </p>
                             </div>
                         </div>
-                        <div className='flex space-x-2 pb-3'>    
+                        <div className='flex space-x-2 pb-3'>
                             <Link to="/Host/Wishlist">
                                 <button className='btn' onClick={() => addGameToWishlist(getUserId(), gameId)}>
                                     Add to Wishlist
@@ -88,7 +83,6 @@ const GameDetails = () => {
                                     Add to Cart
                                 </button>
                             </Link>
-                            
                         </div>
                     </div>
                 </div>
@@ -97,11 +91,11 @@ const GameDetails = () => {
                         Publisher
                     </h1>
                     <div className='bg-main-color flex border-black p-4 rounded-lg'>
-                        <img 
+                        <img
                             src={publisher.profilePicUrl}
                             className='profilePic p-4'
                         />
-                        <div className='ml-4'>    
+                        <div className='ml-4'>
                             <h1 className='font-bold'>
                                 {publisher.title}
                             </h1>
@@ -115,7 +109,7 @@ const GameDetails = () => {
                     <h1 className='font-bold pb-1'>
                         Game Description
                     </h1>
-                    <div className='bg-main-color flex border-black p-4 rounded-lg'>   
+                    <div className='bg-main-color flex border-black p-4 rounded-lg'>
                         <p className=''>
                             {game.description}
                         </p>
@@ -125,7 +119,7 @@ const GameDetails = () => {
                     <h1 className='font-bold pb-1'>
                         System Requirements
                     </h1>
-                    <div className='bg-main-color border-black p-4 rounded-lg flex justify-between'>   
+                    <div className='bg-main-color border-black p-4 rounded-lg flex justify-between'>
                         <div className='w-1/2 text-center'>
                             <h2 className='font-semibold'>
                                 Minimum Requirements
@@ -143,15 +137,32 @@ const GameDetails = () => {
                             </p>
                         </div>
                     </div>
-                </div>
-                
+                </div>  
                 <div className='w-[59rem]'>
-                    <Comment/>
+                    <h1 className='font-bold pb-1'> Comments </h1>
+                    {comments.length > 0 ? (
+                        comments.map((comment, index) => (
+                            <Comment 
+                                key={index} // Asegúrate de dar una key única a cada comentario
+                                username={comment.userName}
+                                comment={comment.comment}
+                                rating={comment.score}
+                            />
+                        ))
+                    ) : (
+                        <div>
+                            <p className='text-center'>No hay comentarios todavía.</p>
+                        </div>
+                    )}
                 </div>
+
                 <div className='w-[59rem]'>
-                    <AddComment/>
+                    <AddComment
+                        gameId={gameId}
+                        setComments={setComments} // Pasar setComments
+                    />
                 </div>
-                <Footer/>
+                <Footer />
             </div>
         );
     }

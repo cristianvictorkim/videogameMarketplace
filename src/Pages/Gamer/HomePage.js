@@ -33,7 +33,7 @@ const HomePage = () => {
                     /> 
                 ))
                 ) : (
-                    <h3> No games found </h3>
+                    <h3 className="text-center"> No games found. </h3>
                 )
             }
         </div>

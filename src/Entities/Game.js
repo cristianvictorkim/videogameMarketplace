@@ -1,3 +1,16 @@
+const comments = new Map();
+
+function addComment(userName, comment, score) {
+    const commentId = Date.now();
+    const userComment = {
+        id: commentId, 
+        userName: userName,
+        comment: comment,
+        score: score
+    };
+    comments.set(commentId, userComment);
+}
+
 // Function to get all games
 async function getGames() {
     
@@ -84,5 +97,8 @@ async function getGamesFiltered(filter)
     return output;
 }
 
-// Exporting the functions and games array for use in other files
-export { getGameById, getGames, getSelection, getGamesFiltered };
+function getComments() {
+    return comments;
+}
+
+export { getGameById, getGames, getSelection, getGamesFiltered, addComment, getComments};
