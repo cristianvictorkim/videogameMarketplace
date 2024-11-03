@@ -53,12 +53,14 @@ const UserLogIn = () => {
                         className="w-full p-2 border rounded-lg"
                     />
                 </div>
-                <button
-                    type="submit"
-                    className="w-full p-2 border rounded-lg border-black bg-btn-color"
-                    >
-                    Log in
-                </button>
+                <Link to={`/6722c48b5751b6669ba2cb69`}>
+                    <button
+                        type="submit"
+                        className="w-full p-2 border rounded-lg border-black bg-btn-color"
+                        >
+                        Log in
+                    </button>
+                </Link>
                 <div className='text-center py-4 space-y-1'> 
                     <p><Link>Forgot Password?</Link></p>
                     <p><Link to="/UserRegistration">Register</Link></p>

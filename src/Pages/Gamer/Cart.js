@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Navbar from 'components/Common/Navbar';
 import RemovableGameCard from 'components/Common/RemovableGameCard';
 
 import { getUserId } from 'Entities/User';
@@ -36,7 +35,6 @@ const Cart = () => {
 
     return(
         <div className='min-h-screen'>
-            <Navbar/>
             <div className='flex flex-col items-center justify-center'> 
                 <div className='space-y-4'>
                     <h1 className='text-center text-2xl font-bold pt-5 '>Cart</h1>    
@@ -73,7 +71,7 @@ const Cart = () => {
                                 /> 
                             ))
                         ) : (
-                            <div className='text-center'> No games found </div>
+                            <h3 className="flex items-center justify-around rounded-full"> No games found </h3>
                         )
                     }
                 </div>
@@ -83,7 +81,7 @@ const Cart = () => {
                         Total estimated to pay ${cartTotal.toFixed(2)}
                     </p>
                     <button className='bg-btn-color my-1 w-[40%] border border-black'>
-                    <Link to='/Host/SuccessfulPurchase'> Pay</Link>  
+                    <Link to='/SuccessfulPurchase'> Pay</Link>  
                     </button>
                 </div>
                 )}

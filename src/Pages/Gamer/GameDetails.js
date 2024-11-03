@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 
 import Comment from 'components/GameDetails/Comment';
 import AddComment from 'components/GameDetails/AddComment';
@@ -16,10 +16,10 @@ const GameDetails = () => {
     const [isLoading, setIsLoading] = React.useState(true);
     const [game, setGame] = React.useState({});
     const [publisher, setPublisherData] = React.useState({});
-    const [searchParams, setSearchParams] = useSearchParams();
+    const params = useParams();
 
-    let gameId = searchParams.get("gameId");
-    let publisherId  = searchParams.get("publisherId");
+    let gameId = params.gameId;
+    let publisherId  = params.publisherId;
 
     React.useEffect(() => {      
         getGameById(gameId)
@@ -78,12 +78,12 @@ const GameDetails = () => {
                             </div>
                         </div>
                         <div className='flex space-x-2 pb-3'>    
-                            <Link to="/Host/Wishlist">
+                            <Link to="../Wishlist">
                                 <button className='btn' onClick={() => addGameToWishlist(getUserId(), gameId)}>
                                     Add to Wishlist
                                 </button>
                             </Link>
-                            <Link to="/Host/Cart">
+                            <Link to="../Cart">
                                 <button className='btn' onClick={() => addGameToCart(getUserId(), gameId)}>
                                     Add to Cart
                                 </button>

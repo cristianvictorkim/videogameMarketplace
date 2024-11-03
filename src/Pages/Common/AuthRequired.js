@@ -1,9 +1,11 @@
 import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useParams } from 'react-router-dom';
 import { userLogged } from 'Entities/User';
 
 const AuthRequired = () => {
     
+    const params = useParams();
+
     if (userLogged())
     {
         return <Outlet/>

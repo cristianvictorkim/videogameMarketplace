@@ -42,11 +42,11 @@ const SuccessfulPurchase = () => {
                         />
                     ))
                 ) : (
-                    <p>No games found.</p>
+                    <h3 className="flex items-center justify-around rounded-full">No games found.</h3>
                 )}
             </div>
             <button className='btn mt-4'>
-                <Link to={"/Host/UserProfile"}>View my purchases</Link>
+                <Link to={"/UserProfile"}>View my purchases</Link>
             </button>
         </div>
     );

@@ -33,7 +33,7 @@ const HomePage = () => {
                     /> 
                 ))
                 ) : (
-                    <h3> No games found </h3>
+                    <h3 className="flex items-center justify-around rounded-full"> No games found </h3>
                 )
             }
         </div>

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import logo from "assets/Misc/logo.png";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import emptyFoto from 'assets/User/pfp.png'
 import { logOff } from 'Entities/User'
 import { UserContext } from './UserContext';
@@ -8,6 +8,7 @@ import { UserContext } from './UserContext';
 const Navbar = () => {
     
     const { profile, setProfile, sCLIENT, sDEVELOPER } = useContext(UserContext);
+    const params = useParams();
 
     switch(profile.type)
     {      
@@ -15,15 +16,15 @@ const Navbar = () => {
             return( 
                 <div className={`navbar`}>
                     <div className="logoStyle">
-                        <Link to="/Host">
+                        <Link to={`/${params.userId}`}>
                             <img src={logo} className="imageStyle" alt="Logo"/>
                         </Link>
                     </div>    
                     <div>
-                        <Link to="/Host">Home</Link>
+                        <Link to={`/${params.userId}`}>Home</Link>
                     </div>
                     <div className='flex items-center'>
-                        <Link to="/Host/UserProfile">
+                        <Link to={`/${params.userId}/UserProfile`}>
                         <img 
                             src={profile.profilePicture}
                             alt={emptyFoto} 
@@ -31,14 +32,14 @@ const Navbar = () => {
                         />
                         </Link>
                         <div className='px-3'>
-                            <Link to="/Host/UserProfile"><span>{profile.username}</span></Link> 
+                            <Link to={`/${params.userId}/UserProfile`}><span>{profile.username}</span></Link> 
                         </div>
                     </div>
                     <div>
-                        <Link to="/Host/Wishlist">Wishlist</Link>
+                        <Link to={`/${params.userId}/Wishlist`}>Wishlist</Link>
                     </div>
                     <div>
-                        <Link to="/Host/Cart">Cart</Link>
+                        <Link to={`/${params.userId}/Cart`}>Cart</Link>
                     </div>
                     <div>
                         <Link to="/Login">
@@ -53,15 +54,15 @@ const Navbar = () => {
             return( 
                 <div className={`navbar`}>
                     <div className="logoStyle">
-                        <Link to="/Host">
+                        <Link to={`/${params.userId}`}>
                             <img src={logo} className="imageStyle" alt="Logo"/>
                         </Link>
                     </div>    
                     <div>
-                        <Link to="/Host">Home</Link>
+                        <Link to={`/${params.userId}`}>Home</Link>
                     </div>
                     <div className='flex items-center'>
-                        <Link to="/Host/CompanyProfile">
+                        <Link to={`/${params.userId}/CompanyProfile`}>
                         <img 
                             src={profile.profilePicture}
                             alt={emptyFoto} 
@@ -69,7 +70,7 @@ const Navbar = () => {
                         />
                         </Link>
                         <div className='px-3'>
-                            <Link to="/Host/CompanyProfile"><span>{profile.username}</span></Link> 
+                            <Link to={`/${params.userId}/CompanyProfile`}><span>{profile.username}</span></Link> 
                         </div>
                     </div>
                     <div>

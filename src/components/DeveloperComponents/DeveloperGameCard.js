@@ -28,7 +28,7 @@ const DeveloperGameCard = () => {
                             <p>Genre</p>
                         </div>
                         <div className="absolute bottom-4 inset-x-0 flex justify-center space-x-2">
-                            <Link to='/Host/EditGame'><p>Edit</p></Link>
+                            <Link to='/EditGame'><p>Edit</p></Link>
                             <p>Remove</p>
                             <p>Delete</p>
                         </div>

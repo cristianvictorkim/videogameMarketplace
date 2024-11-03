@@ -24,10 +24,7 @@ const RemovableGameCard = ({ gameId, image, title, price, score, publisherId, re
                             ${price}
                     </span>
                     <div className="space-y-2   ">   
-                        <Link to={"/Host/GameDetails/?" + new URLSearchParams({
-                            gameId : gameId,
-                            publisherId : publisherId
-                            }).toString()}>  
+                        <Link to={`../GameDetails/${publisherId}/${gameId}`}>  
                             <button className="btn">
                                 View Details 
                             </button>

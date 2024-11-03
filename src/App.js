@@ -25,7 +25,6 @@ function App() {
     return (
         <UserProvider>
             <div>
-                <Navbar/>
                 <Routes>
                     <Route path="/" element={<MainLayout />}>
                         <Route index                       element={<UserLogIn />} />
@@ -34,16 +33,16 @@ function App() {
                         <Route path="Register"             element={<UserRegistration />} />
                         <Route path="CompanyRegistration"  element={<CompanyRegistration />} />
                         <Route path="CompanyLogIn"         element={<CompanyLogin />} />
-                        <Route path="Host"                 element={<AuthRequired />}>
-                            <Route index                       element={<HomePage />} />
-                            <Route path="CompanyProfile"       element={<CompanyProfile />} />
-                            <Route path="UserProfile"          element={<UserProfile />} />
-                            <Route path="GameDetails"          element={<GameDetails />} />
-                            <Route path="Wishlist"             element={<Wishlist />} />
-                            <Route path="Cart"                 element={<Cart />} />
-                            <Route path="SearchedGames"        element={<SearchedGames />} />
-                            <Route path="SuccessfulPurchase"   element={<SuccessfulPurchase />} />
-                            <Route path="EditGame"             element={<EditGame />} />
+                        <Route path='/:userId'             element={<AuthRequired />}>
+                            <Route index                                      element={<HomePage />} />
+                            <Route path="CompanyProfile"                      element={<CompanyProfile />} />
+                            <Route path="UserProfile"                         element={<UserProfile />} />
+                            <Route path="GameDetails/:publisherId/:gameId"    element={<GameDetails />} />
+                            <Route path="Wishlist"                            element={<Wishlist />} />
+                            <Route path="Cart"                                element={<Cart />} />
+                            <Route path="SearchedGames"                       element={<SearchedGames />} />
+                            <Route path="SuccessfulPurchase"                  element={<SuccessfulPurchase />} />
+                            <Route path="EditGame"                            element={<EditGame />} />
                         </Route>
                     </Route>
                 </Routes>

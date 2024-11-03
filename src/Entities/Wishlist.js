@@ -2,9 +2,7 @@ async function getWishlistFromUser(userId)
 {
     let output = [];
 
-    await fetch("http://localhost:5000/wishlists/byUserId?" + new URLSearchParams({
-            userId: userId
-            }).toString())
+    await fetch(`http://localhost:5000/wishlists/${userId}`)
         .then(res => res.json())
         .then(getWishlistOutput => output = getWishlistOutput);
 
@@ -13,26 +11,19 @@ async function getWishlistFromUser(userId)
 
 async function addGameToWishlist(userId, gameId)
 {
-    await fetch('http://localhost:5000/wishlists/add', {
+    await fetch(`http://localhost:5000/wishlists/${userId}/${gameId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: JSON.stringify({
-            userId : userId,
-            gameId : gameId
-        })
+        }
     })
     .then(response => console.log(response));
 }
 
 function removeGameFromWishlist(userId, gameId)
 {
-    fetch("http://localhost:5000/wishlists/remove?" + new URLSearchParams({
-        userId: userId,
-        gameId: gameId
-        }).toString() ,{
-        method: 'POST',
+    fetch(`http://localhost:5000/wishlists/${userId}/${gameId}` ,{
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8'
         }

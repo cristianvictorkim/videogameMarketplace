@@ -60,8 +60,9 @@ const Wishlist = () => {
                                 /> 
                             ))
                         ) : (
-                        <p className='text-center text-lg'>No games found</p>
-                    )}              
+                            <h3 className="flex items-center justify-around rounded-full"> No games found </h3>
+                        )
+                    }              
                 </div>
             </div>
         </div>

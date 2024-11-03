@@ -15,22 +15,7 @@ if (!debugRequireAuth)
 async function getUserProfile() {
     let user = {};
 
-    await fetch("http://localhost:5000/users/profile/byId?" + new URLSearchParams({
-            userId : userId
-            }).toString())
-        .then(res => res.json())
-        .then(data => user = data);
-
-    return user;
-}
-
-async function getUserByUsername(username)
-{
-    let user = {};
-
-    await fetch("http://localhost:5000/users/byUsername?" + new URLSearchParams({
-            username : username
-            }).toString())
+    await fetch(`http://localhost:5000/users/profile/${userId}?`)
         .then(res => res.json())
         .then(data => user = data);
 
@@ -72,4 +57,4 @@ function getUserId()
 }
 
 // Exporting the functions and variables for use in other files
-export { pfp, setUserId, getUserId, getUserProfile, setPfp, getPfp, getUserByUsername, userLogged, logOff };
+export { pfp, setUserId, getUserId, getUserProfile, setPfp, getPfp, userLogged, logOff };
