@@ -1,10 +1,10 @@
 import React from "react";
 
-import Categories from "../../components/Common/Categories";
-import GameCard from "../../components/Common/GameCard";
-import YourSelection from "../../components/Common/YourSelection";
+import Categories from "components/Common/Categories";
+import GameCard from "components/Common/GameCard";
+import YourSelection from "components/Common/YourSelection";
 
-import { getSelection } from "../../Entities/Game";
+import { getSelection } from "Entities/Game";
 
 const HomePage = () => {    
     const [selection, setSelection] = React.useState([]);

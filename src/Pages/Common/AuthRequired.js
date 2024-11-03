@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { userLogged } from '../../Entities/User';
+import { userLogged } from 'Entities/User';
 
 const AuthRequired = () => {
     

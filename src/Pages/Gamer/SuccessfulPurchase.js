@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getUserId } from '../../Entities/User';
-import { getCartForUser, removeGameFromCart } from '../../Entities/Cart';
+import { getUserId } from 'Entities/User';
+import { getCartForUser } from 'Entities/Cart';
 
-import PurchasedGameCard from '../../components/Common/PurchasedGameCard';
+import PurchasedGameCard from 'components/Common/PurchasedGameCard';
 import { wait } from '@testing-library/user-event/dist/utils';
 
 

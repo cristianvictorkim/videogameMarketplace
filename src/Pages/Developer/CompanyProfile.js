@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import { UserContext } from '../../components/Common/UserContext';
-import DeveloperGameCard from '../../components/DeveloperComponents/DeveloperGameCard';
+import { UserContext } from 'components/Common/UserContext';
+import DeveloperGameCard from 'components/DeveloperComponents/DeveloperGameCard';
 
-import { getPfp, setPfp } from "../../Entities/User";
-import { getGames } from '../../Entities/Game';
+import { getPfp, setPfp } from "Entities/User";
+import { getGames } from 'Entities/Game';
 
 const CompanyProfile = () => {
     const [games, setGames] = useState([]);

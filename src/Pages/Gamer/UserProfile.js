@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react';
 
-import PurchaseHistory from '../../components/Common/PurchaseHistory';
-import { UserContext } from '../../components/Common/UserContext';
+import PurchaseHistory from 'components/Common/PurchaseHistory';
+import { UserContext } from 'components/Common/UserContext';
 
-import { getUserProfile } from '../../Entities/User';
-import {getPfp, setPfp } from "../../Entities/User";
+import { getUserProfile } from 'Entities/User';
+import {getPfp, setPfp } from "Entities/User";
 import luffy from 'assets/User/luffy.png';
 import chopper from 'assets/User/chopper.png';
 import nami from 'assets/User/nami.png';

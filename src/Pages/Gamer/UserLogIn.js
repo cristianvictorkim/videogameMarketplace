@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { setUserId } from '../../Entities/User';
+import { setUserId } from 'Entities/User';
 
-import { UserContext } from '../../components/Common/UserContext';
+import { UserContext } from 'components/Common/UserContext';
 
 
 const UserLogIn = () => {
