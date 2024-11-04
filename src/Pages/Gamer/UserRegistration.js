@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../../components/Common/UserContext';
+import { UserContext } from 'components/Common/UserContext';
 
 const UserRegistration = () => {
     const { profile, setProfile, sCLIENT, sDEVELOPER } = useContext(UserContext);

@@ -20,7 +20,7 @@ const GameCard = ({ gameId, image, title, price, score, publisherId}) => {
                         {title}
                     </h2>
                         <p className="text-gray-700 text-sm text-[17px] ">
-                        Rating: {score}
+                        {score > 0 ? `Rating: ${score}` : "No reviews yet"}
                     </p>
                     <span className="text-[16px]">
                             ${price}

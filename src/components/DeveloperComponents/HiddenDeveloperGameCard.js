@@ -1,5 +1,5 @@
 import React from 'react';
-import placeholder from 'assets/Misc/placeholder-image.jpg';
+import placeholder from 'assets/User/placeholder-image.jpg';
 
 
 const DeveloperGameCard = () => {

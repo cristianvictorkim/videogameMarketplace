@@ -21,12 +21,12 @@ const AddComment = ({ gameId, setComments }) => { // Agregar setComments aquí
         }
     
         // Agrega el comentario
-        addComment(profile.username, tempComment, score);
+        addComment(gameId, profile.username, tempComment, score);
     
         // Actualiza el estado de los comentarios en GameDetails
         setComments(prevComments => [
             ...prevComments,
-            { userName: profile.username, comment: tempComment, score } // Crear el nuevo comentario
+            { username: profile.username, comment: tempComment, rating: score } // Crear el nuevo comentario
         ]);
     
         // Limpiar los campos

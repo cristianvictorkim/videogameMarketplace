@@ -3,8 +3,17 @@ async function getCartForUser(userId)
     let output = [];
 
     await fetch(`http://localhost:5000/carts/${userId}`)
-        .then(res => res.json())
-        .then(getCartOutput => output = getCartOutput);
+        .then(async res => {
+            if (res.ok)
+            {
+                output = await res.json();
+            }
+            else
+            {
+                output = {userId: userId, games: []}
+            }
+        })
+        
     return output;
 }
 

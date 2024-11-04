@@ -3,9 +3,17 @@ async function getWishlistFromUser(userId)
     let output = [];
 
     await fetch(`http://localhost:5000/wishlists/${userId}`)
-        .then(res => res.json())
-        .then(getWishlistOutput => output = getWishlistOutput);
-
+        .then(async res => {
+            if (res.ok)
+            {
+                output = await res.json();
+            }
+            else
+            {
+                output = {userId: userId, games: []}
+            }
+        })
+        
     return output;
 }
 

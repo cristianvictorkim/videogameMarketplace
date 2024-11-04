@@ -1,14 +1,19 @@
-const comments = new Map();
-
-function addComment(userName, comment, score) {
-    const commentId = Date.now();
-    const userComment = {
-        id: commentId, 
-        userName: userName,
-        comment: comment,
-        score: score
-    };
-    comments.set(commentId, userComment);
+async function addComment(gameId, userName, comment, score) 
+{
+    console.log("llego")
+    await fetch(`http://localhost:5000/games/${gameId}/comments`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            user: userName,
+            comment: comment,
+            rating: score,
+            date: Date.now()
+        })
+    })
+    .then(response => console.log(response));
 }
 
 // Function to get all games
@@ -60,7 +65,7 @@ async function getGamesFiltered(filter)
     {
         let insert = true;
 
-        if(atrib1.toString() !== "" && atrib2 != undefined)
+        if(atrib1.toString() !== "" && atrib2 !== undefined)
         {
             insert = comparator(atrib1, atrib2);
         }
@@ -95,8 +100,4 @@ async function getGamesFiltered(filter)
     return output;
 }
 
-function getComments() {
-    return comments;
-}
-
-export { getGameById, getGames, getSelection, getGamesFiltered, addComment, getComments};
+export { getGameById, getGames, getSelection, getGamesFiltered, addComment };
