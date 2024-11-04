@@ -114,22 +114,20 @@ const GameDetails = () => {
                     System Requirements
                 </h1>
                 <div className='bg-main-color border-black p-4 rounded-lg flex justify-between'>
-                    <div className='w-1/2 text-center'>
-                        <h2 className='font-semibold'>
-                            Minimum Requirements
-                        </h2>
-                        <p>
-                            Details about minimum system requirements.
-                        </p>
-                    </div>
-                    <div className='w-1/2 text-center'>
-                        <h2 className='font-semibold'>
-                            Recommended Requirements
-                        </h2>
-                        <p>
-                            Details about recommended system requirements.
-                        </p>
-                    </div>
+                <div className='w-1/2 text-center'>
+                    <h2 className='font-semibold'>Minimum Requirements</h2>
+                    <p>CPU: {game.systemRequirements?.minimum?.cpu || "N/A"}</p>
+                    <p>GPU: {game.systemRequirements?.minimum?.gpu || "N/A"}</p>
+                    <p>RAM: {game.systemRequirements?.minimum?.ram || "N/A"}</p>
+                    <p>Storage: {game.systemRequirements?.minimum?.storage || "N/A"}</p>
+                </div>
+                <div className='w-1/2 text-center'>
+                    <h2 className='font-semibold'>Recommended Requirements</h2>
+                    <p>CPU: {game.systemRequirements?.recommended?.cpu || "N/A"}</p>
+                    <p>GPU: {game.systemRequirements?.recommended?.gpu || "N/A"}</p>
+                    <p>RAM: {game.systemRequirements?.recommended?.ram || "N/A"}</p>
+                    <p>Storage: {game.systemRequirements?.recommended?.storage || "N/A"}</p>
+                </div>
                 </div>
             </div>  
             <div className='w-[59rem]'>

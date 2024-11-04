@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { getUserId } from 'Entities/User';
 import { getCartForUser } from 'Entities/Cart';
@@ -9,7 +9,7 @@ import { wait } from '@testing-library/user-event/dist/utils';
 
 
 const SuccessfulPurchase = () => {
-    
+    const params = useParams();
     const [purchasedGames, setPurchasedGames] = useState([]);
     let userId = getUserId();
     
@@ -46,7 +46,7 @@ const SuccessfulPurchase = () => {
                 )}
             </div>
             <button className='btn mt-4'>
-                <Link to={"/UserProfile"}>View my purchases</Link>
+                <Link to={`/${params.userId}/UserProfile`}>View my purchases</Link>
             </button>
         </div>
     );

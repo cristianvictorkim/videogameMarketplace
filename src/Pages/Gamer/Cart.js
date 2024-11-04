@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import RemovableGameCard from 'components/Common/RemovableGameCard';
 
@@ -16,6 +16,7 @@ const Cart = () => {
     const [searchTerm, setSearchTerm] = React.useState(""); 
 
     let userId = getUserId();
+    const params = useParams();
 
     React.useEffect(() => { 
         async function loadGames()
@@ -82,7 +83,9 @@ const Cart = () => {
                             Total estimated to pay ${cartTotal.toFixed(2)}
                         </p>
                         <button className='bg-btn-color my-1 w-[40%] border border-black'>
-                        <Link to='/SuccessfulPurchase'> Pay</Link>  
+                            <Link to={`/${params.userId}/SuccessfulPurchase`}> 
+                                Pay
+                            </Link>  
                         </button>
                     </div>
                     )
