@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-
 import { getUserId } from 'Entities/User';
-import { getCartForUser } from 'Entities/Cart';
+import { getCartForUser, clearCart } from 'Entities/Cart';
 
 import PurchasedGameCard from 'components/Common/PurchasedGameCard';
 import { wait } from '@testing-library/user-event/dist/utils';
@@ -19,6 +18,7 @@ const SuccessfulPurchase = () => {
             await wait(200);
             const gameCardData = await getCartForUser(userId);
             setPurchasedGames(gameCardData.games);
+            clearCart(userId); // No funciona
         }
         
         loadGames();

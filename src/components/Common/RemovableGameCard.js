@@ -23,7 +23,7 @@ const RemovableGameCard = ({ gameId, image, title, price, score, publisherId, re
                     <span className="text-[16px]">
                             ${price}
                     </span>
-                    <div className="space-y-2   ">   
+                    <div className="space-x-2   ">   
                         <Link to={`../GameDetails/${publisherId}/${gameId}`}>  
                             <button className="btn">
                                 View Details 

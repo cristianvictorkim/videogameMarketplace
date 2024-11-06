@@ -1,9 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import placeholder from 'assets/Misc/placeholder-image.jpg';
 
-const DeveloperGameCard = () => {
 
+const DeveloperGameCard = () => {
+    
+    const params = useParams();
+    
     return (
         <div className="flex justify-center space-x-5">
             <div className="bg-main-color rounded-lg max-w-2xl border-2 border-black w-[45rem]">
@@ -28,7 +31,7 @@ const DeveloperGameCard = () => {
                             <p>Genre</p>
                         </div>
                         <div className="absolute bottom-4 inset-x-0 flex justify-center space-x-2">
-                            <Link to='/EditGame'><p>Edit</p></Link>
+                            <Link to={`/${params.userId}/EditGame`}><p>Edit</p></Link>
                             <p>Remove</p>
                             <p>Delete</p>
                         </div>

@@ -16,6 +16,22 @@ async function getCartForUser(userId)
         
     return output;
 }
+// No funciona
+async function clearCart(userId) {
+    try {
+        const response = await fetch(`http://localhost:5000/carts/${userId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            console.error("Error clearing cart:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Error in clearCart:", error);
+    }
+}
 
 async function addGameToCart(userId, gameId)
 {
@@ -39,4 +55,4 @@ function removeGameFromCart(userId, gameId)
     .then(response => console.log(response));
 }
 
-export { getCartForUser, addGameToCart, removeGameFromCart };
+export { getCartForUser, addGameToCart, removeGameFromCart, clearCart };

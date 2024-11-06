@@ -20,6 +20,7 @@ import Wishlist from './Pages/Gamer/Wishlist';
 
 import Navbar from './components/Common/Navbar';
 import { UserProvider } from './components/Common/UserContext';
+import ForgotPassword from 'Pages/Common/ForgotPassword';
 
 function App() {
     return (
@@ -33,6 +34,8 @@ function App() {
                         <Route path="Register"             element={<UserRegistration />} />
                         <Route path="CompanyRegistration"  element={<CompanyRegistration />} />
                         <Route path="CompanyLogIn"         element={<CompanyLogin />} />
+                        <Route path="UserRegistration"     element={<UserRegistration/>} />
+                        <Route path="ForgotPassword"       element={<ForgotPassword/>} />
                         <Route path='/:userId'             element={<AuthRequired />}>
                             <Route index                                      element={<HomePage />} />
                             <Route path="CompanyProfile"                      element={<CompanyProfile />} />

@@ -59,7 +59,7 @@ const CompanyLogIn = () => {
                     Log in
                 </button>
                 <div className='text-center py-4 space-y-1'> 
-                    <p><Link>Forgot Password?</Link></p>
+                    <p><Link to='/ForgotPassword'>Forgot Password?</Link></p>
                     <p><Link to='/CompanyRegistration'>Register</Link></p>
                     <p><Link to="/Login">                        
                         <button onClick={() => {setProfile({ username: profile.username, profilePicture: profile.profilePicture, type : sCLIENT })}}>
