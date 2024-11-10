@@ -82,6 +82,7 @@ async function getGamesFiltered(filter) {
     await gameData.forEach((game) => {
         let priceMatch = true;
         let filterRating = true;
+        
         if (filterPrice !== "") {
             if (filterPrice === "Free") {
                 priceMatch = game.price === 0;

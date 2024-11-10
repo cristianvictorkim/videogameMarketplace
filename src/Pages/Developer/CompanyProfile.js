@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-
 import { UserContext } from 'components/Common/UserContext';
 import DeveloperGameCard from 'components/DeveloperComponents/DeveloperGameCard';
-
 import { getPfp, setPfp } from "Entities/User";
 import { getGames } from 'Entities/Game';
 
@@ -35,7 +33,7 @@ const CompanyProfile = () => {
     const handleSaveChanges = () => {
         setPfp(tempProfilePicture);
         if (tempUsername !== '') {
-            setProfile({ username: tempUsername, profilePicture: tempProfilePicture, type : profile.type });
+            setProfile({ username: tempUsername, profilePicture: tempProfilePicture, type: profile.type });
         } else {
             alert("Some fields are incomplete");
         }
@@ -44,10 +42,16 @@ const CompanyProfile = () => {
     return (
         <div className="min-h-screen">
             <h1 className="titleBold text-center p-3">{profile.username}</h1>
-            <div className="space-y-5">
-                <DeveloperGameCard />
-                <DeveloperGameCard />
-            </div>
+
+            {games.length > 0 ? (
+                <div className="space-y-5">
+                    {games.map((game, index) => (
+                        <DeveloperGameCard key={index} game={game} />
+                    ))}
+                </div>
+            ) : (
+                <h1 className="text-center p-5">No games available.</h1>
+            )}
 
             <h1 className="titleBold text-center p-5">Edit profile</h1>
             <div className="flex justify-center">
@@ -137,7 +141,7 @@ const CompanyProfile = () => {
                             type="file"
                             accept="image/*"
                             onChange={handleProfilePictureChange}
-                            className='pt-3' 
+                            className='pt-3'
                         />
                     </div>
                 </div>
