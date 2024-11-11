@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import placeholder from 'assets/Misc/placeholder-image.jpg';
+import { changeBannerImage, changeGamePlayImage } from 'Entities/Game';
 
 const EditGame = () => {
     const location = useLocation();
     const { publisherId } = useParams();
     const { game } = location.state || {};
+    console.log('Game data from location.state:', game);
 
     const [gameData, setGameData] = useState(() => ({
         name: game?.title || '',
@@ -59,13 +61,21 @@ const EditGame = () => {
             }
         }));
     };
-
-    const saveChanges = (section) => {
-        console.log('Changes saved for:', section, gameData[section] || gameData);
+    
+    const handleFileChange = (e, field) => {
+        const file = e.target.files[0];
+        setGameData(prevData => ({
+            ...prevData,
+            [field]: file
+        }));
     };
 
-    const saveUpperChanges = () => {
-        console.log('Changes saved for:', gameData.mainPhoto, gameData.miniature, gameData.name);
+
+    const saveChanges = () => {
+        const bannerImage = gameData.mainPhoto; 
+        const gamePlayImage = gameData.miniature;  
+        changeBannerImage(game.gameId ,bannerImage);
+        changeGamePlayImage(game.gameId ,gamePlayImage);
     };
 
     return (
@@ -81,7 +91,7 @@ const EditGame = () => {
                         <input
                             type="file"
                             className="w-[50%] mx-auto pt-3"
-                            onChange={e => handleInputChange('mainPhoto', URL.createObjectURL(e.target.files[0]))}
+                            onChange={e => handleFileChange('mainPhoto', URL.createObjectURL(e.target.files[0]))}
                         />
                     </div>
                     <div className="flex-1 flex flex-col items-center">
@@ -90,7 +100,7 @@ const EditGame = () => {
                         <input
                             type="file"
                             className="w-[50%] mx-auto pt-3"
-                            onChange={e => handleInputChange('miniature', URL.createObjectURL(e.target.files[0]))}
+                            onChange={e => handleFileChange('miniature', URL.createObjectURL(e.target.files[0]))}
                         />
                     </div>
                     <div className="space-y-2 flex-1">
@@ -118,7 +128,7 @@ const EditGame = () => {
                             value={gameData.genre}
                             onChange={e => handleInputChange('genre', e.target.value)}
                         />
-                        <button className='btn mt-3' onClick={() => saveUpperChanges()}>
+                        <button className='btn mt-3' onClick={() => saveChanges()}>
                             Save Changes
                         </button>
                     </div>

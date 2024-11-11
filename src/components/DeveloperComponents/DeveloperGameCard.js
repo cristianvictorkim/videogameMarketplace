@@ -40,11 +40,11 @@ const DeveloperGameCard = ({game}) => {
                         <div className="absolute bottom-4 inset-x-0 flex justify-center space-x-2">
                         <Link 
                             to={{
-                                pathname: `/${params.userId}/EditGame`,
-                                state: { game: game } 
+                                pathname: `/${params.userId}/EditGame`,  // Ruta con el userId como parámetro
+                                state: { game: game }  // Pasa el objeto 'game' al destino
                             }}
                         >
-                            <p>Edit</p>
+                            Edit Game
                         </Link>
                             <p>Remove from public</p>
                             <button onClick={handleGameDelete(game)}>

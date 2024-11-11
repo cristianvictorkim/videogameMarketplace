@@ -52,6 +52,40 @@ async function getGameById(gameId)
     return game;
 }
 
+async function changeBannerImage(gameId, file) {
+    const formData = new FormData();
+    formData.append('bannerUrl', file);
+    console.log(formData);
+    const response = await fetch(`http://localhost:5000/games/${gameId}/banner-image`, {
+        method: 'PUT', 
+        body: formData,
+    });
+
+    if (!response.ok) {
+        throw new Error('Error uploading the banner image');
+    }
+    const result = await response.json();
+    return result;
+}
+
+async function changeGamePlayImage(gameId, file) {
+    const formData = new FormData();
+    formData.append('gameplayUrl', file);
+    console.log(formData);
+    const response = await fetch(`http://localhost:5000/games/${gameId}/gameplay-image`, {
+        method: 'PUT', 
+        body: formData,
+    });
+
+    if (!response.ok) {
+        throw new Error('Error uploading the gameplay image');
+    }
+
+    const result = await response.json();
+    return result;
+}
+
+
 async function getGamesFiltered(filter)
 {
     console.log(filter)
@@ -100,4 +134,4 @@ async function getGamesFiltered(filter)
     return output;
 }
 
-export { getGameById, getGames, getSelection, getGamesFiltered, addComment };
+export { getGameById, getGames, getSelection, getGamesFiltered, addComment, changeBannerImage, changeGamePlayImage}
