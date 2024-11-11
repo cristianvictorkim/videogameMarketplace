@@ -102,4 +102,31 @@ async function getPublisherProfile(publisherId)
     return publisher;
 }
 
-export { getPublisherProfile, devForgotPassword, login, getPublisherById, register }
+async function updateProfile(profileChanges) {
+    
+    let output = {};
+
+    await fetch(`http://localhost:5000/publishers/profile/${getUserId()}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${getToken()}`,
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            profileChanges
+        })
+    })
+    .then(res => res.json())
+    .then(data => output.message = data.message);
+    
+    return output;
+}
+
+export { 
+    updateProfile,
+    getPublisherProfile, 
+    devForgotPassword, 
+    login, 
+    getPublisherById, 
+    register 
+}

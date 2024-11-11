@@ -14,7 +14,7 @@ export const UserProvider = ({ children }) => {
         name: "name",
         address: "address",
         dateOfBirth: "", 
-        profilePicture : '', 
+        profilePicture : "assets/User/pfp.png", 
         type: type
     });
 

@@ -118,11 +118,31 @@ async function userForgotPassword(userData) {
     return output
 }
 
+async function updateProfile(profileChanges) {
+    
+    let output = {};
+
+    await fetch(`http://localhost:5000/users/profile/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            profileChanges
+        })
+    })
+    .then(res => res.json())
+    .then(data => output.message = data.message);
+    
+    return output;
+}
+
 
 // Local Accessors ------------------------------------------------------------------------------------------
 
 function setPfp(newPfp) {
-    pfp = newPfp; // Actualiza la variable global pfp
+    pfp = emptyFoto; // Actualiza la variable global pfp
 }
 
 function getPfp() {
@@ -157,6 +177,7 @@ function setToken(newToken)
 
 // Exporting the functions and variables for use in other files
 export { 
+    updateProfile,
     userForgotPassword,
     setUserId,
     setToken,

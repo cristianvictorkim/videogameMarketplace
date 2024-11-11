@@ -27,11 +27,10 @@ const CompanyLogIn = () => {
         {
             setProfile((prev)=> ({
                 ...prev,     
-                username : output.publisher.name,
-                profilePicture : getPfp()
+                username : output.publisher.name
             }))
         }
-        
+
         alert(output.message);
         window.location.reload(false);
     }

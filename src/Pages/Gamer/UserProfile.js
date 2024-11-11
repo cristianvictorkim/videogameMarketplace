@@ -3,7 +3,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import PurchaseHistory from 'components/Common/PurchaseHistory';
 import { UserContext } from 'components/Common/UserContext';
 
-import { getUserProfile } from 'Entities/User';
+import { getUserProfile, updateProfile } from 'Entities/User';
 import {getPfp, setPfp } from "Entities/User";
 import luffy from 'assets/User/luffy.png';
 import chopper from 'assets/User/chopper.png';
@@ -15,12 +15,13 @@ const UserProfile = () => {
     const { profile, setProfile } = useContext(UserContext);
     const [clientProfile, setClientProfile] = useState({ purchases : [] });
     const [profileChanges, setProfileChanges] = useState({
-            username : profile.username,
-            phoneNumber : profile.phoneNumber,
-            address : profile.address,
-            newPassword : profile.newPassword,
-            newPasswordRetry : profile.newPasswordRetry,
-        });   
+        username : '',
+        phoneNumber : '',
+        address : '',
+        password : '',
+        newPassword : '',
+        newPasswordRetry : '',
+    });   
 
     useEffect(() => {
         fetchProfile();
@@ -46,6 +47,8 @@ const UserProfile = () => {
                 }))
             }
         }
+        let output = await updateProfile(profileChanges);
+        alert(output.message);
     }
 
     function handleChange(e) {
