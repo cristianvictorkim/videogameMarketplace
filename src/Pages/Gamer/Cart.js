@@ -17,7 +17,18 @@ const Cart = () => {
 
     let userId = getUserId();
     const params = useParams();
-
+    
+    const handlePayment = () => {
+        const cardNumber = prompt("Please enter your card number:");
+        const cardholderName = prompt("Please enter the cardholder's name:");
+    
+        if (cardNumber && cardholderName) {
+            window.location.href = `/${userId}/SuccessfulPurchase`;
+        } else {
+            alert("Both card number and cardholder's name are required.");
+        }
+    };
+    
     React.useEffect(() => { 
         async function loadGames()
         {
@@ -82,10 +93,8 @@ const Cart = () => {
                         <p>
                             Total estimated to pay ${cartTotal.toFixed(2)}
                         </p>
-                        <button className='bg-btn-color my-1 w-[40%] border border-black'>
-                            <Link to={`/${params.userId}/SuccessfulPurchase`}> 
-                                Pay
-                            </Link>  
+                        <button className='btn w-[40%]' onClick={handlePayment}>
+                            Pay
                         </button>
                     </div>
                     )

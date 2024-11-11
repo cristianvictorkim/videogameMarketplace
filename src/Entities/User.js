@@ -8,7 +8,7 @@ let debugRequireAuth = false;
 
 if (!debugRequireAuth)
 {
-    userId = "6722c48b5751b6669ba2cb69"
+    userId = "673179bfcaa556130cfbff95"
 }
 
 // Server requests ------------------------------------------------------------------------------------------

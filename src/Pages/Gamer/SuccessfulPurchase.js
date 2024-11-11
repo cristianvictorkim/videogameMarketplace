@@ -37,8 +37,8 @@ const SuccessfulPurchase = () => {
                             image={game.bannerUrl}
                             title={game.title}
                             price={game.price}
-                            purchasedDate={game.purchaseDate}
                             gameId={game.gameId}
+                            minimumRequirements={game.minimumRequirements}
                         />
                     ))
                 ) : (

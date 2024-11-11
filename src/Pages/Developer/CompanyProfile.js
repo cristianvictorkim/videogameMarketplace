@@ -4,6 +4,7 @@ import DeveloperGameCard from 'components/DeveloperComponents/DeveloperGameCard'
 import { getPfp, setPfp } from "Entities/User";
 import { getGames } from 'Entities/Game';
 import { Link, useParams } from 'react-router-dom';
+import HiddenDeveloperGameCard from 'components/DeveloperComponents/HiddenDeveloperGameCard';
 
 const CompanyProfile = () => {
     const [games, setGames] = useState([]);
@@ -11,6 +12,7 @@ const CompanyProfile = () => {
     const [tempUsername, setTempUsername] = useState("");
     const [tempProfilePicture, setTempProfilePicture] = useState(getPfp());
     const params = useParams();
+    const [hiddenGames, setHiddenGames] = useState([]);
     
     useEffect(() => {
         fetchGames();
@@ -52,6 +54,15 @@ const CompanyProfile = () => {
                 </div>
             ) : (
                 <h1 className="text-center p-5">No games available.</h1>
+            )}
+            <h1 className="titleBold text-center p-3">Hidden Games</h1>
+            {hiddenGames.length > 0 ? (<div className="space-y-5">
+                    {games.map((game, index) => (
+                        <HiddenDeveloperGameCard key={index} game={game} />
+                    ))}
+                </div>
+            ) : (
+                <h1 className="text-center p-5">No hidden games.</h1>
             )}
             <h1 className="titleBold text-center p-5">Edit profile</h1>
             <div className="flex justify-center">

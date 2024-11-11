@@ -7,6 +7,10 @@ const DeveloperGameCard = ({game}) => {
     
     const params = useParams();
     
+    function handleGameDelete(game) {
+        
+    }
+
     return (
         <div className="flex justify-center space-x-5">
             <div className="bg-main-color rounded-lg border-2 border-black w-[49rem]">
@@ -43,7 +47,9 @@ const DeveloperGameCard = ({game}) => {
                             <p>Edit</p>
                         </Link>
                             <p>Remove from public</p>
-                            <p>Delete</p>
+                            <button onClick={handleGameDelete(game)}>
+                                Delete
+                            </button>
                         </div>
                     </div>
                 </div>

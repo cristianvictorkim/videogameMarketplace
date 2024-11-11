@@ -1,7 +1,7 @@
 import React from 'react';
 import placeholder from 'assets/Misc/placeholder-image.jpg'
 
-const PurchasedGameCard = ({ image, title, price, purchasedDate }) => {
+const PurchasedGameCard = ({ image, title, price, minimumRequirements}) => {
     // Game card de un juego comprado
     return (
         <div className='bg-main-color mx-auto mt-[2rem] rounded-lg w-full max-w-2xl border-black'>    
@@ -21,10 +21,9 @@ const PurchasedGameCard = ({ image, title, price, purchasedDate }) => {
                         Price: ${price}
                     </span>
                     <p className="">
-                        Date of purchase: {purchasedDate}
                     </p>
                     <p className=''>
-                        Minimum requirements:
+                        Minimum requirements: {minimumRequirements}
                     </p>
                 </div>
             </div>
