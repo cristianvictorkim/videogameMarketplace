@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import RemovableGameCard from 'components/Common/RemovableGameCard';
 
 import { getUserId } from 'Entities/User';
-import { getCartForUser, removeGameFromCart } from 'Entities/Cart';
+import { confirmPurchase, getCartForUser, removeGameFromCart } from 'Entities/Cart';
 
 import { wait } from '@testing-library/user-event/dist/utils';
 
@@ -16,14 +16,14 @@ const Cart = () => {
     const [searchTerm, setSearchTerm] = React.useState(""); 
 
     let userId = getUserId();
-    const params = useParams();
     
     const handlePayment = () => {
         const cardNumber = prompt("Please enter your card number:");
         const cardholderName = prompt("Please enter the cardholder's name:");
     
         if (cardNumber && cardholderName) {
-            window.location.href = `/${userId}/SuccessfulPurchase`;
+            confirmPurchase(userId, gameCards);
+            //window.location.href = `/${userId}/SuccessfulPurchase`;
         } else {
             alert("Both card number and cardholder's name are required.");
         }

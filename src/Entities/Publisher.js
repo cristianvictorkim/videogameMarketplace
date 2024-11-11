@@ -11,4 +11,24 @@ async function getPublisherById(publisherId)
     return publisher;
 }
 
-export { getPublisherById }
+async function register(registerObject) {
+    let result = '';
+    await fetch(`http://localhost:5000/publishers/authentication`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            registerObject: registerObject
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        result = data.message;
+    });   
+
+    return result;
+}
+
+export { getPublisherById, register }

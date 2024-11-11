@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { getUserId, login, setUserId, userLogged } from 'Entities/User';
+import { getPfp, getUserId, login, setUserId, userLogged } from 'Entities/User';
 
 import { UserContext } from 'components/Common/UserContext';
 
@@ -12,7 +12,18 @@ const UserLogIn = () => {
     async function handleSubmit(e)
     {
         e.preventDefault();
-        await login(loginFormData.email, loginFormData.password);
+        const user = await login(loginFormData.email, loginFormData.password);
+        
+        if(userLogged())
+        {
+            setProfile((prev)=> ({
+                ...prev,     
+                username : user.userName,
+                phoneNumber : user.phoneNumber,
+                profilePicture : getPfp()
+            }))
+        }
+
         window.location.reload(false);
     }
 

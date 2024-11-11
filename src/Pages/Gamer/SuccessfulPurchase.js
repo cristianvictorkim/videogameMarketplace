@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getUserId } from 'Entities/User';
-import { getCartForUser, clearCart } from 'Entities/Cart';
+import { getCartForUser } from 'Entities/Cart';
 
 import PurchasedGameCard from 'components/Common/PurchasedGameCard';
 import { wait } from '@testing-library/user-event/dist/utils';
@@ -18,7 +18,6 @@ const SuccessfulPurchase = () => {
             await wait(200);
             const gameCardData = await getCartForUser(userId);
             setPurchasedGames(gameCardData.games);
-            clearCart(userId); // No funciona
         }
         
         loadGames();
@@ -42,7 +41,7 @@ const SuccessfulPurchase = () => {
                         />
                     ))
                 ) : (
-                    <h3 className="flex items-center justify-around rounded-full">No games found.</h3>
+                    <h3 className="flex items-center justify-around rounded-full"></h3>
                 )}
             </div>
             <button className='btn mt-4'>

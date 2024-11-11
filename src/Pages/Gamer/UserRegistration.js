@@ -9,6 +9,7 @@ const UserRegistration = () => {
     const { profile, setProfile, sCLIENT, sDEVELOPER } = useContext(UserContext);
 
     const [registrationForm, setRegistrationForm] = useState({
+        username: "",
         name: "",
         email: "",
         phoneNumber: "",
@@ -22,7 +23,9 @@ const UserRegistration = () => {
     function handleSubmit(e)
     {
         e.preventDefault();
-        register(registrationForm);
+        let result = register(registrationForm);
+        alert(result);
+        window.location.reload(false);
     }
 
     function handleChange(e) {
@@ -40,6 +43,17 @@ const UserRegistration = () => {
                 <h2 className="text-2xl font-semibold mb-6 text-center">
                     Registration
                 </h2>
+                <p className='pb-1'>Username</p>
+                <div className="mb-4">
+                    <input
+                        name="username"
+                        onChange={handleChange}
+                        type="text"
+                        placeholder="Username"
+                        value={registrationForm.username}
+                        className="w-full p-2 border rounded-lg"
+                    />
+                </div>
                 <p className='pb-1'>Name</p>
                 <div className="mb-4">
                     <input

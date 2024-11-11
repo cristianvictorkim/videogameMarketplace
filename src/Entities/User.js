@@ -36,6 +36,8 @@ async function logOff()
 
 async function login(email, password)
 {   
+    let user = {};
+
     await fetch(`http://localhost:5000/users/authentication/login`, {
         method: 'POST',
         headers: {
@@ -48,18 +50,22 @@ async function login(email, password)
     })
     .then(res => res.json())
     .then(data => {
-        if(data.token && data.userId)
+        if(data.token && data.user)
         {
+            user = data.user;
             token = data.token;
-            userId = data.userId;
+            userId = data.user._id;
             Cookies.set(sUserIdCookie, userId);
             Cookies.set(sTokenCookie, token);
         }
     });
+
+    return user;
 }
 
 async function register(registerObject)
 {  
+    let result = '';
     await fetch(`http://localhost:5000/users/authentication`, {
         method: 'POST',
         headers: {
@@ -70,7 +76,25 @@ async function register(registerObject)
         })
     })
     .then(res => res.json())
-    .then(data => console.log(data));   
+    .then(data => {
+        console.log(data);
+        result = data.message;
+    });   
+
+    return result;
+}
+
+async function addPurchase(games) {
+    await fetch(`http://localhost:5000/users/${userId}/purchases`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            games : games
+        })
+    })
 }
 
 // Local Accessors ------------------------------------------------------------------------------------------
@@ -93,5 +117,10 @@ function getUserId()
     return userId;
 }
 
+function getToken()
+{
+    return token;
+}
+
 // Exporting the functions and variables for use in other files
-export { register, pfp, getUserId, getUserProfile, setPfp, getPfp, userLogged, logOff, login };
+export { addPurchase, getToken, register, pfp, getUserId, getUserProfile, setPfp, getPfp, userLogged, logOff, login };

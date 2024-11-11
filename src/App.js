@@ -11,7 +11,6 @@ import CompanyRegistration from './Pages/Developer/CompanyRegistration';
 import EditGame from './Pages/Developer/EditGame';
 import GameDetails from './Pages/Gamer/GameDetails';
 import HomePage from './Pages/Gamer/HomePage';
-import SearchedGames from './Pages/Common/SearchedGames';
 import SuccessfulPurchase from './Pages/Gamer/SuccessfulPurchase';
 import UserLogIn from './Pages/Gamer/UserLogIn';
 import UserProfile from './Pages/Gamer/UserProfile';
@@ -43,7 +42,6 @@ function App() {
                             <Route path="GameDetails/:publisherId/:gameId"    element={<GameDetails />} />
                             <Route path="Wishlist"                            element={<Wishlist />} />
                             <Route path="Cart"                                element={<Cart />} />
-                            <Route path="SearchedGames"                       element={<SearchedGames />} />
                             <Route path="SuccessfulPurchase"                  element={<SuccessfulPurchase />} />
                             <Route path="EditGame"                            element={<EditGame />} />
                             <Route path="CreateGame"                          element={<CreateGame/>} />
