@@ -23,7 +23,7 @@ const Cart = () => {
     
         if (cardNumber && cardholderName) {
             confirmPurchase(userId, gameCards);
-            //window.location.href = `/${userId}/SuccessfulPurchase`;
+            window.location.href = `/${userId}/SuccessfulPurchase`;
         } else {
             alert("Both card number and cardholder's name are required.");
         }

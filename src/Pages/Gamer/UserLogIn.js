@@ -18,18 +18,18 @@ const UserLogIn = () => {
     async function handleSubmit(e)
     {
         e.preventDefault();
-        const user = await login(loginFormData.email, loginFormData.password);
+        const output = await login(loginFormData.email, loginFormData.password);
         
         if(userLogged())
         {
             setProfile((prev)=> ({
                 ...prev,     
-                username : user.userName,
-                phoneNumber : user.phoneNumber,
+                username : output.user.userName,
                 profilePicture : getPfp()
             }))
         }
 
+        alert(output.message)
         window.location.reload(false);
     }
 

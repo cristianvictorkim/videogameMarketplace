@@ -21,18 +21,19 @@ const CompanyLogIn = () => {
     async function handleSubmit(e)
     {
         e.preventDefault();
-        const publisher = await login(loginFormData.email, loginFormData.password);
+        const output = await login(loginFormData.email, loginFormData.password);
     
         if(userLogged())
         {
             setProfile((prev)=> ({
                 ...prev,     
-                username : publisher.name,
+                username : output.publisher.name,
                 profilePicture : getPfp()
             }))
         }
-        console.log(publisher)
-        //window.location.reload(false);
+        
+        alert(output.message);
+        window.location.reload(false);
     }
 
     function handleChange(e) {

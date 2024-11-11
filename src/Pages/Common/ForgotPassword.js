@@ -17,16 +17,19 @@ const ForgotPassword = () => {
 
     async function handleSubmit(e)
     {
+        let output = {}
         e.preventDefault();
         if(profile.type === sCLIENT)
         {
-            userForgotPassword(formData);
+            output = await userForgotPassword(formData);
         }
         else if(profile.type === sDEVELOPER)
         {
-            devForgotPassword(formData);
+            output = await devForgotPassword(formData);
         }
-        //window.location.reload(false);
+
+        alert(output.message);
+        window.location.reload(false);
     }
 
     function handleChange(e) {

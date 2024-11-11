@@ -36,7 +36,7 @@ async function logOff()
 
 async function login(email, password)
 {   
-    let user = {};
+    let output = {};
 
     await fetch(`http://localhost:5000/users/authentication/login`, {
         method: 'POST',
@@ -50,9 +50,10 @@ async function login(email, password)
     })
     .then(res => res.json())
     .then(data => {
+        output.message = data.message;
         if(data.token && data.user)
         {
-            user = data.user;
+            output.user = data.user;
             token = data.token;
             userId = data.user._id;
             Cookies.set(sUserIdCookie, userId);
@@ -60,7 +61,7 @@ async function login(email, password)
         }
     });
 
-    return user;
+    return output;
 }
 
 async function register(registerObject)
@@ -98,6 +99,9 @@ async function addPurchase(games) {
 }
 
 async function userForgotPassword(userData) {
+    
+    let output = {};
+
     await fetch(`http://localhost:5000/users/authentication/forgot-password`, {
         method: 'POST',
         headers: {
@@ -108,6 +112,10 @@ async function userForgotPassword(userData) {
             userData
         })
     })
+    .then(res => res.json())
+    .then(data => output.message = data.message)
+
+    return output
 }
 
 

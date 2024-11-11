@@ -37,7 +37,7 @@ async function register(registerObject) {
 
 
 async function login(email, password) {
-    let publisher = '';
+    let output = {};
 
     await fetch(`http://localhost:5000/publishers/authentication/login`, {
         method: 'POST',
@@ -51,20 +51,25 @@ async function login(email, password) {
     })
     .then(res => res.json())
     .then(data => {
+
+        output.message = data.message;
         if(data.token && data.publisher)
         {
-            publisher = data.publisher;
+            output.publisher = data.publisher;
             setToken(data.token);
             setUserId(data.publisher._id);
             Cookies.set(sUserIdCookie, getUserId());
             Cookies.set(sTokenCookie, getToken());
         }
     });   
-
-    return publisher;
+    
+    return output;
 }
 
 async function devForgotPassword(userData) {
+    
+    let output = {};
+
     await fetch(`http://localhost:5000/publishers/authentication/forgot-password`, {
         method: 'POST',
         headers: {
@@ -74,6 +79,10 @@ async function devForgotPassword(userData) {
             userData
         })
     })
+    .then(res => res.json())
+    .then(data => output.message = data.message);
+    
+    return output;
 }
 
 async function getPublisherProfile(publisherId)
