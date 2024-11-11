@@ -3,13 +3,15 @@ import { UserContext } from 'components/Common/UserContext';
 import DeveloperGameCard from 'components/DeveloperComponents/DeveloperGameCard';
 import { getPfp, setPfp } from "Entities/User";
 import { getGames } from 'Entities/Game';
+import { Link, useParams } from 'react-router-dom';
 
 const CompanyProfile = () => {
     const [games, setGames] = useState([]);
     const { profile, setProfile } = useContext(UserContext);
     const [tempUsername, setTempUsername] = useState("");
     const [tempProfilePicture, setTempProfilePicture] = useState(getPfp());
-
+    const params = useParams();
+    
     useEffect(() => {
         fetchGames();
     }, []);
@@ -42,7 +44,6 @@ const CompanyProfile = () => {
     return (
         <div className="min-h-screen">
             <h1 className="titleBold text-center p-3">{profile.username}</h1>
-
             {games.length > 0 ? (
                 <div className="space-y-5">
                     {games.map((game, index) => (
@@ -52,7 +53,6 @@ const CompanyProfile = () => {
             ) : (
                 <h1 className="text-center p-5">No games available.</h1>
             )}
-
             <h1 className="titleBold text-center p-5">Edit profile</h1>
             <div className="flex justify-center">
                 <div className="flex space-x-3 w-[45rem]">
@@ -107,9 +107,14 @@ const CompanyProfile = () => {
                                 type="password"
                             />
                         </div>
-                        <button className="btn self-start mt-4" onClick={handleSaveChanges}>
-                            Save Changes
-                        </button>
+                        <div className='flex space-x-2'>  
+                            <button className="btn self-start mt-4" onClick={handleSaveChanges}>
+                                Save Changes
+                            </button>
+                            <Link to={`/${params.userId}/CreateGame`} className="btn self-start mt-4">
+                                Upload game
+                            </Link>
+                        </div>
                     </div>
                     <div className="w-[50%]">
                         <p>New password</p>

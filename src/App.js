@@ -17,7 +17,7 @@ import UserLogIn from './Pages/Gamer/UserLogIn';
 import UserProfile from './Pages/Gamer/UserProfile';
 import UserRegistration from './Pages/Gamer/UserRegistration';
 import Wishlist from './Pages/Gamer/Wishlist';
-
+import CreateGame from './Pages/Developer/CreateGame';
 import Navbar from './components/Common/Navbar';
 import { UserProvider } from './components/Common/UserContext';
 import ForgotPassword from 'Pages/Common/ForgotPassword';
@@ -46,6 +46,7 @@ function App() {
                             <Route path="SearchedGames"                       element={<SearchedGames />} />
                             <Route path="SuccessfulPurchase"                  element={<SuccessfulPurchase />} />
                             <Route path="EditGame"                            element={<EditGame />} />
+                            <Route path="CreateGame"                          element={<CreateGame/>} />
                         </Route>
                     </Route>
                 </Routes>
