@@ -9,7 +9,6 @@ const Navbar = () => {
     
     const { profile, setProfile, sCLIENT, sDEVELOPER } = useContext(UserContext);
     const params = useParams();
-    const profilePicture = profile.profilePicture || emptyFoto;
 
     switch(profile.type)
     {      
@@ -25,9 +24,9 @@ const Navbar = () => {
                         <Link to={`/${params.userId}`}>Home</Link>
                     </div>
                     <div className='flex items-center'>
-                        <Link to={`/${params.userId}/CompanyProfile`}>
+                        <Link to={`/${params.userId}/UserProfile`}>
                         <img 
-                            src={profilePicture} 
+                            src={profile.profilePicture} 
                             alt={emptyFoto} 
                             className='w-11 h-11 rounded-full'
                         />
