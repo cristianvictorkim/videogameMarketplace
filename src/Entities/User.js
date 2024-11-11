@@ -97,6 +97,20 @@ async function addPurchase(games) {
     })
 }
 
+async function userForgotPassword(userData) {
+    await fetch(`http://localhost:5000/users/authentication/forgot-password`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            userData
+        })
+    })
+}
+
+
 // Local Accessors ------------------------------------------------------------------------------------------
 
 function setPfp(newPfp) {
@@ -109,6 +123,7 @@ function getPfp() {
 
 function userLogged()
 {
+    console.log(userId, token)
     return userId !== undefined && token !== undefined;
 }
 
@@ -117,10 +132,37 @@ function getUserId()
     return userId;
 }
 
+function setUserId(id)
+{
+    userId = id;
+}
+
 function getToken()
 {
     return token;
 }
 
+function setToken(newToken)
+{
+    token = newToken;
+}
+
 // Exporting the functions and variables for use in other files
-export { addPurchase, getToken, register, pfp, getUserId, getUserProfile, setPfp, getPfp, userLogged, logOff, login };
+export { 
+    userForgotPassword,
+    setUserId,
+    setToken,
+    sTokenCookie,
+    sUserIdCookie,
+    addPurchase, 
+    getToken, 
+    register, 
+    pfp, 
+    getUserId, 
+    getUserProfile, 
+    setPfp, 
+    getPfp, 
+    userLogged, 
+    logOff, 
+    login 
+};

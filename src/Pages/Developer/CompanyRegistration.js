@@ -18,7 +18,7 @@ const DeveloperRegistration = () => {
         e.preventDefault();
         let result = await register(registrationForm);
         alert(result);
-        //window.location.reload(false);
+        window.location.reload(false);
     }
 
     function handleChange(e) {

@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
 import { UserContext } from 'components/Common/UserContext';
 import DeveloperGameCard from 'components/DeveloperComponents/DeveloperGameCard';
-import { getPfp, setPfp } from "Entities/User";
-import { getGames } from 'Entities/Game';
-import { Link, useParams } from 'react-router-dom';
 import HiddenDeveloperGameCard from 'components/DeveloperComponents/HiddenDeveloperGameCard';
+
+import { getPfp, getUserId, setPfp } from "Entities/User";
+import { getGames, getGamesFiltered } from 'Entities/Game';
+import { getPublisherProfile } from 'Entities/Publisher';
 
 const CompanyProfile = () => {
     const [games, setGames] = useState([]);
@@ -19,8 +22,17 @@ const CompanyProfile = () => {
     }, []);
 
     const fetchGames = async () => {
-        const allGames = await getGames();
-        setGames(allGames);
+        const publisher = await getPublisherProfile(getUserId());
+        let hidden = [];
+        let show = [];
+
+        publisher.games.forEach(game => {
+            if (game.isHidden) hidden.push(game);
+            else show.push(game)
+        });
+
+        setGames(show);
+        setHiddenGames(hidden);
     };
 
     const handleProfilePictureChange = (event) => {
@@ -46,20 +58,27 @@ const CompanyProfile = () => {
     return (
         <div className="min-h-screen">
             <h1 className="titleBold text-center p-3">{profile.username}</h1>
-            {games.length > 0 ? (
-                <div className="space-y-5">
-                    {games.map((game, index) => (
-                        <DeveloperGameCard key={index} game={game} />
-                    ))}
-                </div>
-            ) : (
-                <h1 className="text-center p-5">No games available.</h1>
-            )}
+            {
+                games.length > 0 ? (
+                    <div className="space-y-5">
+                        {
+                            games.map((game, index) => (
+                                <DeveloperGameCard key={index} game={game} />
+                            ))
+                        }
+                    </div>
+                ) : (
+                    <h1 className="text-center p-5">No games available.</h1>
+                )
+            }
             <h1 className="titleBold text-center p-3">Hidden Games</h1>
-            {hiddenGames.length > 0 ? (<div className="space-y-5">
-                    {games.map((game, index) => (
-                        <HiddenDeveloperGameCard key={index} game={game} />
-                    ))}
+            {
+            hiddenGames.length > 0 ? (<div className="space-y-5">
+                    {
+                        games.map((game, index) => (
+                            <HiddenDeveloperGameCard key={index} game={game} />
+                        ))
+                    }
                 </div>
             ) : (
                 <h1 className="text-center p-5">No hidden games.</h1>

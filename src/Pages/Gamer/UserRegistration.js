@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from 'components/Common/UserContext';
 import { register } from 'Entities/User'
+import Cookies from 'js-cookie';
 
 const UserRegistration = () => {
 
     const { profile, setProfile, sCLIENT, sDEVELOPER } = useContext(UserContext);
+    
+    useEffect(() => {
+        setProfile((prev) => ({...prev, type : sCLIENT }));
+        Cookies.set("type", sCLIENT);
+    }, [])
 
     const [registrationForm, setRegistrationForm] = useState({
         username: "",
@@ -130,9 +136,8 @@ const UserRegistration = () => {
                 <div className='text-center py-2 space-y-1'> 
                     <Link to={"/LogIn"}>Log in</Link>
                     <Link to={"/CompanyLogIn"}><p>
-                        <button onClick={() => { setProfile({ username: profile.username, profilePicture: profile.profilePicture, type : sDEVELOPER }) }}>
                         I am a developer
-                        </button></p></Link>  
+                    </p></Link>  
                 </div>
                 </form>
             </div>

@@ -41,7 +41,7 @@ const DeveloperGameCard = ({game}) => {
                         <Link 
                             to={{
                                 pathname: `/${params.userId}/EditGame`,
-                                state: { game: game } 
+                                state: {game} 
                             }}
                         >
                             <p>Edit</p>

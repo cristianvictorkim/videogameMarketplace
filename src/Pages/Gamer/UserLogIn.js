@@ -1,13 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { getPfp, getUserId, login, setUserId, userLogged } from 'Entities/User';
 
 import { UserContext } from 'components/Common/UserContext';
+import Cookies from 'js-cookie';
 
 
 const UserLogIn = () => {
     const [loginFormData, setLoginFormData] = useState({ email: "", password: "" })
     const { profile, setProfile, sCLIENT, sDEVELOPER } = useContext(UserContext);
+    
+    useEffect(() => {
+        setProfile((prev) => ({...prev, type : sCLIENT }));
+        Cookies.set("type", sCLIENT);
+    }, [])
 
     async function handleSubmit(e)
     {
@@ -84,9 +90,7 @@ const UserLogIn = () => {
                         <p><Link to='/ForgotPassword'>Forgot Password?</Link></p>
                         <p><Link to="/UserRegistration">Register</Link></p>
                         <p><Link to="/CompanyLogIn">
-                            <button onClick={() => {setProfile({ username: "", profilePicture: profile.profilePicture, type : sDEVELOPER })}}>
-                                I am a developer
-                            </button>
+                            I am a developer
                         </Link></p>
                     </div>
                 </form>

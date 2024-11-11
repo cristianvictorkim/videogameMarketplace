@@ -1,6 +1,5 @@
 async function addComment(gameId, userName, comment, score) 
 {
-    console.log("llego")
     await fetch(`http://localhost:5000/games/${gameId}/comments`, {
         method: 'PUT',
         headers: {
