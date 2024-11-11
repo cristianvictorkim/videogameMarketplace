@@ -1,21 +1,25 @@
 // Array to store multiple game information instances
 import emptyFoto from "assets/User/pfp.png";
+import Cookies from 'js-cookie';
+
+const sUserIdCookie = 'userid';
+const sTokenCookie = 'token';
 
 let pfp = emptyFoto;
-let userId = undefined;
-let debugRequireAuth = false;
-//debugRequireAuth = true; // <----- comment this to bypass auth
-
-if (!debugRequireAuth)
-{
-    userId = "673179bfcaa556130cfbff95"
-}
+let userId = Cookies.get(sUserIdCookie);
+let token = Cookies.get(sTokenCookie);
 
 // Server requests ------------------------------------------------------------------------------------------
 async function getUserProfile() {
     let user = {};
 
-    await fetch(`http://localhost:5000/users/profile/${userId}?`)
+    await fetch(`http://localhost:5000/users/profile/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
         .then(res => res.json())
         .then(data => user = data);
 
@@ -24,10 +28,49 @@ async function getUserProfile() {
 
 async function logOff()
 {
-    if(debugRequireAuth)
-    {
-        userId = undefined;
-    }
+    Cookies.remove(sUserIdCookie);
+    Cookies.remove(sTokenCookie);
+    userId = undefined;
+    token = undefined;
+}
+
+async function login(email, password)
+{   
+    await fetch(`http://localhost:5000/users/authentication/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.token && data.userId)
+        {
+            token = data.token;
+            userId = data.userId;
+            Cookies.set(sUserIdCookie, userId);
+            Cookies.set(sTokenCookie, token);
+        }
+    });
+}
+
+async function register(registerObject)
+{  
+    await fetch(`http://localhost:5000/users/authentication`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            registerObject: registerObject
+        })
+    })
+    .then(res => res.json())
+    .then(data => console.log(data));   
 }
 
 // Local Accessors ------------------------------------------------------------------------------------------
@@ -40,15 +83,9 @@ function getPfp() {
     return pfp; // Retorna la foto de perfil actual
 }
 
-function setUserId()
-{
-    userId = "6722c48b5751b6669ba2cb69"
-    console.log(userId)
-}
-
 function userLogged()
 {
-    return userId !== undefined;
+    return userId !== undefined && token !== undefined;
 }
 
 function getUserId()
@@ -57,4 +94,4 @@ function getUserId()
 }
 
 // Exporting the functions and variables for use in other files
-export { pfp, setUserId, getUserId, getUserProfile, setPfp, getPfp, userLogged, logOff };
+export { register, pfp, getUserId, getUserProfile, setPfp, getPfp, userLogged, logOff, login };

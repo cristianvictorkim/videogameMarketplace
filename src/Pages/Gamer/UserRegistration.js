@@ -1,65 +1,110 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from 'components/Common/UserContext';
+import { register } from 'Entities/User'
 
 const UserRegistration = () => {
+
     const { profile, setProfile, sCLIENT, sDEVELOPER } = useContext(UserContext);
+
+    const [registrationForm, setRegistrationForm] = useState({
+        name: "",
+        email: "",
+        phoneNumber: "",
+        address: "",
+        dateOfBirth: "",
+        password: "",
+        secretQuestion: "",
+        answer: ""
+    })
+
+    function handleSubmit(e)
+    {
+        e.preventDefault();
+        register(registrationForm);
+    }
+
+    function handleChange(e) {
+        const { name, value } = e.target
+        setRegistrationForm(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
 
     return (
         <div className="">
             <div className="flex items-center justify-center min-h-screen p-10">  
-                <form className="p-5 w-full max-w-sm bg-main-color border-2 border-black">
+                <form onSubmit={handleSubmit} className="p-5 w-full max-w-sm bg-main-color border-2 border-black">
                 <h2 className="text-2xl font-semibold mb-6 text-center">
                     Registration
                 </h2>
                 <p className='pb-1'>Name</p>
                 <div className="mb-4">
                     <input
-                    type="text"
-                    placeholder="Name"
-                    className="w-full p-2 border rounded-lg"
+                        name="name"
+                        onChange={handleChange}
+                        type="text"
+                        placeholder="Name"
+                        value={registrationForm.name}
+                        className="w-full p-2 border rounded-lg"
                     />
                 </div>
                 <p className='pb-1'>Email Adress</p>
                 <div className="mb-6">
                     <input
-                    type="text"
-                    placeholder="Email Address"
-                    className="w-full p-2 border rounded-lg"
+                        name="email"
+                        onChange={handleChange}
+                        type="text"
+                        placeholder="Email"
+                        value={registrationForm.email}
+                        className="w-full p-2 border rounded-lg"
                     />
                 </div>
                 <p className='pb-1'>Password</p>
                 <div className="mb-6">
                     <input
-                    type="password"
-                    placeholder="Password"
-                    autoComplete="new-password"
-                    className="w-full p-2 border rounded-lg"
+                        name="password"
+                        onChange={handleChange}
+                        type="password"
+                        placeholder="Password"
+                        value={registrationForm.password}
+                        className="w-full p-2 border rounded-lg"
+                        autoComplete="new-password"
                     />
                 </div>
                 <p className='pb-1'>Date of birth</p>
                 <div className="mb-6">
                     <input
-                    type="date"
-                    placeholder="07/04/2004"
-                    className="w-full p-2 border rounded-lg"
+                        name="dateOfBirth"
+                        type="date"
+                        onChange={handleChange}
+                        placeholder="07/04/2024"
+                        value={registrationForm.dateOfBirth}
+                        className="w-full p-2 border rounded-lg"
                     />
                 </div>
                 <p className='pb-1'>Secret Question</p>
                 <div className="mb-6">
                     <input
-                    type="password"
-                    placeholder="Enter secret question"
-                    className="w-full p-2 border rounded-lg"
+                        name="secretQuestion"
+                        onChange={handleChange}
+                        type="text"
+                        placeholder="SecretQuestion"
+                        value={registrationForm.secretQuestion}
+                        className="w-full p-2 border rounded-lg"
                     />
                 </div>
                 <p className='pb-1'>Answer</p>
                 <div className="mb-6">
                     <input
-                    type="password"
-                    placeholder="..."
-                    className="w-full p-2 border rounded-lg"
+                        name="answer"
+                        onChange={handleChange}
+                        type="text"
+                        placeholder="Answer"
+                        value={registrationForm.answer}
+                        className="w-full p-2 border rounded-lg"
                     />
                 </div>
                 <button
