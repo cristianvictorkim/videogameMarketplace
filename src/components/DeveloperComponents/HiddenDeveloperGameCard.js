@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import placeholder from 'assets/Misc/placeholder-image.jpg';
 
@@ -6,9 +6,41 @@ import placeholder from 'assets/Misc/placeholder-image.jpg';
 const HiddenDeveloperGameCard = ({game}) => {
     
     const params = useParams();
+
+    let [interaction, setInteraction] = useState({
+
+        sales: 0,
+        views: 0,
+        wishlists: 0
+    })
+
     function handleGameDelete(game) {
         
     }
+
+    useEffect(() => {
+
+        interaction.sales =  0;
+        interaction.views =  0;
+        interaction.wishlists =  0;
+
+        var fields = Object.keys(game.userInteractions);
+
+        for(let i = 0; i < fields.length; i++)
+        {
+            let value = game.userInteractions[fields[i]];
+            setInteraction((prev) => (
+                {
+                    ...prev,
+                    sales: value.bought ? interaction.sales + 1 : interaction.sales,
+                    wishlists: value.wishlisted ? interaction.wishlists + 1 : interaction.wishlists,
+                    views: interaction.views + 1
+                })
+            )
+        }
+
+    }, [game])
+
     return (
         <div className="flex justify-center space-x-5">
             <div className="bg-main-color rounded-lg border-2 border-black w-[49rem]">

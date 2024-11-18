@@ -86,6 +86,7 @@ async function register(registerObject)
 }
 
 async function addPurchase(games) {
+
     await fetch(`http://localhost:5000/users/${userId}/purchases`, {
         method: 'POST',
         headers: {
@@ -95,7 +96,7 @@ async function addPurchase(games) {
         body: JSON.stringify({
             games : games
         })
-    })
+    }).then(res => res.json()).then(data => console.log(data))
 }
 
 async function userForgotPassword(userData) {
@@ -138,6 +139,14 @@ async function updateProfile(profileChanges) {
     return output;
 }
 
+async function confirmPurchase(userId, games) {
+    try {
+        addPurchase(games);
+    } catch (error) {
+        console.error("Error in clearCart:", error);
+    }
+}
+
 
 // Local Accessors ------------------------------------------------------------------------------------------
 
@@ -177,6 +186,7 @@ function setToken(newToken)
 
 // Exporting the functions and variables for use in other files
 export { 
+    confirmPurchase,
     updateProfile,
     userForgotPassword,
     setUserId,

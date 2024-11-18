@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
 
 import RemovableGameCard from 'components/Common/RemovableGameCard';
 
-import { getUserId } from 'Entities/User';
-import { confirmPurchase, getCartForUser, removeGameFromCart } from 'Entities/Cart';
+import { confirmPurchase, getUserId } from 'Entities/User';
+import { getCartForUser, removeGameFromCart } from 'Entities/Cart';
 
 import { wait } from '@testing-library/user-event/dist/utils';
 

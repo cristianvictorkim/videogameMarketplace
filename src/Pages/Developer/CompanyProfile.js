@@ -43,6 +43,7 @@ const CompanyProfile = () => {
 
         setGames(show);
         setHiddenGames(hidden);
+        console.log(publisher)
     };
 
     const handleProfilePictureChange = (event) => {

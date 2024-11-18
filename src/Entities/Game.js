@@ -20,7 +20,7 @@ async function getGames() {
     
     let output = [];
 
-    await fetch("http://localhost:5000/games")
+    await fetch("http://localhost:5000/games/public")
     .then(res => res.json())
     .then(data => output = data);
 
@@ -31,7 +31,7 @@ async function getSelection() {
     
     let output = [];
 
-    await fetch("http://localhost:5000/games/selection?" + new URLSearchParams({
+    await fetch("http://localhost:5000/games/public/selection?" + new URLSearchParams({
         n : 4
         }).toString())
     .then(res => res.json())
@@ -44,7 +44,7 @@ async function getGameById(gameId)
 {
     let game = {};
     
-    await fetch(`http://localhost:5000/games/details/${gameId}`)
+    await fetch(`http://localhost:5000/games/public/details/${gameId}`)
         .then(res => res.json())
         .then(data => game = data);
 

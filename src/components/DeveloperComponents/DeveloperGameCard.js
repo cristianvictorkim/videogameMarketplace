@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import placeholder from 'assets/Misc/placeholder-image.jpg';
 
@@ -6,10 +6,39 @@ import placeholder from 'assets/Misc/placeholder-image.jpg';
 const DeveloperGameCard = ({game}) => {
     
     const params = useParams();
+    let [interaction, setInteraction] = useState({
+
+        sales: 0,
+        views: 0,
+        wishlists: 0
+    })
     
     function handleGameDelete(game) {
         
     }
+
+    useEffect(() => {
+
+        interaction.sales =  0;
+        interaction.views =  0;
+        interaction.wishlists =  0;
+
+        var fields = Object.keys(game.userInteractions);
+
+        for(let i = 0; i < fields.length; i++)
+        {
+            let value = game.userInteractions[fields[i]];
+            setInteraction((prev) => (
+                {
+                    ...prev,
+                    sales: value.bought ? interaction.sales + 1 : interaction.sales,
+                    wishlists: value.wishlisted ? interaction.wishlists + 1 : interaction.wishlists,
+                    views: interaction.views + 1
+                })
+            )
+        }
+
+    }, [game])
 
     return (
         <div className="flex justify-center space-x-5">
@@ -46,7 +75,7 @@ const DeveloperGameCard = ({game}) => {
                         >
                             <p>Edit</p>
                         </Link>
-                            <p>Remove from public</p>
+                            <p>Hide</p>
                             <button onClick={handleGameDelete(game)}>
                                 Delete
                             </button>
@@ -59,10 +88,10 @@ const DeveloperGameCard = ({game}) => {
                     Stats for nerds
                 </h1>
                 <div className="h-full flex flex-col space-y-2">
-                    <p>Views: {game.views}</p>
-                    <p>Sales: {game.sales}</p>
-                    <p>Wishlisted: {game.wishlisted}</p>
-                    <p>Views Confirmation Rate: </p>
+                    <p>Views: {interaction.views}</p>
+                    <p>Sales: {interaction.sales}</p>
+                    <p>Wishlisted: {interaction.wishlists}</p>
+                    <p>Views Confirmation Rate: { interaction.sales / interaction.views }</p>
                 </div>
             </div>
         </div>
