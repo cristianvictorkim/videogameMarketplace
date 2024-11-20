@@ -22,7 +22,23 @@ const CompanyLogIn = () => {
     {
         e.preventDefault();
         const output = await login(loginFormData.email, loginFormData.password);
-    
+        console.log('OUTPUT completo: ', output);
+
+        const token = output.token;
+        const publisher = output.publisher;
+
+
+        if (token) {
+            // Guardamos el token en Cookies con una expiración de 7 días
+            Cookies.set('token', token, { expires: 7 });  
+            console.log("Token JWT:", token);
+        }
+
+        if (publisher) {
+            Cookies.set('publisherId', publisher._id, { expires: 7 });
+            Cookies.set('publisherTitle', publisher.title, { expires: 7 });
+        }
+
         if(userLogged())
         {
             setProfile((prev)=> ({
