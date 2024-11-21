@@ -19,26 +19,29 @@ const DeveloperGameCard = ({game}) => {
 
     useEffect(() => {
 
-        interaction.sales =  0;
-        interaction.views =  0;
-        interaction.wishlists =  0;
+        let sales =  0;
+        let views =  0;
+        let wishlists =  0;
+
         if (game.userInteractions)
         {
             var fields = Object.keys(game.userInteractions);
-    
+
             for(let i = 0; i < fields.length; i++)
             {
                 let value = game.userInteractions[fields[i]];
-                setInteraction((prev) => (
-                    {
-                        ...prev,
-                        sales: value.bought ? interaction.sales + 1 : interaction.sales,
-                        wishlists: value.wishlisted ? interaction.wishlists + 1 : interaction.wishlists,
-                        views: interaction.views + 1
-                    })
-                )
+                sales =  value.bought ? sales + 1 : sales;
+                wishlists = value.wishlisted ? wishlists + 1 : wishlists;
+                views = views + 1;
             }
         }
+ 
+        setInteraction({
+            sales: sales,
+            wishlists: wishlists,
+            views: views
+        })
+ 
     }, [game])
 
     return (

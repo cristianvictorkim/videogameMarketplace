@@ -7,7 +7,6 @@ import HiddenDeveloperGameCard from 'components/DeveloperComponents/HiddenDevelo
 
 import { getPfp, getUserId } from "Entities/User";
 import { getPublisherProfile, updateProfile } from 'Entities/Publisher';
-import { uploadPicture } from 'Entities/Pictures';
 
 const CompanyProfile = () => {
      
@@ -55,7 +54,6 @@ const CompanyProfile = () => {
             };
             reader.readAsDataURL(file);
         }
-        uploadPicture(file);
     };
 
     async function handleSubmit(e) {

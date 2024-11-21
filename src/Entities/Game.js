@@ -1,3 +1,5 @@
+import { getUserId } from "./User";
+
 async function addComment(gameId, userName, comment, score) 
 {
     await fetch(`http://localhost:5000/games/${gameId}/comments`, {
@@ -40,10 +42,24 @@ async function getSelection() {
     return output;
 }
 
+async function createUserInteraction(gameId, userId)
+{
+    let game = {};
+    console.log("creating user interaction")
+    await fetch(`http://localhost:5000/games/public/details/${gameId}/${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        }
+    }).then(res => res.json())
+    .then(data => game = data);
+
+    return game;
+}
+
 async function getGameById(gameId)
 {
     let game = {};
-    
     await fetch(`http://localhost:5000/games/public/details/${gameId}`)
         .then(res => res.json())
         .then(data => game = data);
@@ -99,4 +115,4 @@ async function getGamesFiltered(filter)
     return output;
 }
 
-export { getGameById, getGames, getSelection, getGamesFiltered, addComment };
+export { createUserInteraction, getGameById, getGames, getSelection, getGamesFiltered, addComment };
