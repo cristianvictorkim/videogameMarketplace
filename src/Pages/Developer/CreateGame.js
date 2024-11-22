@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import placeholder from 'assets/Misc/placeholder-image.jpg';
+import Cookies from 'js-cookie';
+import { getToken, getUserId } from 'Entities/User';
 
 const CreateGame = () => {
-    const {publisherId} = useParams();
+    const { publisherId } = useParams();
 
-    const [gameData, setGameData] = useState(() => ({
+    const [gameData, setGameData] = useState({
         name: '',
         price: '',
         genre: '',
@@ -26,7 +28,7 @@ const CreateGame = () => {
             storage: '',
             gpu: ''
         }
-    }));
+    });
 
     const handleInputChange = (field, value) => {
         setGameData(prevData => ({
@@ -44,8 +46,70 @@ const CreateGame = () => {
             }
         }));
     };
-    // Guardar cambios con llamada al back crear metodo que guarde el juego en el dev.
-    const saveChanges = (section) => {
+
+    const saveChanges = async () => {
+        const token = getToken();
+        const id = getUserId();
+        console.log('TOKENCITO: ', token);
+        console.log('id: ', getUserId());
+
+        // Verifica si el token está presente
+        if (!token) {
+            console.log('No token found. Please log in.');
+            // Aquí puedes redirigir al usuario a la página de inicio de sesión si no hay token
+            return;
+        }
+        
+
+        try {
+            // Datos que se enviarán al backend
+            const gamePayload = {
+                title: gameData.name,
+                price: gameData.price,
+                genre: gameData.genre,
+                description: gameData.description,
+                systemRequirements: {
+                    minimum: gameData.minRequirements,
+                    recommended: gameData.recRequirements
+                },
+                OS: gameData.minRequirements.os,
+                bannerUrl: gameData.mainPhoto,
+                gameplayUrl: gameData.miniature,
+                publisherId: id,
+                publisher: Cookies.get('publisherTitle'),
+                language: 'English',
+                playerCount: 1, 
+                isHidden: false 
+            };
+
+            console.log(gamePayload);
+
+            // Realizar la solicitud POST al backend usando fetch
+            const response = await fetch('http://localhost:5000/games', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,  // El token se pasa como "Bearer" en el encabezado
+                    'Content-Type': 'application/json'   // Especifica que estamos enviando JSON
+                },
+                body: JSON.stringify(gamePayload)  // Convierte el objeto a JSON
+            });
+
+            // Verificar si la respuesta fue exitosa
+            if (!response.ok) {
+                throw new Error('Error creating game');
+            }
+
+            // Parsear la respuesta JSON
+            const responseData = await response.json();
+
+            // Manejo de la respuesta exitosa
+            console.log('Game created:', responseData);
+            alert('Game created successfully!');
+        } catch (error) {
+            // Manejo de errores
+            console.error('Error creating game:', error);
+            alert('Error creating game');
+        }
     };
 
     return (
@@ -97,7 +161,7 @@ const CreateGame = () => {
                             type="text"
                             value={gameData.genre}
                             onChange={e => handleInputChange('genre', e.target.value)}
-                        /> 
+                        />
                     </div>
                 </div>
             </div>
@@ -145,12 +209,11 @@ const CreateGame = () => {
                     ))}
                 </div>
                 <div className='pt-1'>   
-                    <button className='btn mt-3' onClick={() => saveChanges()}>
+                    <button className='btn mt-3' onClick={saveChanges}>
                         Save Changes
                     </button>
                 </div>
             </div>
-            
         </div>
     );
 };

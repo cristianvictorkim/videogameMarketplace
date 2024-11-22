@@ -5,26 +5,25 @@ import { UserContext } from 'components/Common/UserContext';
 import DeveloperGameCard from 'components/DeveloperComponents/DeveloperGameCard';
 import HiddenDeveloperGameCard from 'components/DeveloperComponents/HiddenDeveloperGameCard';
 
-import { getPfp, getUserId } from "Entities/User";
+import { getPfp, getUserId, uploadImage } from "Entities/User";
 import { getPublisherProfile, updateProfile } from 'Entities/Publisher';
-import { uploadPicture } from 'Entities/Pictures';
 
 const CompanyProfile = () => {
      
     const params = useParams();
-
-    const [tempProfilePicture, setTempProfilePicture] = useState(getPfp());
     
     const [games, setGames] = useState([]);
     const [hiddenGames, setHiddenGames] = useState([]);
 
     const { profile, setProfile } = useContext(UserContext);
+    const [loading, setLoading] = useState(false);
     const [profileChanges, setProfileChanges] = useState({
         name : '',
         description : '',
         password : '',
         newPassword : '',
-        newPasswordRetry : ''
+        newPasswordRetry : '',
+        profilePicture : profile.profilePicture
     });   
     
     useEffect(() => {
@@ -46,16 +45,17 @@ const CompanyProfile = () => {
         console.log(publisher)
     };
 
-    const handleProfilePictureChange = (event) => {
+    const handleProfilePictureChange = async (event) => {
         const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setTempProfilePicture(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-        uploadPicture(file);
+
+        setLoading(true);
+        let output = await uploadImage(file);
+        setLoading(false);
+
+        setProfileChanges((previousValue) => ({
+            ...previousValue,
+            profilePicture: output.downloadUrl
+        }))
     };
 
     async function handleSubmit(e) {
@@ -79,6 +79,11 @@ const CompanyProfile = () => {
             ...previousValue,
             [name]: value 
         }))
+    }
+
+    if(loading)
+    {
+        let saveChanges = <h3>Uploading Image</h3>
     }
 
     return (
@@ -148,9 +153,16 @@ const CompanyProfile = () => {
                                 />
                             </div>
                             <div className='flex space-x-2'>  
-                                <button className="btn self-start mt-4" type='submit'>
-                                    Save Changes
-                                </button>
+                                {
+                                loading ? 
+                                    <div className="btn self-start mt-4">
+                                        Loading
+                                    </div> 
+                                    :
+                                    <button className="btn self-start mt-4" type='submit'>
+                                        Save Changes
+                                    </button>
+                                }
                                 <Link to={`/${params.userId}/CreateGame`} className="btn self-start mt-4">
                                     Upload game
                                 </Link>
@@ -183,7 +195,7 @@ const CompanyProfile = () => {
                                 <div className="pt-3">
                                     <img
                                         className="developerPic"
-                                        src={tempProfilePicture}
+                                        src={profileChanges.profilePicture}
                                         alt=""
                                     />
                                 </div>

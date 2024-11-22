@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Comment from 'components/GameDetails/Comment';
 import AddComment from 'components/GameDetails/AddComment';
 import { UserContext } from 'components/Common/UserContext';
-import { getGameById } from 'Entities/Game';
+import { getGameById, createUserInteraction } from 'Entities/Game';
 import { getUserId } from 'Entities/User';
 import { addGameToCart } from 'Entities/Cart';
 import { addGameToWishlist } from 'Entities/Wishlist';
@@ -25,6 +25,8 @@ const GameDetails = () => {
                 setGame(data);
                 setComments(data.comments || []);
             });
+
+        createUserInteraction(gameId, getUserId());
 
         getPublisherById(publisherId)
             .then(data => {

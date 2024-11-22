@@ -147,7 +147,20 @@ async function confirmPurchase(userId, games) {
     }
 }
 
+async function uploadImage(file)
+{
+    let output = {}
+    let formData = new FormData();
+    formData.append('filename', file);
+    formData.append('userName', 'fededebug')
 
+    await fetch(`http://localhost:5000/uploads/image`, {
+        method: 'POST',
+        body: formData
+    }).then(res => res.json())
+    .then(data => output = data);
+    return output;
+}
 // Local Accessors ------------------------------------------------------------------------------------------
 
 function setPfp(newPfp) {
@@ -186,6 +199,7 @@ function setToken(newToken)
 
 // Exporting the functions and variables for use in other files
 export { 
+    uploadImage,
     confirmPurchase,
     updateProfile,
     userForgotPassword,
