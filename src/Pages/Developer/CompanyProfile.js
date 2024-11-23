@@ -5,8 +5,10 @@ import { UserContext } from 'components/Common/UserContext';
 import DeveloperGameCard from 'components/DeveloperComponents/DeveloperGameCard';
 import HiddenDeveloperGameCard from 'components/DeveloperComponents/HiddenDeveloperGameCard';
 
-import { getPfp, getUserId, uploadImage } from "Entities/User";
+import { getUserId, sProfilePicture, sUsername } from "Entities/User";
 import { getPublisherProfile, updateProfile } from 'Entities/Publisher';
+import { uploadImage } from 'Entities/Image';
+import Cookies from 'js-cookie';
 
 const CompanyProfile = () => {
      
@@ -59,17 +61,29 @@ const CompanyProfile = () => {
     };
 
     async function handleSubmit(e) {
-        for (const change in profileChanges)
+
+        if(profileChanges.name !== Cookies.get(sUsername))
         {
-            if(change !== '')
-            {
-                setProfile((previousValue) => ({
-                    ...previousValue,
-                    [change]: profileChanges[change] 
-                }))
-            }
+            Cookies.set(sUsername, profileChanges.name);
+        
+            setProfile((previousValue) => ({
+                ...previousValue,
+                username: profileChanges.name
+            }));
         }
+
+        if(profileChanges.profilePicture !== Cookies.get(sProfilePicture))
+        {
+            Cookies.set(sProfilePicture, profileChanges.profilePicture);
+        
+            setProfile((previousValue) => ({
+                ...previousValue,
+                profilePicture: profileChanges.profilePicture
+            }));
+        }
+
         let output = await updateProfile(profileChanges);
+
         alert(output.message);
     }
 
@@ -79,11 +93,6 @@ const CompanyProfile = () => {
             ...previousValue,
             [name]: value 
         }))
-    }
-
-    if(loading)
-    {
-        let saveChanges = <h3>Uploading Image</h3>
     }
 
     return (

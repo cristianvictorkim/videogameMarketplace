@@ -3,17 +3,19 @@ import React, {useState, useEffect, useContext} from 'react';
 import PurchaseHistory from 'components/Common/PurchaseHistory';
 import { UserContext } from 'components/Common/UserContext';
 
-import { getUserProfile, updateProfile } from 'Entities/User';
-import {getPfp, setPfp } from "Entities/User";
-import luffy from 'assets/User/luffy.png';
-import chopper from 'assets/User/chopper.png';
-import nami from 'assets/User/nami.png';
+import { getUserProfile, sProfilePicture, sUsername, updateProfile } from 'Entities/User';
+import Cookies from 'js-cookie';
 
 const UserProfile = () => {
     
-    const [tempProfilePicture, setTempProfilePicture] = useState(getPfp());
+    const urls = {
+        CHOPPER: "https://firebasestorage.googleapis.com/v0/b/jovial-beach-442521-q5.firebasestorage.app/o/files%2Fchopper.png?alt=media&token=74f5f207-ff3d-4729-86c0-43b0a3f93ca4",
+        LUFFY: "https://firebasestorage.googleapis.com/v0/b/jovial-beach-442521-q5.firebasestorage.app/o/files%2Fluffy.png?alt=media&token=878754b8-80c7-4999-9931-959af10f5630",
+        NAMI: "https://firebasestorage.googleapis.com/v0/b/jovial-beach-442521-q5.firebasestorage.app/o/files%2Fnami.png?alt=media&token=71444fa8-d733-4175-969e-6609f57d9e4f"
+    }
+
     const { profile, setProfile } = useContext(UserContext);
-    const [clientProfile, setClientProfile] = useState({ purchases : [] });
+    const [purchases, setPurchases] = useState({ purchases : [] });
     const [profileChanges, setProfileChanges] = useState({
         username : '',
         phoneNumber : '',
@@ -21,6 +23,7 @@ const UserProfile = () => {
         password : '',
         newPassword : '',
         newPasswordRetry : '',
+        profilePicture : profile.profilePicture
     });   
 
     useEffect(() => {
@@ -28,26 +31,42 @@ const UserProfile = () => {
     }, []);
 
     const fetchProfile = async () => {
-        const clientProfile = await getUserProfile();
-        setClientProfile(clientProfile);
+        const purchasesOutput = await getUserProfile();
+        setPurchases(purchasesOutput);
     };
     
-    const handleProfilePictureChange = (newPfp) => {
-        setTempProfilePicture(newPfp);
+    const handleProfilePictureChange = async (localUrl) => {
+        console.log(localUrl);
+
+        setProfileChanges((previousValue) => ({
+            ...previousValue,
+            profilePicture: localUrl
+        }))
     };
 
     async function handleSubmit(e) {
-        for (const change in profileChanges)
+        e.preventDefault();
+
+        if(profileChanges.username !== Cookies.get(sUsername))
         {
-            if(change !== '')
-            {
-                setProfile((previousValue) => ({
-                    ...previousValue,
-                    [change]: profileChanges[change] 
-                }))
-            }
+            Cookies.set(sUsername, profileChanges.username);
+            setProfile((previousValue) => ({
+                ...previousValue,
+                username: profileChanges.username 
+            }))
         }
+
+        if(profileChanges.profilePicture !== Cookies.get(sProfilePicture))
+        {
+            Cookies.set(sProfilePicture, profileChanges.profilePicture);
+            setProfile((previousValue) => ({
+                ...previousValue,
+                profilePicture: profileChanges.profilePicture 
+            }))
+        }
+
         let output = await updateProfile(profileChanges);
+
         alert(output.message);
     }
 
@@ -63,15 +82,15 @@ const UserProfile = () => {
         <div className='min-h-screen flex justify-center'>
             <div className='w-[45rem] space-y-5'>    
                 <h1 className='titleBold'>
-                    {clientProfile.userName}
+                    {profile.username}
                 </h1>
                 <div>
                     <h2 className='titleBold pb-3'>
                         Purchases
                     </h2>
                     {
-                        clientProfile.purchases.length > 0 ? (
-                            clientProfile.purchases.map((game, index) => (
+                        purchases.purchases.length > 0 ? (
+                            purchases.purchases.map((game, index) => (
                                 <PurchaseHistory
                                     key={index}
                                     game={game}
@@ -173,27 +192,27 @@ const UserProfile = () => {
                                 <div className='p-3 space-y-5 min-w-[100px]'>
                                     <img
                                         className='tinyPic'
-                                        src={nami}
+                                        src={urls.NAMI}
                                         alt='Nami'
-                                        onClick={() => handleProfilePictureChange(nami)}
+                                        onClick={() => handleProfilePictureChange(urls.NAMI)}
                                     />
                                     <img
                                         className='tinyPic'
-                                        src={chopper}
+                                        src={urls.CHOPPER}
                                         alt='Chopper'
-                                        onClick={() => handleProfilePictureChange(chopper)}
+                                        onClick={() => handleProfilePictureChange(urls.CHOPPER)}
                                     />
                                     <img
                                         className='tinyPic'
-                                        src={luffy}
+                                        src={urls.LUFFY}
                                         alt='Luffy'
-                                        onClick={() => handleProfilePictureChange(luffy)}
+                                        onClick={() => handleProfilePictureChange(urls.LUFFY)}
                                     />
                                 </div>
                                 <div className='pt-3 flex-grow h-full'>
                                     <img
                                         className='w-full h-full'
-                                        src={tempProfilePicture}
+                                        src={profileChanges.profilePicture}
                                         alt=''
                                     />
                                 </div>

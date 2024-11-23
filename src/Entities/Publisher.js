@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { getToken, getUserId, setToken, setUserId, sTokenCookie, sUserIdCookie } from "./User";
+import { getToken, getUserId, setToken, setUserId, sProfilePicture, sTokenCookie, sUserIdCookie, sUsername } from "./User";
 
 const publishers = new Map()
 
@@ -56,10 +56,16 @@ async function login(email, password) {
         if(data.token && data.publisher)
         {
             output.publisher = data.publisher;
+
             setToken(data.token);
             setUserId(data.publisher._id);
+            const profilePicture = data.publisher.profilePicUrl;
+            const title = data.publisher.title;
+
             Cookies.set(sUserIdCookie, getUserId());
             Cookies.set(sTokenCookie, getToken());
+            Cookies.set(sProfilePicture, profilePicture);
+            Cookies.set(sUsername, title);
         }
     });   
     

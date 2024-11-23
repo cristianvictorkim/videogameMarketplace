@@ -27,7 +27,6 @@ const CompanyLogIn = () => {
         const token = output.token;
         const publisher = output.publisher;
 
-
         if (token) {
             // Guardamos el token en Cookies con una expiración de 7 días
             Cookies.set('token', token, { expires: 7 });  
@@ -41,14 +40,14 @@ const CompanyLogIn = () => {
 
         if(userLogged())
         {
-            setProfile((prev)=> ({
-                ...prev,     
-                username : output.publisher.name
-            }))
+            setProfile({
+                username : output.publisher.title,
+                profilePicture: output.publisher.profilePicUrl,
+                type: sDEVELOPER,
+            })
         }
 
         alert(output.message);
-        window.location.reload(false);
     }
 
     function handleChange(e) {

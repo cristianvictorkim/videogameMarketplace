@@ -1,13 +1,15 @@
 // Array to store multiple game information instances
-import emptyFoto from "assets/User/pfp.png";
 import Cookies from 'js-cookie';
 
 const sUserIdCookie = 'userid';
 const sTokenCookie = 'token';
+const sUsername = 'username';
+const sProfilePicture = 'profilepicture';
 
-let pfp = emptyFoto;
 let userId = Cookies.get(sUserIdCookie);
 let token = Cookies.get(sTokenCookie);
+let username = Cookies.get(sUsername);
+let profilePicture = Cookies.get(sProfilePicture);
 
 // Server requests ------------------------------------------------------------------------------------------
 async function getUserProfile() {
@@ -29,9 +31,13 @@ async function getUserProfile() {
 async function logOff()
 {
     Cookies.remove(sUserIdCookie);
-    Cookies.remove(sTokenCookie);
     userId = undefined;
+    
+    Cookies.remove(sTokenCookie);
     token = undefined;
+
+    Cookies.set(sUsername, "username");
+    Cookies.set(sProfilePicture, "https://firebasestorage.googleapis.com/v0/b/jovial-beach-442521-q5.firebasestorage.app/o/files%2Fpfp.png?alt=media&token=3332a2a8-5490-40ce-b5d9-4ac5f2876156");
 }
 
 async function login(email, password)
@@ -54,10 +60,16 @@ async function login(email, password)
         if(data.token && data.user)
         {
             output.user = data.user;
+
             token = data.token;
             userId = data.user._id;
+            profilePicture = data.user.profilePicture;
+            username = data.user.username;
+
             Cookies.set(sUserIdCookie, userId);
             Cookies.set(sTokenCookie, token);
+            Cookies.set(sProfilePicture, profilePicture);
+            Cookies.set(sUsername, username);
         }
     });
 
@@ -122,6 +134,7 @@ async function userForgotPassword(userData) {
 async function updateProfile(profileChanges) {
     
     let output = {};
+    console.log(profileChanges)
 
     await fetch(`http://localhost:5000/users/profile/${userId}`, {
         method: 'PUT',
@@ -147,29 +160,7 @@ async function confirmPurchase(userId, games) {
     }
 }
 
-async function uploadImage(file)
-{
-    let output = {}
-    let formData = new FormData();
-    formData.append('filename', file);
-    formData.append('userName', 'fededebug')
-
-    await fetch(`http://localhost:5000/uploads/image`, {
-        method: 'POST',
-        body: formData
-    }).then(res => res.json())
-    .then(data => output = data);
-    return output;
-}
 // Local Accessors ------------------------------------------------------------------------------------------
-
-function setPfp(newPfp) {
-    pfp = emptyFoto; // Actualiza la variable global pfp
-}
-
-function getPfp() {
-    return pfp; // Retorna la foto de perfil actual
-}
 
 function userLogged()
 {
@@ -199,7 +190,6 @@ function setToken(newToken)
 
 // Exporting the functions and variables for use in other files
 export { 
-    uploadImage,
     confirmPurchase,
     updateProfile,
     userForgotPassword,
@@ -207,14 +197,13 @@ export {
     setToken,
     sTokenCookie,
     sUserIdCookie,
+    sProfilePicture,
+    sUsername,
     addPurchase, 
     getToken, 
     register, 
-    pfp, 
     getUserId, 
     getUserProfile, 
-    setPfp, 
-    getPfp, 
     userLogged, 
     logOff, 
     login 

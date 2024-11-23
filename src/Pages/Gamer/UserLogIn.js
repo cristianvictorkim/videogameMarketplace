@@ -22,11 +22,11 @@ const UserLogIn = () => {
         
         if(userLogged())
         {
-            setProfile((prev)=> ({
-                ...prev,     
-                username : output.user.userName,
-                profilePicture : getPfp()
-            }))
+            setProfile({
+                username : output.user.username,
+                type: sCLIENT,
+                profilePicture : output.user.profilePicture
+            })
         }
 
         alert(output.message)
