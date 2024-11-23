@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import placeholder from 'assets/Misc/placeholder-image.jpg';
+import { deleteGame } from 'Entities/Game';
 
 
 const HiddenDeveloperGameCard = ({game}) => {
@@ -35,6 +36,12 @@ const HiddenDeveloperGameCard = ({game}) => {
             }
         }
     }, [game])
+
+    const handleDelete = async () =>
+    {
+        let output = await deleteGame(game._id);
+        alert(output.message); 
+    } 
 
     return (
         <div className="flex justify-center space-x-5">
@@ -72,7 +79,7 @@ const HiddenDeveloperGameCard = ({game}) => {
                             <p>Edit</p>
                         </Link>
                             <p>Show</p>
-                            <button onClick={console.log("jaja")}>
+                            <button onClick={handleDelete}>
                                 Delete
                             </button>
                         </div>

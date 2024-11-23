@@ -118,7 +118,6 @@ async function getGamesFiltered(filter)
 async function updateGame(gameId, gameForm)
 {
     let output = {};
-    console.log("creating user interaction")
     await fetch(`http://localhost:5000/games/${gameId}`, {
         method: 'PUT',
         headers: {
@@ -134,9 +133,22 @@ async function updateGame(gameId, gameForm)
     return output;
 }
 
+async function deleteGame(gameId)
+{
+    let output = {};
+    await fetch(`http://localhost:5000/games/${gameId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        }
+    }).then(res => res.json())
+    .then(data => output = data);
 
+    return output;
+}
 
 export { 
+    deleteGame,
     updateGame,
     createUserInteraction, 
     getGameById, 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import placeholder from 'assets/Misc/placeholder-image.jpg';
+import { deleteGame } from 'Entities/Game';
 
 
 const DeveloperGameCard = ({game}) => {
@@ -11,7 +12,14 @@ const DeveloperGameCard = ({game}) => {
         sales: 0,
         views: 0,
         wishlists: 0
-    })
+    });
+
+    const handleDelete = async () =>
+    {
+        let output = await deleteGame(game._id);
+        alert(output.message); 
+        window.location.reload(false);
+    }; 
 
     useEffect(() => {
 
@@ -76,7 +84,7 @@ const DeveloperGameCard = ({game}) => {
                             <p>Edit</p>
                         </Link>
                             <p>Hide</p>
-                            <button onClick={console.log("ajaj")}>
+                            <button onClick={handleDelete}>
                                 Delete
                             </button>
                         </div>

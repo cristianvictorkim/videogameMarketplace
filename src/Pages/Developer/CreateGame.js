@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import placeholder from 'assets/Misc/placeholder-image.jpg';
 import Cookies from 'js-cookie';
 import { getToken, getUserId } from 'Entities/User';
 
 const CreateGame = () => {
-    const { publisherId } = useParams();
-
     const [gameData, setGameData] = useState({
         name: '',
         price: '',
