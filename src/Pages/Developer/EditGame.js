@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import placeholder from 'assets/Misc/placeholder-image.jpg';
+import { getToken, getUserId } from 'Entities/User';
 
 const EditGame = () => {
     const location = useLocation();
-    const { publisherId } = useParams();
+    const { publisherId, gameId } = useParams();
+    const history = useNavigate();
     const { game } = location.state || {};
 
     const [gameData, setGameData] = useState(() => ({
         name: game?.title || '',
         price: game?.price || '',
         genre: game?.genre || '',
-        mainPhoto: game?.bannerUrl || placeholder,
-        miniature: game?.miniature || placeholder,
+        mainPhoto: game?.bannerUrl || '',
+        miniature: game?.miniature || '',
         description: game?.description || '',
         minRequirements: game?.systemRequirements?.min || {
             os: '',
@@ -32,7 +34,7 @@ const EditGame = () => {
 
     useEffect(() => {
         if (!game && publisherId) {
-            fetch(`/api/publishers/profile/${publisherId}`)
+            fetch(`http://localhost:5000/publishers/profile/${publisherId}`)
                 .then(response => response.json())
                 .then(data => {
                     setGameData(prevData => ({
@@ -60,12 +62,62 @@ const EditGame = () => {
         }));
     };
 
-    const saveChanges = (section) => {
-        console.log('Changes saved for:', section, gameData[section] || gameData);
+    const handleImageChange = (field, file) => {
+        if (file) {
+            const imageUrl = URL.createObjectURL(file);
+            handleInputChange(field, imageUrl);
+        } else {
+            handleInputChange(field, ''); 
+        }
     };
 
-    const saveUpperChanges = () => {
-        console.log('Changes saved for:', gameData.mainPhoto, gameData.miniature, gameData.name);
+    const saveChanges = async () => {
+        const token = getToken();
+        if (!token) {
+            alert('You must be logged in to make changes');
+            return;
+        }
+
+        const updatedGameData = {
+            title: gameData.name,
+            price: gameData.price,
+            genre: gameData.genre,
+            description: gameData.description,
+            systemRequirements: {
+                minimum: gameData.minRequirements,
+                recommended: gameData.recRequirements
+            },
+            OS: gameData.minRequirements.os,
+            bannerUrl: gameData.mainPhoto || '',  
+            gameplayUrl: gameData.miniature || '',  
+            publisherId,
+            publisher: gameData.publisher,
+            language: 'English',
+            playerCount: 1,  
+            isHidden: false
+        };
+
+        try {
+            const response = await fetch(`http://localhost:5000/games/${gameId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(updatedGameData)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert('Game updated successfully!');
+                history.push(`/games/${gameId}`);
+            } else {
+                alert('Error updating game');
+            }
+        } catch (error) {
+            console.error('Error updating game:', error);
+            alert('Error updating game');
+        }
     };
 
     return (
@@ -77,20 +129,20 @@ const EditGame = () => {
                 <div className="flex w-[60rem] space-x-10">
                     <div className="flex-1 flex flex-col items-center">
                         <p>Main photo</p>
-                        <img src={gameData.mainPhoto} className="mainPhoto" alt="Main" />
+                        <img src={gameData.mainPhoto || placeholder} className="mainPhoto" alt="Main" />
                         <input
                             type="file"
                             className="w-[50%] mx-auto pt-3"
-                            onChange={e => handleInputChange('mainPhoto', URL.createObjectURL(e.target.files[0]))}
+                            onChange={e => handleImageChange('mainPhoto', e.target.files[0])}
                         />
                     </div>
                     <div className="flex-1 flex flex-col items-center">
                         <p>Miniature</p>
-                        <img src={gameData.miniature} className="miniature w-full object-cover h-48" alt="Miniature" />
+                        <img src={gameData.miniature || placeholder} className="miniature w-full object-cover h-48" alt="Miniature" />
                         <input
                             type="file"
                             className="w-[50%] mx-auto pt-3"
-                            onChange={e => handleInputChange('miniature', URL.createObjectURL(e.target.files[0]))}
+                            onChange={e => handleImageChange('miniature', e.target.files[0])}
                         />
                     </div>
                     <div className="space-y-2 flex-1">
@@ -118,9 +170,6 @@ const EditGame = () => {
                             value={gameData.genre}
                             onChange={e => handleInputChange('genre', e.target.value)}
                         />
-                        <button className='btn mt-3' onClick={() => saveUpperChanges()}>
-                            Save Changes
-                        </button>
                     </div>
                 </div>
             </div>
@@ -134,11 +183,6 @@ const EditGame = () => {
                         value={gameData.description}
                         onChange={e => handleInputChange('description', e.target.value)}
                     />
-                    <div className="flex justify-end pt-2">
-                        <button className="btn" onClick={() => saveChanges('description')}>
-                            Save Changes
-                        </button>
-                    </div>
                 </div>
 
                 <h1 className='titleBold mt-5 mb-2'>Minimum Requirements</h1>
@@ -155,11 +199,6 @@ const EditGame = () => {
                             />
                         </div>
                     ))}
-                    <div className="flex justify-end pt-2">
-                        <button className="btn" onClick={() => saveChanges('minRequirements')}>
-                            Save Changes
-                        </button>
-                    </div>
                 </div>
 
                 <h1 className='titleBold mt-5 mb-2'>Recommended Requirements</h1>
@@ -176,11 +215,12 @@ const EditGame = () => {
                             />
                         </div>
                     ))}
-                    <div className="flex justify-end pt-2">
-                        <button className="btn" onClick={() => saveChanges('recRequirements')}>
-                            Save Changes
-                        </button>
-                    </div>
+                </div>
+
+                <div className='pt-1'>
+                    <button className='btn mt-3' onClick={saveChanges}>
+                        Save Changes
+                    </button>
                 </div>
             </div>
         </div>
