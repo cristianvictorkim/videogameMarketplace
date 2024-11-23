@@ -1,7 +1,6 @@
 import React from 'react';
-
 import RemovableGameCard from 'components/Common/RemovableGameCard';
-
+import { useNavigate } from 'react-router-dom';
 import { confirmPurchase, getUserId } from 'Entities/User';
 import { getCartForUser, removeGameFromCart } from 'Entities/Cart';
 
@@ -13,7 +12,7 @@ const Cart = () => {
     const [gameCards, setGameCards] = React.useState([]);
     const [cartTotal, setCartTotal] = React.useState(0);
     const [searchTerm, setSearchTerm] = React.useState(""); 
-
+    const navigate = useNavigate();
     let userId = getUserId();
     
     const handlePayment = () => {
@@ -22,7 +21,7 @@ const Cart = () => {
     
         if (cardNumber && cardholderName) {
             confirmPurchase(userId, gameCards);
-            window.location.href = `/${userId}/SuccessfulPurchase`;
+            navigate(`/${userId}/SuccessfulPurchase`, { state: { games: gameCards } });
         } else {
             alert("Both card number and cardholder's name are required.");
         }

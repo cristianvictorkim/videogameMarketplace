@@ -22,9 +22,13 @@ const PurchasedGameCard = ({ image, title, price, minimumRequirements}) => {
                     </span>
                     <p className="">
                     </p>
-                    <p className=''>
-                        Minimum requirements: {minimumRequirements}
-                    </p>
+                    <ul>
+                        <li>Minimum Requirements: </li>
+                        <li>{minimumRequirements.cpu}</li>
+                        <li>{minimumRequirements.gpu}</li>
+                        <li>{minimumRequirements.ram}</li>
+                        <li>{minimumRequirements.storage}</li>
+                    </ul>
                 </div>
             </div>
         </div>
