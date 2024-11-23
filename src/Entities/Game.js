@@ -115,4 +115,33 @@ async function getGamesFiltered(filter)
     return output;
 }
 
-export { createUserInteraction, getGameById, getGames, getSelection, getGamesFiltered, addComment };
+async function updateGame(gameId, gameForm)
+{
+    let output = {};
+    console.log("creating user interaction")
+    await fetch(`http://localhost:5000/games/${gameId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            gameForm,
+            gameId
+        })
+    }).then(res => res.json())
+    .then(data => output = data);
+
+    return output;
+}
+
+
+
+export { 
+    updateGame,
+    createUserInteraction, 
+    getGameById, 
+    getGames, 
+    getSelection, 
+    getGamesFiltered, 
+    addComment 
+};

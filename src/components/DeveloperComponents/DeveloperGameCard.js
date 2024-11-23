@@ -12,10 +12,6 @@ const DeveloperGameCard = ({game}) => {
         views: 0,
         wishlists: 0
     })
-    
-    function handleGameDelete(game) {
-        
-    }
 
     useEffect(() => {
 
@@ -73,14 +69,14 @@ const DeveloperGameCard = ({game}) => {
                         <div className="absolute bottom-4 inset-x-0 flex justify-center space-x-2">
                         <Link 
                             to={{
-                                pathname: `/${params.userId}/EditGame`,
+                                pathname: `/${params.userId}/EditGame/${game.title}/${game._id}`,
                                 state: {game} 
                             }}
                         >
                             <p>Edit</p>
                         </Link>
                             <p>Hide</p>
-                            <button onClick={handleGameDelete(game)}>
+                            <button onClick={console.log("ajaj")}>
                                 Delete
                             </button>
                         </div>

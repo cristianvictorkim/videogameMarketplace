@@ -42,7 +42,7 @@ function App() {
                             <Route path="Wishlist"                            element={<Wishlist />} />
                             <Route path="Cart"                                element={<Cart />} />
                             <Route path="SuccessfulPurchase"                  element={<SuccessfulPurchase />} />
-                            <Route path="EditGame"                            element={<EditGame />} />
+                            <Route path="EditGame/:gameTitle/:gameId"         element={<EditGame />} />
                             <Route path="CreateGame"                          element={<CreateGame/>} />
                         </Route>
                     </Route>

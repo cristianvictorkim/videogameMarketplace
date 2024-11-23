@@ -50,17 +50,7 @@ const CreateGame = () => {
     const saveChanges = async () => {
         const token = getToken();
         const id = getUserId();
-        console.log('TOKENCITO: ', token);
-        console.log('id: ', getUserId());
-
-        // Verifica si el token está presente
-        if (!token) {
-            console.log('No token found. Please log in.');
-            // Aquí puedes redirigir al usuario a la página de inicio de sesión si no hay token
-            return;
-        }
         
-
         try {
             // Datos que se enviarán al backend
             const gamePayload = {

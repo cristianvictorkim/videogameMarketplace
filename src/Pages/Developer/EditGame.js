@@ -1,188 +1,208 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import placeholder from 'assets/Misc/placeholder-image.jpg';
+import { getGameById, updateGame } from 'Entities/Game';
+import { uploadImage } from 'Entities/Image';
 
 const EditGame = () => {
-    const location = useLocation();
-    const { publisherId } = useParams();
-    const { game } = location.state || {};
 
-    const [gameData, setGameData] = useState(() => ({
-        name: game?.title || '',
-        price: game?.price || '',
-        genre: game?.genre || '',
-        mainPhoto: game?.bannerUrl || placeholder,
-        miniature: game?.miniature || placeholder,
-        description: game?.description || '',
-        minRequirements: game?.systemRequirements?.min || {
-            os: '',
-            processor: '',
-            memory: '',
-            storage: '',
-            gpu: ''
-        },
-        recRequirements: game?.systemRequirements?.rec || {
-            os: '',
-            processor: '',
-            memory: '',
-            storage: '',
-            gpu: ''
-        }
+    const PLACEHOLDER = "https://firebasestorage.googleapis.com/v0/b/jovial-beach-442521-q5.firebasestorage.app/o/files%2Fplaceholder-image.jpg?alt=media&token=3e5fdbbd-e06c-4754-a6a0-352159f2e55e";
+    const requirements = ['OS', 'Processor', 'Memory', 'Storage', 'Gpu'];
+    const formStyle = {
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "nowrap",
+        flexDirection: "column",
+        alignItems: "center",
+    }
+
+    const { gameTitle, gameId } = useParams();
+    let [loading, setLoading] = useState(false);
+
+    const [gameForm, setGameForm] = useState(() => ({
+        name: '',
+        price: '',
+        genre: '',
+        mainPhoto: '',
+        miniature: '',
+        description: '',
+        minimumOS: '',
+        minimumProcessor: '',
+        minimumMemory: '',
+        minimumStorage: '',
+        minimumGpu: '',
+        recommendedOS: '',
+        recommendedProcessor: '',
+        recommendedMemory: '',
+        recommendedStorage: '',
+        recommendedGpu: ''
     }));
+    
 
-    useEffect(() => {
-        if (!game && publisherId) {
-            fetch(`/api/publishers/profile/${publisherId}`)
-                .then(response => response.json())
-                .then(data => {
-                    setGameData(prevData => ({
-                        ...prevData,
-                        ...data
-                    }));
-                });
-        }
-    }, [publisherId, game]);
+    async function handleSubmit(e) {
+        e.preventDefault();
+        
+        let modifiedData = {};
 
-    const handleInputChange = (field, value) => {
-        setGameData(prevData => ({
-            ...prevData,
-            [field]: value
-        }));
-    };
-
-    const handleNestedInputChange = (section, field, value) => {
-        setGameData(prevData => ({
-            ...prevData,
-            [section]: {
-                ...prevData[section],
-                [field]: value
+        for (const field of Object.keys(gameForm))
+        {
+            if (gameForm[field] !== '')
+            {
+                modifiedData[field] = gameForm[field]
             }
-        }));
-    };
+        }
 
-    const saveChanges = (section) => {
-        console.log('Changes saved for:', section, gameData[section] || gameData);
-    };
+        console.log(modifiedData)
+        let output = await updateGame(gameId, modifiedData);
+        
+        window.location.reload(false);
+        alert(output.message);
+    }
 
-    const saveUpperChanges = () => {
-        console.log('Changes saved for:', gameData.mainPhoto, gameData.miniature, gameData.name);
+    function handleChange(e) {
+        const { name, value } = e.target
+        setGameForm((previousValue) => ({
+            ...previousValue,
+            [name]: value 
+        }))
+    }
+    
+    const handlePictureChange = async (event) => {
+        const file = event.target.files[0];
+        const name = event.target.name;
+
+        setLoading(true);
+        let output = await uploadImage(file);
+        setLoading(false);
+
+        setGameForm((previousValue) => ({
+            ...previousValue,
+            [name]: output.downloadUrl
+        }))
     };
 
     return (
         <div className="min-h-screen flex flex-col items-center">
             <div className='p-5'>
-                <h1 className='titleBold'>Edit Game: {gameData.name || 'Game'}</h1>
+                <h1 className='titleBold'>Edit Game: {gameTitle}</h1>
             </div>
-            <div className='flex justify-center'>
-                <div className="flex w-[60rem] space-x-10">
-                    <div className="flex-1 flex flex-col items-center">
-                        <p>Main photo</p>
-                        <img src={gameData.mainPhoto} className="mainPhoto" alt="Main" />
-                        <input
-                            type="file"
-                            className="w-[50%] mx-auto pt-3"
-                            onChange={e => handleInputChange('mainPhoto', URL.createObjectURL(e.target.files[0]))}
-                        />
-                    </div>
-                    <div className="flex-1 flex flex-col items-center">
-                        <p>Miniature</p>
-                        <img src={gameData.miniature} className="miniature w-full object-cover h-48" alt="Miniature" />
-                        <input
-                            type="file"
-                            className="w-[50%] mx-auto pt-3"
-                            onChange={e => handleInputChange('miniature', URL.createObjectURL(e.target.files[0]))}
-                        />
-                    </div>
-                    <div className="space-y-2 flex-1">
-                        <p>Game Name</p>
-                        <input
-                            className="input w-full"
-                            placeholder="New name"
-                            type="text"
-                            value={gameData.name}
-                            onChange={e => handleInputChange('name', e.target.value)}
-                        />
-                        <p>Price</p>
-                        <input
-                            className="input w-full"
-                            placeholder="Enter new price"
-                            type="text"
-                            value={gameData.price}
-                            onChange={e => handleInputChange('price', e.target.value)}
-                        />
-                        <p>Genre</p>
-                        <input
-                            className="input w-full"
-                            placeholder="Set a new genre"
-                            type="text"
-                            value={gameData.genre}
-                            onChange={e => handleInputChange('genre', e.target.value)}
-                        />
-                        <button className='btn mt-3' onClick={() => saveUpperChanges()}>
-                            Save Changes
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div className='w-[45rem] flex flex-col mt-5'>
-                <h1 className='titleBold mb-2'>Description</h1>
-                <div className='p-3 bg-main-color w-full'>
-                    <input
-                        className='input h-[5rem]'
-                        type='text'
-                        placeholder='Edit description'
-                        value={gameData.description}
-                        onChange={e => handleInputChange('description', e.target.value)}
-                    />
-                    <div className="flex justify-end pt-2">
-                        <button className="btn" onClick={() => saveChanges('description')}>
-                            Save Changes
-                        </button>
-                    </div>
-                </div>
-
-                <h1 className='titleBold mt-5 mb-2'>Minimum Requirements</h1>
-                <div className="p-3 bg-main-color space-y-1 w-full">
-                    {['os', 'processor', 'memory', 'storage', 'gpu'].map(field => (
-                        <div key={field} className="flex space-x-2 items-center">
-                            <p className="w-24">{field.charAt(0).toUpperCase() + field.slice(1)}:</p>
-                            <input
-                                className="input flex-1"
-                                type="text"
-                                placeholder={`Enter ${field} requirements`}
-                                value={gameData.minRequirements[field]}
-                                onChange={e => handleNestedInputChange('minRequirements', field, e.target.value)}
-                            />
+            <form style={formStyle} onSubmit={handleSubmit}>
+                <div className='flex justify-center'>
+                        <div className="flex w-[60rem] space-x-10">
+                            <div className="flex-1 flex flex-col items-center">
+                                <p>Main photo</p>
+                                <img src={ gameForm.mainPhoto || PLACEHOLDER } className="mainPhoto" alt="Main" />
+                                <input
+                                    name= "mainPhoto"
+                                    type="file"
+                                    className="w-[50%] mx-auto pt-3"
+                                    onChange={handlePictureChange}
+                                />
+                            </div>
+                            <div className="flex-1 flex flex-col items-center">
+                                <p>Miniature</p>
+                                <img src={ gameForm.miniature || PLACEHOLDER } className="miniature w-full object-cover h-48" alt="Miniature" />
+                                <input
+                                    name='miniature'
+                                    type="file"
+                                    className="w-[50%] mx-auto pt-3"
+                                    onChange={handlePictureChange}
+                                />
+                            </div>
+                            <div className="space-y-2 flex-1">
+                                <p>Game Name</p>
+                                <input
+                                    name="name"
+                                    onChange={handleChange}
+                                    type="text"
+                                    placeholder="New name"
+                                    value={gameForm.name}
+                                    className="input w-full"
+                                />
+                                <p>Price</p>
+                                <input
+                                    name="price"
+                                    onChange={handleChange}
+                                    type="text"
+                                    placeholder="Enter new price"
+                                    value={gameForm.price}
+                                    className="input w-full"
+                                />
+                                <p>Genre</p>
+                                <input
+                                    name="genre"
+                                    onChange={handleChange}
+                                    type="text"
+                                    placeholder="Set a new genre"
+                                    value={gameForm.genre}
+                                    className="input w-full"
+                                />
+                                {
+                                    loading ? 
+                                    <div className='btn mt-3'>
+                                        Uploading Image
+                                    </div>
+                                    :
+                                    <button className='btn mt-3' type='submit'>
+                                        Save Changes
+                                    </button>
+                                }
+                            </div>
                         </div>
-                    ))}
-                    <div className="flex justify-end pt-2">
-                        <button className="btn" onClick={() => saveChanges('minRequirements')}>
-                            Save Changes
-                        </button>
-                    </div>
                 </div>
-
-                <h1 className='titleBold mt-5 mb-2'>Recommended Requirements</h1>
-                <div className="p-3 bg-main-color space-y-1 w-full">
-                    {['os', 'processor', 'memory', 'storage', 'gpu'].map(field => (
-                        <div key={field} className="flex space-x-2 items-center">
-                            <p className="w-24">{field.charAt(0).toUpperCase() + field.slice(1)}:</p>
+                <div className='w-[45rem] flex flex-col mt-5'>
+                    <h1 className='titleBold mb-2'>Description</h1>
+                    <div className='p-3 bg-main-color w-full'>
                             <input
-                                className="input flex-1"
+                                name="description"
+                                onChange={handleChange}
                                 type="text"
-                                placeholder={`Enter ${field} requirements`}
-                                value={gameData.recRequirements[field]}
-                                onChange={e => handleNestedInputChange('recRequirements', field, e.target.value)}
+                                placeholder='Edit description'
+                                value={gameForm.description}
+                                className="input h-[5rem]"
                             />
-                        </div>
-                    ))}
-                    <div className="flex justify-end pt-2">
-                        <button className="btn" onClick={() => saveChanges('recRequirements')}>
-                            Save Changes
-                        </button>
                     </div>
+                    <h1 className='titleBold mt-5 mb-2'>Minimum Requirements</h1>
+                        <div className="p-3 bg-main-color space-y-1 w-full">
+                            {
+                                requirements.map(field => (
+                                    <div key={field} className="flex space-x-2 items-center">
+                                        <p className="w-24">{field.charAt(0).toUpperCase() + field.slice(1)}:</p>
+                                        <input
+                                            name={`minimum${field}`}
+                                            onChange={handleChange}
+                                            type="text"
+                                            placeholder={`Enter ${field} requirements`}
+                                            value={gameForm[`minimum${field}`]}
+                                            className="input flex-1"
+                                        />
+                                    </div>
+                                ))
+                            }
+                            <div className="flex justify-end pt-2">
+                            </div>
+                        </div>
+                    <h1 className='titleBold mt-5 mb-2'>Recommended Requirements</h1>
+                        <div className="p-3 bg-main-color space-y-1 w-full">
+                            {
+                                requirements.map( field => (
+                                    <div key={field} className="flex space-x-2 items-center">
+                                        <p className="w-24">{field.charAt(0).toUpperCase() + field.slice(1)}:</p>
+                                        <input
+                                            name={`recommended${field}`}
+                                            onChange={handleChange}
+                                            type="text"
+                                            placeholder={`Enter ${field} requirements`}
+                                            value={gameForm[`recommended${field}`]}
+                                            className="input flex-1"
+                                        />
+                                    </div>
+                                ))
+                            }
+                            <div className="flex justify-end pt-2">
+                            </div>
+                        </div>
                 </div>
-            </div>
+            </form>
         </div>
     );
 };

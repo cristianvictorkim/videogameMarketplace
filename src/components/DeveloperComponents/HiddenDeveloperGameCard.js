@@ -8,18 +8,12 @@ const HiddenDeveloperGameCard = ({game}) => {
     const params = useParams();
 
     let [interaction, setInteraction] = useState({
-
         sales: 0,
         views: 0,
         wishlists: 0
     })
 
-    function handleGameDelete(game) {
-        
-    }
-
     useEffect(() => {
-
         interaction.sales =  0;
         interaction.views =  0;
         interaction.wishlists =  0;
@@ -71,14 +65,14 @@ const HiddenDeveloperGameCard = ({game}) => {
                         <div className="absolute bottom-4 inset-x-0 flex justify-center space-x-2">
                         <Link 
                             to={{
-                                pathname: `/${params.userId}/EditGame`,
+                                pathname: `/${params.userId}/EditGame/${game.title}/${game._id}`,
                                 state: { game: game } 
                             }}
                         >
                             <p>Edit</p>
                         </Link>
                             <p>Show</p>
-                            <button onClick={handleGameDelete(game)}>
+                            <button onClick={console.log("jaja")}>
                                 Delete
                             </button>
                         </div>
